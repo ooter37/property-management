@@ -1,1 +1,98 @@
 @import '../../App.scss';
+
+.display-houses-header-bar {
+  background-color: lightgreen;
+  width: 100%;
+  display: flex;
+}
+.house-address-container {
+  background-color: red;
+}
+.status-container {
+  background-color: lightblue;
+}
+.modules {
+  width: 100%;
+  background-color: grey;
+}
+.module-container {
+  width: 45%;
+  height: 300px;
+  background-color: yellow;
+}
+.module-button {
+  background-color: orange;
+  width: 200px;
+  height: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.react-tabs {
+    -webkit-tap-highlight-color: transparent;
+  
+    &__tab-list {
+      border-bottom: 1px solid $light-highlight;
+      margin: 0 0 10px;
+      padding: 0;
+    }
+  
+    &__tab {
+      display: inline-block;
+      border: 1px solid transparent;
+      border-bottom: none;
+      bottom: -1px;
+      position: relative;
+      list-style: none;
+      padding: 6px 12px;
+      color: $font-color;
+      cursor: pointer;
+  
+      &--selected {
+        background: $primary-color;
+        // filter: brightness(130%);
+        border-color: $light-highlight;
+        color: $font-color;
+        font-weight: bolder;
+        border-radius: 5px 5px 0 0;
+      }
+  
+      &--disabled {
+        color: GrayText;
+        cursor: default;
+      }
+  
+      &:focus {
+        box-shadow: 0 0 5px hsl(208, 99%, 50%);
+        border-color: hsl(208, 99%, 50%);
+        outline: none;
+  
+        &:after {
+          content: "";
+          position: absolute;
+          height: 5px;
+          left: -4px;
+          right: -4px;
+          bottom: -5px;
+          background: #fff;
+        }
+      }
+    }
+  
+    &__tab-panel {
+      display: none;
+  
+      &--selected {
+        display: block;
+      }
+    }
+  }
+  

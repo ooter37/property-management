@@ -1,0 +1,23 @@
+.datepicker {
+    background-color: red;
+    z-index: 2000 !important;
+}
+
+.swal2-container {
+    z-index: 1;
+    // position: relative !important;
+}
+  
+.react-datepicker{ 
+    z-index: 999999 !important;
+    background-color: red;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+.react-datepicker-popper {
+    z-index: 99999 !important;
+    background-color: red;
+    position: relative !important;
+    overflow: visible !important;
+  }

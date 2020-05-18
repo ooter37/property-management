@@ -5,7 +5,7 @@ import DisplayHouses from '../DisplayHouses/DisplayHouses'
 export default function Main (props) {
     
     return (
-        <div>
+        <div className='main'>
             <DisplayHouses />
         </div>
     )
