@@ -6,6 +6,7 @@ const Register = (props) => {
     const [state, setState] = useState({email: '', password: ''})
 
     const registrationHandler = (e) => {
+        console.log('from register', props)
         e.preventDefault()
         props.register(state)
         .then(() => {

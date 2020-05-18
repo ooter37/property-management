@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './App.scss';
 import './reset.css';
 import {Route, Switch, withRouter} from 'react-router-dom'
@@ -8,16 +8,19 @@ import {requestUserData} from './redux/reducers/user'
 import useRedirect from './Components/Hooks/useRedirect'
 import Main from './Components/Main/Main'
 import Auth from './Components/Auth/Auth'
+import Header from './Components/Header/Header'
 
 function App(props) {
+  // console.log(props.user)
   // const [redirect, useRedirect] = useState(false)
-  const {redirect, toggleRedirect} = useRedirect(false)
+  const {redirect} = useRedirect(false)
+  const {user, requestUserData} = props
 
-  // useEffect(() => {
-  //   if (props.user) {
-  //     props.requestUserData()
-  //   }
-  // },[])
+  useEffect(() => {
+    if (user) {
+      requestUserData()
+    }
+  },[])
 
   // const toggleRedirect = () => {
   //   useRedirect(!redirect)
@@ -25,6 +28,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <Header />
       {
         redirect
         &&

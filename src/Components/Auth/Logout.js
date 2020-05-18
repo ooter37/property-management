@@ -2,7 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {logout} from '../../redux/reducers/user'
 
-const Logout = () => {
+
+const Logout = (props) => {
+    console.log(props)
     const logoutHandler = () => {
         props.logout().then(() => {
             console.log('logout successful')
@@ -17,3 +19,5 @@ const Logout = () => {
         </div>
     )
 }
+
+export default connect(null, { logout })(Logout);
