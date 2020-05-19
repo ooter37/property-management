@@ -1,66 +1,73 @@
-import React, {useState, useRef} from 'react'
-// import Swal from 'sweetalert2/src/sweetalert2.js'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import moment from 'moment'
-import DatePicker from 'react-datepicker'
 import './AddTask.scss'
+import React, {useState} from 'react'
+import {connect} from 'react-redux'
+import axios from 'axios'
+import { TextField, FormControlLabel, Checkbox, Button } from '@material-ui/core';
+import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import PriceInput from '../../Functions/PriceInput'
+import SelectInput from '../../Functions/SelectInput'
+import NoteInput from '../../Functions/NoteInput'
 
-export default function AddTask(props) {
-    // const [type,setType] = useState()
-    const [startDate, setStartDate] = useState(new Date());
-    const addTask = (name,date) => {
-        console.log(name,date)
+
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+
+
+// const taskSelections = [
+//     {title: 'Tree Trimming'},
+//     {title: 'Pool Repair'},
+//     {title: 'House Repair'},
+//     {title: 'Exterior Painting'},
+// ];
+const taskSelections = [
+    'Tree Trimming',
+    'Pool Repair',
+    'House Repair',
+    'Exterior Painting'
+];
+
+function AddTask(props) {
+    const [type, setType] = useState('');
+    const [date, setDate] = useState(new Date());
+    const [price, setPrice] = useState(0)
+    const [urgent, setUrgent] = useState(false)
+    const [note, setNote] = useState('')
+    const [contact, setContact] = useState('')
+
+    //TEST HERE
+    const submitNewTask = () => {
+        if (props.user.data) {
+            const userId = props.user.data.user_id
+            const houseId = props.selectedHouse
+            axios.post('/api/tasks', {userId, houseId, type, date, price, urgent, note, contact})
+            .then(() => {
+            })
+        }
     }
-    const MySwal = withReactContent(Swal)
-    
-    return (
+
+        return (
         <div>
-            Add Task Component
-            <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
-            <button
-                        className='button edit-baby-button'
-                        onClick={() => {
-                            MySwal.mixin({
-                                input: 'text',
-                                confirmButtonText: 'Next &rarr;',
-                                showCancelButton: true,
-                                progressSteps: ['1', '2']
-                            }).queue([
-                                {title: 'Name',
-                                html: <DatePicker className='datepicker' selected={startDate} onChange={date => setStartDate(date)} />,
-                                inputValue: `${moment(startDate).format("MMMM Do")}`,
-                                inputValidator: (value) => {if (!value) return 'Please enter a name.'}
-                            },
-                                {title: 'Identifier',
-                                text: 'Enter a new identifier or leave as is to keep existing identifier.', 
-                                // inputValue: `${this.state.babyIdentifier}`,
-                                inputValidator: (value) => {if (value.length < 4) return 'Please enter an identifier that is at least four characters in length.'}
-                            }])
-                                .then((result) => {
-                                    if (result.value) {
-                                        this.updateBaby(result.value[0],result.value[1])
-                                    }
-                                })
-                        }}
-                    >Edit Baby</button>
-            <button onClick={() => {
-                MySwal.fire({
-                    title: <p>Hello World</p>,
-                    footer: 'Copyright 2018',
-                    html: <DatePicker selected={startDate} onChange={date => setStartDate(date)} />,
-                    // onOpen: () => {
-                    //   // `MySwal` is a subclass of `Swal`
-                    //   //   with all the same instance & static methods
-                    //   MySwal.clickConfirm()
-                    // }
-                  })
-                //   .then(() => {
-                //     return MySwal.fire(<p>Shorthand works too</p>)
-                //   })
-                console.log(startDate)
-            }}>Swal</button>
-            <button onClick={() => console.log(startDate)}>check</button>
+            <form className='add-task-form' autoComplete="off" onSubmit={submitNewTask}>
+                <div> {/* Name and urgent checkbox container */}
+                    <SelectInput selections={taskSelections} value={type} setValue={setType} />
+                    <FormControlLabel control={<Checkbox checked={urgent} onChange={() => setUrgent(!urgent)} name="urgent"/>} label="Urgent"/>
+                </div>
+                <div> {/* Date and price container */}
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}> <DatePicker value={date} onChange={setDate}/> </MuiPickersUtilsProvider>
+                    <PriceInput label='Estimated cost.' price={price} setPrice={setPrice} />
+                </div>
+                    <NoteInput note={note} setNote={setNote} />
+                <div>
+                    <TextField value={contact} onChange={(e) => setContact(e.target.value)} label="Serviceman" />
+                    <Button variant='contained' type='submit'>Submit</Button>
+                </div>
+            </form>
+                {/* <button onClick={() => console.log(type)}>log</button> */}
         </div>
     )
 }
+
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, null)(AddTask)

@@ -10,7 +10,7 @@ export default function ModuleTasks(props) {
             module tasks
             {/* <DisplayTasks selectedHouse={props.location.state.selectedHouse} /> */}
             <DisplayTasks selectedHouse={props.match.params.id} />
-            <AddTask />
+            <AddTask selectedHouse={props.match.params.id} />
         </div>
     )
 }

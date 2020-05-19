@@ -18,8 +18,8 @@ module.exports = {
         try {
             db = req.app.get('db')
             if (req.session.user) {
-                const userId = req.session.user.user_id
-                const {houseId,type,date,price,urgent,note,contact} = req.body
+                // console.log(req.body)
+                const {userId, houseId,type,date,price,urgent,note,contact} = req.body
                 const task = await db.tasks.add_task(userId,houseId,type,date,price,urgent,note,contact)
                 res.status(200).send(task)
             } else {

@@ -8,7 +8,7 @@ const massive = require('massive')
 const {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET} = process.env
 const {login, register, logout, getUser, userData} = require('./controllers/authController')
 const {getHousesByLinked} = require('./controllers/houseController')
-const {getTasksByHouse} = require('./controllers/taskController')
+const {getTasksByHouse, addTask} = require('./controllers/taskController')
 
 //TOP-LEVEL MIDDLEWARE
 const app=express()
@@ -44,3 +44,4 @@ app.get('/api/houses', getHousesByLinked)
 
 //TASK ENDPOINTS
 app.get('/api/tasks/:id', getTasksByHouse)
+app.post('/api/tasks', addTask)
