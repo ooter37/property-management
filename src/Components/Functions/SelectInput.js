@@ -6,9 +6,9 @@ const filter = createFilterOptions();
 
 export default function FreeSoloCreateOption(props) {
   const {value,setValue, selections} = props
-  const handleChange = (event) => {
-    setValue(event.target.value);
-};
+//   const handleChange = (event) => {
+//     setValue(event.target.value);
+// };
   return (
     <Autocomplete
       value={value}

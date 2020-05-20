@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react'
 import './DisplayHouses.scss'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {Link} from 'react-router-dom'
+import ButtonBase from '@material-ui/core/ButtonBase';
+
 import displayAddress from '../Functions/displayAddress'
+import AddHouse from '../AddHouse/AddHouse'
 
 function DisplayHouses (props) {
     // const sampleHouse = {link_id: 0, user_id: 0, house_id: 0, email: "sample@sample.sample", address: "123 Fake St.", city: 'Springfield', state: 'Illinois', zipcode: 62629, rent: 2000, status: 'rented'}
@@ -52,7 +55,9 @@ function DisplayHouses (props) {
                     <Tab>ADD HOUSE</Tab>
                 </TabList>
                 {mappedHouses}
-                <TabPanel>Add House Panel</TabPanel>
+                <TabPanel>
+                    <AddHouse/>
+                </TabPanel>
             </Tabs>
     )
 }

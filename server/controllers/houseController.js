@@ -14,6 +14,7 @@ module.exports = {
         try {
             db = req.app.get('db')
             if (req.session.user) {
+                // console.log(req.body)
                 const {address, city, state, zipcode, rent, status, image, ownership} = req.body
                 const house = await db.houses.add_house(address, city, state, zipcode, rent, status, image, req.session.user.user_id, ownership)
                 res.status(200).send(house)
