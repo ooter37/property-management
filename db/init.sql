@@ -6,8 +6,9 @@ CREATE TABLE users (
 
 CREATE TABLE linked (
     link_id SERIAL PRIMARY KEY,
-    user_ID INT REFERENCES users(user_id),
-    house_id INT REFERENCES houses(house_id)
+    user_id INT REFERENCES users(user_id),
+    house_id INT REFERENCES houses(house_id),
+    ownership VARCHAR(30)
 );
 INSERT INTO linked (user_id,house_id)
 VALUES
@@ -23,7 +24,8 @@ CREATE TABLE houses (
     state VARCHAR(20),
     zipcode INT,
     rent INT,
-    status VARCHAR(20)
+    status VARCHAR(20),
+    image TEXT
 );
 INSERT INTO houses (address, city, state, zipcode, rent, status)
 VALUES

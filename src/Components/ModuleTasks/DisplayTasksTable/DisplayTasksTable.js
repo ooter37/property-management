@@ -1,5 +1,6 @@
-import React from 'react';
 import './DisplayTasksTable.scss'
+import React from 'react';
+import {connect} from 'react-redux' 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,9 +13,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 // import useFetch from '../../Hooks/useFetch'
 // import format from '@date-io/date-fns';
 import moment from "moment";
-import {confirmDelete} from '../../Functions/Sweetalerts'
+import {confirmDelete, pleaseSignIn} from '../../Functions/Sweetalerts'
+import axiosDelete from '../../Functions/axisoDelete'
 
-export default function DisplayTasksTable(props) {
+function DisplayTasksTable(props) {
     // const tasks = useFetch(`/api/tasks/${props.selectedHouse}`,props.selectedHouse)
     const mappedTasks = props.tasks && props.tasks.map((task) => {
         return (
@@ -24,7 +26,12 @@ export default function DisplayTasksTable(props) {
             <TableCell align="right">${task.price}</TableCell>
             <TableCell align="right">{task.contact}</TableCell>
             <TableCell align="right">{task.note}</TableCell>
-            <TableCell align="right"><Button onClick={() => console.log('button')} startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
+            <TableCell align="right"><Button onClick={() => { if (props.user.data) {
+                        confirmDelete.fire({
+                            text: 'Are you sure you want to delete this task?'}).then((result) => {
+                            if (result.value) {axiosDelete('task',task.task_id)}})
+                        } else {pleaseSignIn.fire()}}} 
+                        startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
         </TableRow>
         )
     })
@@ -50,3 +57,7 @@ export default function DisplayTasksTable(props) {
     </TableContainer>
   );
 }
+
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, null)(DisplayTasksTable)

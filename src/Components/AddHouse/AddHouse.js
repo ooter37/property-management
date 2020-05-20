@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {connect} from 'react-redux'
+import axios from 'axios'
+
 import './AddHouse.scss'
 
-export default function AddHouse (props) {
+function AddHouse (props) {
+
     return (
         <div>
             this is the AddHouse component
@@ -9,3 +13,6 @@ export default function AddHouse (props) {
     )
 }
 
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, null)(AddHouse)
