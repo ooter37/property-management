@@ -1,0 +1,17 @@
+@import '../../../App.scss';
+
+.table {
+    // width: 1200px;
+    margin:50px;
+    // background-color: red;
+}
+
+
+.display-tasks-table {
+    min-width: 650px;
+    // from default
+}
+
+.urgent-true {
+    background-color: $urgent;
+}

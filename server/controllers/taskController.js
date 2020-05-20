@@ -29,5 +29,17 @@ module.exports = {
             console.log('Error adding task.', error)
             res.status(500).send(error)
         }
+    },
+    deleteTask: async (req,res) => {
+        try {
+            db = req.app.get('db')
+            if (req.session.user) {
+                const tasks = await db.tasks.delete_task(req.params.id)
+                res.status(200).send(tasks)
+            }
+        } catch (error) {
+            console.log('Error deleting task.', error)
+            res.status(500).send(error)
+        }
     }
 }

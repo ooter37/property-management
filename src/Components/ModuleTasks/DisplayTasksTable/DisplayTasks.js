@@ -1,18 +1,20 @@
+// import './DisplayTasks.scss'
 import React from 'react'
 import './DisplayTasks.scss'
 import useFetch from '../../Hooks/useFetch'
+import Table from './DisplayTasksTable'
 
 export default function DisplayTasks(props) {
-    // console.log(props)
+    console.log(props)
     const tasks = useFetch(`/api/tasks/${props.selectedHouse}`,props.selectedHouse)
     const mappedTasks = tasks && tasks.map((task) => {
         return (
-        <div key={`Tasks ${task.task_id}`}>{task.note}</div>
+        <div></div>
         )
     })
     return (
-        <div>
-            {mappedTasks}
+        <div className='table'>
+            {/* <Table /> */}
         </div>
     )
 }

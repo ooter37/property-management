@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import { TextField, FormControlLabel, Checkbox, Button } from '@material-ui/core';
 import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import DateFnsUtils from '@date-io/date-fns';
 import PriceInput from '../../Functions/PriceInput'
 import SelectInput from '../../Functions/SelectInput'
 import NoteInput from '../../Functions/NoteInput'
@@ -42,6 +42,7 @@ function AddTask(props) {
             const houseId = props.selectedHouse
             axios.post('/api/tasks', {userId, houseId, type, date, price, urgent, note, contact})
             .then(() => {
+                
             })
         }
     }
@@ -49,17 +50,17 @@ function AddTask(props) {
         return (
         <div>
             <form className='add-task-form' autoComplete="off" onSubmit={submitNewTask}>
-                <div> {/* Name and urgent checkbox container */}
+                <div className='input-mini-container'> {/* Name and urgent checkbox container */}
                     <SelectInput selections={taskSelections} value={type} setValue={setType} />
                     <FormControlLabel control={<Checkbox checked={urgent} onChange={() => setUrgent(!urgent)} name="urgent"/>} label="Urgent"/>
                 </div>
-                <div> {/* Date and price container */}
+                <div className='input-mini-container'> {/* Date and price container */}
+                    <TextField value={contact} onChange={(e) => setContact(e.target.value)} label="Serviceman" />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}> <DatePicker value={date} onChange={setDate}/> </MuiPickersUtilsProvider>
-                    <PriceInput label='Estimated cost.' price={price} setPrice={setPrice} />
                 </div>
                     <NoteInput note={note} setNote={setNote} />
-                <div>
-                    <TextField value={contact} onChange={(e) => setContact(e.target.value)} label="Serviceman" />
+                <div className='input-mini-container'>
+                    <PriceInput label='Estimated cost.' price={price} setPrice={setPrice} />
                     <Button variant='contained' type='submit'>Submit</Button>
                 </div>
             </form>
