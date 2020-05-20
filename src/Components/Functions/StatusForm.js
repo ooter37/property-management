@@ -42,7 +42,7 @@ export default function StatusForm(props) {
                 <MenuItem value='Residence - Other'>Residence - Other</MenuItem>
                 <MenuItem value='Under Remodel'>Under Remodel</MenuItem>
                 <MenuItem value='Unoccupied'>Unoccupied</MenuItem>
-                <MenuItem value='Rental - Other'>Thirty</MenuItem>
+                <MenuItem value='Rental - Other'>Rental - Other</MenuItem>
                 <MenuItem value='Other'>Other</MenuItem>
             </TextField>
         </Grid>

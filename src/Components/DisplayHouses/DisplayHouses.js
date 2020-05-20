@@ -4,8 +4,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {Link} from 'react-router-dom'
-import ButtonBase from '@material-ui/core/ButtonBase';
-
+import HouseButton from '../Functions/HouseButton'
 import displayAddress from '../Functions/displayAddress'
 import AddHouse from '../AddHouse/AddHouse'
 
@@ -18,7 +17,8 @@ function DisplayHouses (props) {
         .then(res => {
             setHouses(res.data)
             // console.log(res.data)
-            setSelectedHouse(res.data[0].house_id)
+            if (res.data[0]){
+            setSelectedHouse(res.data[0].house_id)}
         })}, []
     )
 
@@ -26,7 +26,7 @@ function DisplayHouses (props) {
     const mappedNames = houses && houses.map((house) => {
         return (
             <Tab onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
-                <div>{house.address}</div>
+                <HouseButton image={`house.image`} title={house.address}>{house.address}</HouseButton>
             </Tab>
         )
     })

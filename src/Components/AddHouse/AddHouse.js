@@ -8,7 +8,6 @@ import { TextField, Button, Grid, MenuItem } from '@material-ui/core';
 import './AddHouse.scss'
 
 function AddHouse (props) {
-    // const GOOGLE = REACT_APP_GOOGLE
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -16,29 +15,36 @@ function AddHouse (props) {
     const [status, setStatus] = useState('')
     const [stringRent, setStringRent] = useState(0)
     const [ownership, setOwnership] = useState('')
-
-    //TEST HERE
-    const image = () => {
-        // const concAddress = (`${address},+${city},+${state},+${stringZipcode}`).replace(/\s/g,',+')
-        const imageAddress = `https://maps.googleapis.com/maps/api/streetview?size=300x200&location=${(`${address},+${city},+${state},+${stringZipcode}`).replace(/\s/g,',+')}key=${process.env.REACT_APP_GOOGLE}`
-        console.log(imageAddress)
-    }
     
     const submitNewHouse = () => {
         if (props.user.data) {
             const userId = props.user.data.user_id
             const zipcode = parseInt(stringZipcode, 10)
             const rent = parseInt(stringRent, 10)
-            axios.post('/api/houses', {address,city,state,zipcode,rent,status,image,userId,ownership})
+            axios.post('/api/houses', {address,city,state,zipcode,rent,status,userId,ownership})
             .then(() => {
                 
             })
         }
     }
+    
+    //TEST HERE
+    // const imageChecker = () => {
+    //     axios.get(
+    //         `https://maps.googleapis.com/maps/api/streetview/metadata?location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`
+    //         ).then(res => {
+    //     if (res.data.location) {
+    //         setImage(`https://maps.googleapis.com/maps/api/streetview?size=300x200&location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
+    //     } else {
+    //         setImage(noImageAvailable)
+    //     }
+    //     submitNewHouse()
+    //     })
+    // }
 
     return (
         <div>
-            <button onClick={() => {console.log(process.env.REACT_APP_GOOGLE)}}>console log</button>
+            <button onClick={() => console.log('button')}>console log</button>
             
             <div className='address-form'><AddressForm 
             address={address} setAddress={setAddress} 
