@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
             },
         },
     },
+    imageSelected: {
+        border: '3px solid red',
+    },
     focusVisible: {},
     imageButton: {
         position: 'absolute',

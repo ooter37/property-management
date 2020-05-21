@@ -4,12 +4,19 @@
 }
 // Variables
 $font-color: black;
-$background-color: #f6f578;
+$background-color: #f5f7fb;
 $primary-color: #f6d743;
 $light-highlight:#649d66;
 $dark-highlight: #06623b;
 $urgent: lightpink;
 
+// GLOBAL STYLING
+a {
+  color: inherit;
+}
+A:hover {
+  color: inherit;
+}
 
 
-// Sweetalerts
+// SWEETALERTS

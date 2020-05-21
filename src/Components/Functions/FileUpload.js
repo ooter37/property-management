@@ -31,10 +31,10 @@ export default function FileUpload() {
     })
   }
 
-  const Success_message = () => (
+  const successMessage = () => (
     <div style={{padding:50}}>
       <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
-      <a href={url}>Access the file here</a>
+      <a href={url}>View uploaded image</a>
       <br/>
     </div>
   )
@@ -43,7 +43,7 @@ export default function FileUpload() {
     <div className="App">
         <center>
           <h1>UPLOAD A FILE</h1>
-          {success ? <Success_message/> : null}
+          {success ? <successMessage/> : null}
           <input onChange={changeHandler} type="file"/>
           <br/>
           <button onClick={sendFile}>UPLOAD</button>

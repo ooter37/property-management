@@ -1,12 +1,16 @@
 import React from 'react'
+import Typography from '@material-ui/core/Typography';
 
 export default function displayAddress (element) {
     return(
         <div className='address-container'>
-            <div>{element.address}</div>
-            <div>{element.city}</div>
-            <div>{element.state}</div>
-            <div>{element.zipcode}</div>
+            <Typography component={'div'}>
+                <Typography variant='h5'>Address</Typography>
+                <div>{element.address}</div>
+                <div>{element.city}, {element.state} {element.zipcode}</div>
+                {/* <div>{element.state}</div> */}
+                {/* <div>{element.zipcode}</div> */}
+            </Typography>
         </div>
         )
 }
