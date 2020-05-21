@@ -1,62 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 export default function FileUpload() {
   const [success, setSuccess] = useState(false)
   const [url, setUrl] = useState('')
-  const [selectedFile, setSelectedFile] = useState([])
+  const [selectedFile, setSelectedFile] = useState('')
 
   function changeHandler(e) {
     setSuccess(false)
     setUrl('')
-    console.log(e)
-  }
-  
-  
-  function onFileChange(e) {
     setSelectedFile(e.target.files[0])
-    console.log(e.target.files[0])
-    console.log(selectedFile)
-  }
-  function onFileUpload() {
-    const formData = new FormData()
-    formData.append(
-      "myFile",
-      selectedFile,
-      selectedFile.name
-    )
   }
 
-  function uploadFile(e) {
-    let file = file.files[0]
-    let fileParts = file.files[0].name.split('.')
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
-    axios.post('/sign_s3', {
-      fileName : fileName,
-      fileType : fileType
-    }).then(res => {
-      const returnData = res.data.data.returnData;
-      const signedRequest = returnData.signedRequest;
-      const url = returnData.url
-      setUrl(url)
-      console.log("Recieved a signed request " + signedRequest)
-      var options = {
-        headers: {
-          'Content-Type': fileType
-        }
-      }
-      axios.put(signedRequest,file,options)
-      .then(result => {
-        console.log("Response from s3")
+  function sendFile(e) {
+    let fileParts = selectedFile.name.split('.')
+    axios.post('/sign_s3', {fileName : fileParts[0],fileType : fileParts[1]}).then(res => {
+      setUrl(res.data.data.returnData.url)
+      console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
+      axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
+      .then(() => {
+        console.log("File upload successful.")
         setSuccess(true)
       })
-      .catch(error => {
-        alert("ERROR " + JSON.stringify(error));
+      .catch(err => {
+        alert("ERROR " + JSON.stringify(err));
       })
     })
-    .catch(error => {
-      alert(JSON.stringify(error));
+    .catch(err => {
+      alert(JSON.stringify(err));
     })
   }
 
@@ -73,9 +44,9 @@ export default function FileUpload() {
         <center>
           <h1>UPLOAD A FILE</h1>
           {success ? <Success_message/> : null}
-          <input onChange={onFileChange} type="file"/>
+          <input onChange={changeHandler} type="file"/>
           <br/>
-          <button onClick={uploadFile}>UPLOAD</button>
+          <button onClick={sendFile}>UPLOAD</button>
         </center>
       </div>
   )

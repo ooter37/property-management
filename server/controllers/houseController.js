@@ -1,8 +1,7 @@
 const axios = require('axios')
-const { v4: uuidv4 } = require('uuid');
 const aws = require('aws-sdk');
 require('dotenv').config()
-const {S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env
+const {S3_BUCKET} = process.env
 
 module.exports = {
     getHousesByLinked: async (req,res) => {
