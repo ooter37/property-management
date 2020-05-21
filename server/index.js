@@ -4,10 +4,11 @@ const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
 
+
 //IMPORT 
 const {CONNECTION_STRING, SERVER_PORT, SESSION_SECRET} = process.env
 const {login, register, logout, getUser, userData} = require('./controllers/authController')
-const {getHousesByLinked, addHouse} = require('./controllers/houseController')
+const {getHousesByLinked, addHouse, uploadFile} = require('./controllers/houseController')
 const {getTasksByHouse, addTask, deleteTask} = require('./controllers/taskController')
 
 //TOP-LEVEL MIDDLEWARE
@@ -42,7 +43,18 @@ app.get('/auth/user-data', userData)
 //HOUSE ENDPOINTS
 app.get('/api/houses', getHousesByLinked)
 app.post('/api/houses', addHouse)
+
 //TASK ENDPOINTS
 app.get('/api/tasks/:id', getTasksByHouse)
 app.post('/api/tasks', addTask)
 app.delete('/api/tasks/:id', deleteTask)
+app.post('/sign_s3', uploadFile)
+
+
+// Configure aws with your accessKeyId and your secretAccessKey -- MIGHT NEED THIS WHEN ACCESS PRIVS ARE FIXED
+// aws.config.update({
+//     region: 'us-east-1', // Put your aws region here
+//     accessKeyId: process.env.AWSAccessKeyId,
+//     secretAccessKey: process.env.AWSSecretKey
+//   })
+
