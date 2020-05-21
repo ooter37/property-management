@@ -6,15 +6,14 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {Link} from 'react-router-dom'
 import HouseButton from '../Functions/HouseButton'
 import displayAddress from '../Functions/displayAddress'
+import displayHouseStatus from '../Functions/displayHouseStatus'
 import AddHouse from '../AddHouse/AddHouse'
-import {Typography, ListItemIcon, ListItem, Button} from '@material-ui/core/';
-// import Card from './Card'
-import { Card} from 'tabler-react'
+import {ListItem, Button} from '@material-ui/core/';
+import { Card, Grid } from 'tabler-react'
 import "tabler-react/dist/Tabler.css";
 import moment from "moment";
 
 function DisplayHouses (props) {
-    // const sampleHouse = {link_id: 0, user_id: 0, house_id: 0, email: "sample@sample.sample", address: "123 Fake St.", city: 'Springfield', state: 'Illinois', zipcode: 62629, rent: 2000, status: 'rented'}
     const [houses, setHouses] = useState(null)
     const [selectedHouse, setSelectedHouse] = useState(null)
     const [displayTasks, setDisplayTasks] = useState([])
@@ -73,28 +72,30 @@ function DisplayHouses (props) {
     const mappedHouses = houses && houses.map((house) => {
         return (
             <TabPanel className='tab-panel' key={house.link_id}>
-                <div className='display-houses-header-bar'>
-                    <div className='house-address-container'>{displayAddress(house)}</div>
-                    <div className='status-container'>
-                        <Typography component={'div'}>
-                            <Typography variant='h5'>Rental Status</Typography>
-                            <Typography>{house.status}</Typography>
-                            <Typography>Monthly Income: ${house.rent}</Typography>
-                        </Typography>
-                    </div>
-                </div>
                 <div className='modules'>
-                    <div className='card-holder'>
-                        <Card>
-                            <Card.Header>
-                            <Link to={`task/${house.house_id}`}><Card.Title><Button variant='outlined'>Manage Tasks</Button></Card.Title></Link>
-                            </Card.Header>
-                            <Card.Body>
-                                <h5>Urgent</h5>
-                                {mappedTasks}
+                    <Grid.Row cards deck>
+                        <Grid.Col md={4}>
+                            <Card>
+                                <Card.Header><Link to={`task/${house.house_id}`}><Card.Title><Button color='primary' variant='outlined'>Manage Tasks</Button></Card.Title></Link></Card.Header>
+                                <Card.Body>
+                                    <h5>Urgent</h5>
+                                    {mappedTasks}
+                                </Card.Body>
+                            </Card> 
+                        </Grid.Col>
+
+                        <Grid.Col md={4}>
+                            <Card>
+                                <Card.Header><Link><Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title></Link></Card.Header>
+                            <Card.Body className='card-display-house-info-container'>
+                            {displayAddress(house)}
+                            {displayHouseStatus(house)}
                             </Card.Body>
                         </Card> 
-                    </div>     
+                    </Grid.Col>
+                        <Grid.Col md={4}><Card body="Short content" /></Grid.Col>
+                    </Grid.Row>
+
                 </div>
             </TabPanel>
         )

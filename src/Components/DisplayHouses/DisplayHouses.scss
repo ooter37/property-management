@@ -18,7 +18,7 @@
 }
 .modules {
   width: 100%;
-  background-color: #f5f7fb;
+  // background-color: red;
 }
 .module-container {
   width: 45%;
@@ -30,10 +30,9 @@
   width: 200px;
   height: 100px;
 }
-
-.card-holder {
-  width: 400px;
-  min-height: 400px;
+.card-display-house-info-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 // .card-class {
