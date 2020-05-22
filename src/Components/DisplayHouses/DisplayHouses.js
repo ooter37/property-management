@@ -82,9 +82,21 @@ function DisplayHouses (props) {
                         <Grid.Col md={4}>
                             <Card>
                                 <Card.Header className='update-house-card-header'>
-                                    {/* <Link> */}
+                                    <Link 
+                                    to={{
+                                        pathname: '/update_house',
+                                        state: {
+                                            selectedHouse: selectedHouse,
+                                            address: house.address,
+                                            city: house.city,
+                                            state: house.state,
+                                            zipcode: house.zipcode,
+                                            status: house.status,
+                                            rent: house.rent
+                                        }
+                                    }}>
                                     <Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title>
-                                    {/* </Link> */}
+                                    </Link>
                                     <Card.Title className='upload-image-button-container'>
                                         <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>Image
                                     </Card.Title>

@@ -15,3 +15,6 @@ SET rent = $6 WHERE house_id = $1;
 
 UPDATE houses
 SET status = $7 WHERE house_id = $1;
+
+-- UPDATE linked
+-- SET ownership = $8 WHERE 

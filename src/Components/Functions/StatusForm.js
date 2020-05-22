@@ -25,7 +25,7 @@ export default function StatusForm(props) {
       <Grid container spacing={1}>
         <Grid item xs={12} sm={6}>
             <TextField
-            required
+            required={props.required}
             select
             fullWidth
             id="status"
@@ -51,7 +51,7 @@ export default function StatusForm(props) {
         </Grid>
         {/* <Grid item xs={12}>
           <TextField
-            required
+            required={props.required}
             id="address1"
             name="address1"
             label="Address line 1"
@@ -94,7 +94,7 @@ export default function StatusForm(props) {
         </Grid> */}
         {/* <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="zip"
             name="zip"
             label="Zip / Postal code"
@@ -106,7 +106,7 @@ export default function StatusForm(props) {
         </Grid> */}
         {/* <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="country"
             name="country"
             label="Country"

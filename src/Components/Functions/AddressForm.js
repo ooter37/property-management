@@ -16,7 +16,7 @@ export default function AddressForm(props) {
       <Grid container spacing={1}>
         {/* <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="firstName"
             name="firstName"
             label="First name"
@@ -26,7 +26,7 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="lastName"
             name="lastName"
             label="Last name"
@@ -36,7 +36,7 @@ export default function AddressForm(props) {
         </Grid> */}
         <Grid item xs={12}>
           <TextField
-            required
+            required={props.required}
             id="address1"
             name="address1"
             label="Address line 1"
@@ -57,7 +57,7 @@ export default function AddressForm(props) {
         </Grid> */}
         <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="city"
             name="city"
             label="City"
@@ -72,7 +72,7 @@ export default function AddressForm(props) {
             id="state" 
             name="state" 
             label="State" 
-            required
+            required={props.required}
             fullWidth 
             select
             value={props.state}
@@ -139,7 +139,7 @@ export default function AddressForm(props) {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="zip"
             name="zip"
             label="Zip / Postal code"
@@ -151,7 +151,7 @@ export default function AddressForm(props) {
         </Grid>
         {/* <Grid item xs={12} sm={6}>
           <TextField
-            required
+            required={props.required}
             id="country"
             name="country"
             label="Country"

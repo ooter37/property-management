@@ -47,13 +47,13 @@ function AddHouse (props) {
     return (
         <div>            
             <div className='address-form'><AddressForm 
-            address={address} setAddress={setAddress} 
+            address={address} setAddress={setAddress} required={true}
             city={city} setCity={setCity} 
             state={state} setState={setState} 
             zipcode={stringZipcode} setZipcode={setStringZipcode} 
             /></div>
             <div className='address-form'><StatusForm
-            status={status} setStatus={setStatus} 
+            status={status} setStatus={setStatus} required={true}
             rent={stringRent} setRent={setStringRent} 
             /></div>
             <div className='address-form'> 

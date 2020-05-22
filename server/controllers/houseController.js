@@ -36,6 +36,20 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+    updateHouse: async (req,res) => {
+        try {
+            db = req.app.get('db')
+            // if (req.session.user) {
+                console.log(req.body)
+                const {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus} = req.body
+                const house = await db.houses.update_house(houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus)
+                res.status(200).send(house)
+            // }
+        } catch (error) {
+            console.log('Error updating house.', error)
+            res.status(500).send(error)
+        }
+    },
     uploadFile: (req,res) => {
         const s3 = new aws.S3();  // Create a new instance of S3
         const fileName = req.body.fileName;
