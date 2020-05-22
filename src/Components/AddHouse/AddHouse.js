@@ -5,7 +5,6 @@ import axios from 'axios'
 import AddressForm from '../Functions/AddressForm'
 import StatusForm from '../Functions/StatusForm'
 import { TextField, Button, Grid, MenuItem } from '@material-ui/core';
-import './AddHouse.scss'
 
 function AddHouse (props) {
     const [address, setAddress] = useState('')

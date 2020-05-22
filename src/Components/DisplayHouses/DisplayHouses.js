@@ -25,7 +25,7 @@ function DisplayHouses (props) {
             // console.log(res.data)
             if (res.data[0]){
             setSelectedHouse(res.data[0].house_id)}
-        })}, []
+        })}, [houses]
     )
     useEffect(() => {
         selectedHouse &&

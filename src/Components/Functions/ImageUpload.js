@@ -34,20 +34,25 @@ export default function ImageUpload(props) {
     //     setSuccess(false)
     //     setUrl('')}
 
-    function sendFile(e) {
+    // function blankImage() {
+    //     let changed = props.houses[0] = {...props.houses[0], image: ''}
+    //     props.setHouses(props.houses, changed)
+    // }
+
+function sendFile(e) {
     let fileParts = e.name.split('.')
     // let fileName = fileParts[0]
-    let fileName = props.selectedHouse
+    const fileName = `${props.selectedHouse}_${Date.now()}`
     axios.post('/sign_s3', {fileName : fileName,fileType : fileParts[1]}).then(res => {
         // setUrl(res.data.data.returnData.url)
         console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
         .then(() => {
-            axios.put(`/api/houses/${fileName}`)
+            axios.put(`/api/houses/${props.selectedHouse}`, {fileName})
         console.log("File upload successful.")
         // setSuccess(true)
     }).then(() => {
-        props.setHouses('')
+        // props.setHouses('')
             console.log('starting the axios call to update houses')
         axios.get('/api/houses').then(res => {
             props.setHouses(res.data)
@@ -73,10 +78,7 @@ export default function ImageUpload(props) {
     
     return (
     <div>
-        <button onClick={() => {
-            // props.setHouses('')
-            console.log(props.houses)
-            }}>console log</button>
+        {/* <button onClick={() => {console.log(Date.now())}}>console log</button> */}
         {/* <button onClick={sendFile}>UPLOAD</button> */}
             <IconButton onClick={() => {
                             Swal.mixin({
