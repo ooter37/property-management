@@ -47,6 +47,7 @@ export default function ImageUpload(props) {
         console.log("File upload successful.")
         // setSuccess(true)
     }).then(() => {
+        props.setHouses('')
             console.log('starting the axios call to update houses')
         axios.get('/api/houses').then(res => {
             props.setHouses(res.data)
@@ -72,7 +73,10 @@ export default function ImageUpload(props) {
     
     return (
     <div>
-        <button onClick={() => console.log(props.houses)}>console log</button>
+        <button onClick={() => {
+            // props.setHouses('')
+            console.log(props.houses)
+            }}>console log</button>
         {/* <button onClick={sendFile}>UPLOAD</button> */}
             <IconButton onClick={() => {
                             Swal.mixin({

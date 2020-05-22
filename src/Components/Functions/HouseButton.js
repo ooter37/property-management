@@ -93,7 +93,7 @@ export default function HouseButton(props) {
         focusVisibleClassName={classes.focusVisible}
         style={{width: '300px', }}
         >
-            <span className={classes.imageSrc} style={{backgroundImage: `url(${props.image})`}}/>
+            <span key={Date.now()} className={classes.imageSrc} style={{backgroundImage: `url(${props.image})`}}/>
             <span className={classes.imageBackdrop} />
             <span className={classes.imageButton}>
                 <Typography
