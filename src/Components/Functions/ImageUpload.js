@@ -5,60 +5,68 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Swal from 'sweetalert2'
 
 export default function ImageUpload() {
-  const [success, setSuccess] = useState(false)
-  const [url, setUrl] = useState('')
-  const [selectedFile, setSelectedFile] = useState('')
+    // const [success, setSuccess] = useState(false)
+    const [url, setUrl] = useState('')
+    const [selectedFile, setSelectedFile] = useState('')
+    
+    useEffect(() => {
+        if (selectedFile) {
+            const reader = new FileReader()
+            reader.onload = (e) => {
+                Swal.fire({
+                title: 'Uploaded Picture',
+                imageUrl: e.target.result,
+                imageAlt: 'The uploaded picture',
+                showCancelButton: true
+            }).then(res => {
+                if (res.value) {
+                    sendFile(selectedFile)
+                } else {
+                    setSelectedFile('')
+                }
+            })
+            }
+            reader.readAsDataURL(selectedFile)
+        }
+    }, [selectedFile])
 
-  function changeHandler(e) {
-    setSuccess(false)
-    setUrl('')
-    // setSelectedFile(e.target.files[0])
-    // console.log('change handler file',selectedFile)
+    // function changeHandler(e) {
+    //     setSuccess(false)
+    //     setUrl('')}
 
-  }
-//   useEffect(() => {
-//       selectedFile
-//       &&
-//       console.log('from use effect',selectedFile)
-//   }, [selectedFile])
-
-  function sendFile(e) {
+    function sendFile(e) {
     let fileParts = e.name.split('.')
     axios.post('/sign_s3', {fileName : fileParts[0],fileType : fileParts[1]}).then(res => {
-      setUrl(res.data.data.returnData.url)
-      console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
-      axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
-      .then(() => {
+        setUrl(res.data.data.returnData.url)
+        console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
+        axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
+        .then(() => {
         console.log("File upload successful.")
-        setSuccess(true)
-      })
-      .catch(err => {
-        alert("ERROR " + JSON.stringify(err));
-      })
+        // setSuccess(true)
     })
     .catch(err => {
-      alert(JSON.stringify(err));
+        alert("ERROR " + JSON.stringify(err));
     })
-  }
+    })
+    .catch(err => {
+        alert(JSON.stringify(err));
+    })
+}
 
-  const successMessage = () => (
-    <div style={{padding:50}}>
-      <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
-      <a href={url}>View uploaded image</a>
-      <br/>
-    </div>
-  )
-
-  return (
+// const successMessage = () => (
+//     <div style={{padding:50}}>
+//         <h3 style={{color: 'green'}}>SUCCESSFUL UPLOAD</h3>
+//         <a href={url}>View uploaded image</a>
+//         <br/>
+//     </div>)
+    
+    return (
     <div>
-        <button onClick={() => console.log(selectedFile)}>console log image</button>
-        <button onClick={sendFile}>UPLOAD</button>
-
-
+        {/* <button onClick={() => console.log(selectedFile)}>console log image</button> */}
+        {/* <button onClick={sendFile}>UPLOAD</button> */}
             <IconButton color="primary" aria-label="upload picture" component="span">
                 <PhotoCamera onClick={() => {
                             Swal.mixin({
-                                // input: 'text',
                                 confirmButtonText: 'Next &rarr;',
                                 showCancelButton: true,
                             }).queue([
@@ -72,21 +80,12 @@ export default function ImageUpload() {
                                 inputValidator: (value) => {if (!value) return 'Please select an image.'},
                                 preConfirm: async (file) => {
                                     if (file) {
-                                        return file
-                                        // await setSelectedFile(file)
-                                        // console.log(selectedFile)
-                                    }
-                                }
-                            }])
-                                .then((result) => {
-                                    if (result.value[0].name)
-                                    console.log(result.value[0].name)
-                                    sendFile(result.value[0])
+                                        return file}}
+                            }]).then((result) => {
+                                    if (result.value) {
+                                        setSelectedFile(result.value[0])}
                                 })
                         }} />
             </IconButton>
-
-    </div>
-  )
-
+    </div>)
 }
