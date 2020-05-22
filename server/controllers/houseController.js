@@ -36,15 +36,26 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+    deleteHouse: async (req,res) => {
+        try {
+            db = req.app.get('db')
+            if (req.session.user) {
+            const houses = await db.houses.delete_house_by_id(req.params.id)
+            res.status(200).send(houses)
+        }
+        } catch (error) {
+            console.log('Error deleting house.', error)
+            res.status(500).send(error)
+        }
+    },
     updateHouse: async (req,res) => {
         try {
             db = req.app.get('db')
-            // if (req.session.user) {
-                console.log(req.body)
+            if (req.session.user) {
                 const {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus} = req.body
                 const house = await db.houses.update_house(houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus)
                 res.status(200).send(house)
-            // }
+            }
         } catch (error) {
             console.log('Error updating house.', error)
             res.status(500).send(error)

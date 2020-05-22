@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 
-//AUTH
+// START AUTH
 const pleaseSignIn = Swal.mixin({
     title: 'Error',
     text: 'Please log in.'
@@ -22,8 +22,9 @@ const errorLogin = Swal.mixin({
     icon: 'error',
     title: 'Error',
 })
+// END AUTH
 
-//ADD
+// START ADD
 const addedSuccess = Swal.mixin({
     icon: 'success',
     toast: true,
@@ -49,8 +50,9 @@ const confirmAdd = Swal.mixin({
     cancelButtonColor: '#d33',
     confirmButtonText: 'ADD'
 })
+// END ADD
 
-//DELETE
+// START DELETE
 const confirmDelete = Swal.mixin({
     title: 'Confirm Delete',
     text: "REPLACE ME",
@@ -60,7 +62,10 @@ const confirmDelete = Swal.mixin({
     cancelButtonColor: '#3085d6',
     confirmButtonText: 'DELETE',    
 })
-const deleteSuccess = Swal.mixin({
+// END DELETE
+
+// START SUCCESS
+const success = Swal.mixin({
     icon: 'success',
     toast: true,
     position: 'top-end',
@@ -72,6 +77,20 @@ const deleteSuccess = Swal.mixin({
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
 })
+// END SUCCESS
+
+
+
+// START ERROR
+const errorUpdate = Swal.mixin({
+    title: 'Update Error',
+    text: 'An error occurred during update. Please try again, or contact administrator if you continue to see this error.'
+});
+const errorDelete = Swal.mixin({
+    title: 'Delete Error',
+    text: 'An error occurred during deletion. Please try again, or contact administrator if you continue to see this error.'
+});
+// END ERROR
 
 //UPDATE
 
@@ -92,7 +111,7 @@ export  {
         confirmAdd,
         errorLogin,
         confirmDelete,
-        deleteSuccess,
-        
-
+        success,
+        errorUpdate,
+        errorDelete
     }

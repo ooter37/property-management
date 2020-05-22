@@ -1,10 +1,12 @@
 import './UpdateHouse.scss'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import {Redirect} from 'react-router-dom'
 import AddressForm from '../../Functions/AddressForm'
 import StatusForm from '../../Functions/StatusForm'
 import { Button, Grid } from '@material-ui/core';
+import {pleaseSignIn, errorUpdate, success, errorDelete} from '../../Functions/Sweetalerts'
 
 function UpdateHouse(props) {
     const [address, setAddress] = useState('')
@@ -13,31 +15,52 @@ function UpdateHouse(props) {
     const [stringZipcode, setStringZipcode] = useState()
     const [status, setStatus] = useState('')
     const [stringRent, setStringRent] = useState(0)
+    const [redirect, setRedirect] = useState(false)
 
+    const deleteExistingHouse = () => {
+        if (props.user.data) {
+            if (!props.location.state) {
+                setRedirect(true)
+                errorDelete.fire()
+            } else {
+                const id = props.location.state.selectedHouse
+                axios.delete(`/api/houses/${id}`)
+                .then(() => {
+                    setRedirect(true)})
+                    success.fire({title: `${props.location.state.address} has been deleted.`})
+            } } else {
+                pleaseSignIn.fire()
+            }
+        }
+    
     const updateExistingHouse = () => {
-        const newAddress = address ? address : props.location.state.address
-        const newCity = city ? city : props.location.state.city
-        const newState = state ? state : props.location.state.state
-        const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
-        const newStringRent = stringRent ? stringRent : props.location.state.rent
-        const newStatus = status ? status : props.location.state.status
-        // if (props.user.data) {
-            const houseId = props.location.state.selectedHouse
-            const newZipcode = parseInt(newStringZipcode, 10)
-            const newRent = parseInt(newStringRent, 10)
-            axios.put('/api/houses', {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus})
-    //         .then(() => {
-    //             axios.get('/api/houses').then(res => {
-    //                 props.setHouses(res.data)
-    //                 if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
-    //     })
-    // })
-// }
-}
+        if (props.user.data) {
+            if (!props.location.state) {
+                setRedirect(true)
+                errorUpdate.fire()
+            } else {
+                const newAddress = address ? address : props.location.state.address
+                const newCity = city ? city : props.location.state.city
+                const newState = state ? state : props.location.state.state
+                const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
+                const newStringRent = stringRent ? stringRent : props.location.state.rent
+                const newStatus = status ? status : props.location.state.status
+                const houseId = props.location.state.selectedHouse
+                const newZipcode = parseInt(newStringZipcode, 10)
+                const newRent = parseInt(newStringRent, 10)
+                axios.put('/api/houses', {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus})
+                .then(() => {
+                    setRedirect(true)})
+                    success.fire({title: `${props.location.state.address} has been updated.`})
+            } } else {
+                pleaseSignIn.fire()
+            }
+        }
 
     return (
         <div>            
-            <button onClick={() => console.log(address)}>state</button>
+        {redirect ? <Redirect to="/main" /> : null}
+            <button onClick={() => console.log(props.location.state)}>state</button>
             {/* <button onClick={() => console.log(newAddress)}>new</button> */}
             {/* <button onClick={() => console.log(props.location.state.address)}>props</button> */}
             <div className='address-form'><AddressForm 
@@ -69,8 +92,9 @@ function UpdateHouse(props) {
                         <MenuItem value='Other'>Other</MenuItem>                       
                     </TextField>
                     </Grid> */}
-                    <Grid item xs={12} sm={6}>
-                        <Button className='add-house-button' onClick={() => updateExistingHouse()} variant='contained'>Update House</Button>
+                    <Grid item xs={12} sm={6} className='update-house-component-buttons'>
+                        <Button color='primary' className='add-house-button' onClick={() => updateExistingHouse()} variant='contained'>Update House</Button>
+                        <Button color='secondary' className='delete-house-button' onClick={() => deleteExistingHouse()} variant='contained'>Delete House</Button>
                     </Grid>
                 </Grid>
             </div>
