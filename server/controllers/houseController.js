@@ -70,8 +70,6 @@ module.exports = {
                 console.log(req.params)
                 const {id} = req.params
                 const imageName = `https://property-management-images.s3-us-west-1.amazonaws.com/house_images/${id}`
-                console.log(fileName)
-                console.log(imageName)
                 const image = await db.houses.update_house_image(imageName,id)
                 res.status(200).send(image)
             }

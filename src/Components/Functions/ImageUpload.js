@@ -43,8 +43,8 @@ export default function ImageUpload(props) {
         console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
         .then(() => {
-            console.log(`/api/houses/`)
             axios.put(`/api/houses/${fileName}`)
+            console.log(`fileName`)
         console.log("File upload successful.")
         // setSuccess(true)
     })
