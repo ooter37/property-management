@@ -2,17 +2,17 @@ import './DisplayHouses.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {Link} from 'react-router-dom'
+import moment from "moment";
+import {ListItem, Button} from '@material-ui/core/';
+import { Card, Grid } from 'tabler-react'
+import "tabler-react/dist/Tabler.css";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import HouseButton from '../Functions/HouseButton'
 import displayAddress from '../Functions/displayAddress'
 import displayHouseStatus from '../Functions/displayHouseStatus'
 import AddHouse from '../AddHouse/AddHouse'
-import {ListItem, Button} from '@material-ui/core/';
-import { Card, Grid } from 'tabler-react'
-import "tabler-react/dist/Tabler.css";
-import moment from "moment";
-import  ImageUpload from '../Functions/ImageUpload'
+import ImageUpload from '../Functions/ImageUpload'
 
 function DisplayHouses (props) {
     const [houses, setHouses] = useState(null)
@@ -20,8 +20,7 @@ function DisplayHouses (props) {
     const [displayTasks, setDisplayTasks] = useState([])
 
     useEffect(() => {
-        axios.get('/api/houses')
-        .then(res => {
+        axios.get('/api/houses').then(res => {
             setHouses(res.data)
             // console.log(res.data)
             if (res.data[0]){
@@ -83,8 +82,12 @@ function DisplayHouses (props) {
                         <Grid.Col md={4}>
                             <Card>
                                 <Card.Header className='update-house-card-header'>
-                                    <Link><Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title></Link>
-                                    <Card.Title className='upload-image-button-container'><ImageUpload selectedHouse={selectedHouse}/>Image</Card.Title>
+                                    {/* <Link> */}
+                                    <Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title>
+                                    {/* </Link> */}
+                                    <Card.Title className='upload-image-button-container'>
+                                        <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>Image
+                                    </Card.Title>
                                 </Card.Header>
                             <Card.Body className='card-display-house-info-container'>
                             {displayAddress(house)}
@@ -101,7 +104,7 @@ function DisplayHouses (props) {
     })
     return (
         <div>
-            <button onClick={() => console.log(displayTasks)} >console log button</button>
+            {/* <button onClick={() => console.log(displayTasks)} >console log button</button> */}
             <Tabs>
                 <TabList>
                     {mappedNames}
@@ -109,7 +112,7 @@ function DisplayHouses (props) {
                 </TabList>
                 {mappedHouses}
                 <TabPanel>
-                    <AddHouse/>
+                    <AddHouse setHouses={setHouses} setSelectedHouse={setSelectedHouse}/>
                 </TabPanel>
             </Tabs>
             

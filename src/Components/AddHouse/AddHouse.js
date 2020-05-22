@@ -23,10 +23,13 @@ function AddHouse (props) {
             const rent = parseInt(stringRent, 10)
             axios.post('/api/houses', {address,city,state,zipcode,rent,status,userId,ownership})
             .then(() => {
-                
-            })
-        }
-    }
+                axios.get('/api/houses').then(res => {
+                    props.setHouses(res.data)
+                    if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
+        })
+    })
+}
+}
     
     //TEST HERE
     // const imageChecker = () => {
@@ -43,9 +46,7 @@ function AddHouse (props) {
     // }
 
     return (
-        <div>
-            <button onClick={() => console.log('button')}>console log</button>
-            
+        <div>            
             <div className='address-form'><AddressForm 
             address={address} setAddress={setAddress} 
             city={city} setCity={setCity} 

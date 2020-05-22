@@ -46,6 +46,13 @@ export default function ImageUpload(props) {
             axios.put(`/api/houses/${fileName}`)
         console.log("File upload successful.")
         // setSuccess(true)
+    }).then(() => {
+            console.log('starting the axios call to update houses')
+        axios.get('/api/houses').then(res => {
+            props.setHouses(res.data)
+            console.log('all complete')
+            // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
+})
     })
     .catch(err => {
         alert("ERROR " + JSON.stringify(err));
@@ -65,10 +72,9 @@ export default function ImageUpload(props) {
     
     return (
     <div>
-        {/* <button onClick={() => console.log(selectedFile)}>console log image</button> */}
+        <button onClick={() => console.log(props.houses)}>console log</button>
         {/* <button onClick={sendFile}>UPLOAD</button> */}
-            <IconButton color="primary" aria-label="upload picture" component="span">
-                <PhotoCamera onClick={() => {
+            <IconButton onClick={() => {
                             Swal.mixin({
                                 confirmButtonText: 'Next &rarr;',
                                 showCancelButton: true,
@@ -88,7 +94,8 @@ export default function ImageUpload(props) {
                                     if (result.value) {
                                         setSelectedFile(result.value[0])}
                                 })
-                        }} />
+                        }} color="primary" aria-label="upload picture" component="span">
+                <PhotoCamera />
             </IconButton>
     </div>)
 }

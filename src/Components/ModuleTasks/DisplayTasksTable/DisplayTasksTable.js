@@ -1,23 +1,28 @@
 import './DisplayTasksTable.scss'
-import React from 'react';
+import React, {useEffect} from 'react'
+import axios from 'axios'
 import {connect} from 'react-redux' 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
-import DeleteIcon from '@material-ui/icons/Delete';
-// import useFetch from '../../Hooks/useFetch'
-// import format from '@date-io/date-fns';
-import moment from "moment";
+import DeleteIcon from '@material-ui/icons/Delete'
+import moment from "moment"
 import {confirmDelete, pleaseSignIn} from '../../Functions/Sweetalerts'
 import axiosDelete from '../../Functions/axisoDelete'
 
 function DisplayTasksTable(props) {
-    // const tasks = useFetch(`/api/tasks/${props.selectedHouse}`,props.selectedHouse)
+
+  useEffect(() => {
+    axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
+        props.setTasks(res.data)
+    })}, [props]
+)
+
     const mappedTasks = props.tasks && props.tasks.map((task) => {
         return (
           <TableRow key={`task-display-${task.task_id}`} className={`urgent-${task.urgent.toString()}`}>

@@ -42,7 +42,9 @@ function AddTask(props) {
             const houseId = props.selectedHouse
             axios.post('/api/tasks', {userId, houseId, type, date, price, urgent, note, contact})
             .then(() => {
-                
+                axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
+                    props.setTasks(res.data)
+                })
             })
         }
     }
