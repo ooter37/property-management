@@ -40,6 +40,17 @@
 //   background-image: '/no-image-available.png' !important;
 // }
 
+.update-house-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+.upload-image-button-container {
+  display: flex;
+  justify-content: flex-end;
+  // flex-direction: column;
+  align-items: center;
+}
+
 //START MAPPED URGENT TASKS
 .mapped-urgent-tasks {
   // background-color:red;

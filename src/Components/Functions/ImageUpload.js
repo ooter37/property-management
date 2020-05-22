@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Swal from 'sweetalert2'
 
-export default function ImageUpload() {
+export default function ImageUpload(props) {
     // const [success, setSuccess] = useState(false)
     const [url, setUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState('')
@@ -36,11 +36,15 @@ export default function ImageUpload() {
 
     function sendFile(e) {
     let fileParts = e.name.split('.')
-    axios.post('/sign_s3', {fileName : fileParts[0],fileType : fileParts[1]}).then(res => {
-        setUrl(res.data.data.returnData.url)
+    // let fileName = fileParts[0]
+    let fileName = props.selectedHouse
+    axios.post('/sign_s3', {fileName : fileName,fileType : fileParts[1]}).then(res => {
+        // setUrl(res.data.data.returnData.url)
         console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
         .then(() => {
+            console.log(`/api/houses/`)
+            axios.put(`/api/houses/${fileName}`)
         console.log("File upload successful.")
         // setSuccess(true)
     })

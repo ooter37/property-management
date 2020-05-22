@@ -12,6 +12,7 @@ import {ListItem, Button} from '@material-ui/core/';
 import { Card, Grid } from 'tabler-react'
 import "tabler-react/dist/Tabler.css";
 import moment from "moment";
+import  ImageUpload from '../Functions/ImageUpload'
 
 function DisplayHouses (props) {
     const [houses, setHouses] = useState(null)
@@ -48,11 +49,6 @@ function DisplayHouses (props) {
         })}, [selectedHouse]
     )
 
-    // const tasks = useFetch(`/api/tasks/${selectedHouse}`,selectedHouse)
-
-    // const mappedTasks = tasks.map(task => {
-    //     if (task.urgent) {setDisplayTasks([...displayTasks,task])}
-    // })
     const mappedTasks = displayTasks && displayTasks.map((task) => {
         return (
             <div className='mapped-urgent-tasks' key={`mappedUrgentTasks ${task.id}`}>
@@ -86,7 +82,10 @@ function DisplayHouses (props) {
 
                         <Grid.Col md={4}>
                             <Card>
-                                <Card.Header><Link><Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title></Link></Card.Header>
+                                <Card.Header className='update-house-card-header'>
+                                    <Link><Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title></Link>
+                                    <Card.Title className='upload-image-button-container'><ImageUpload selectedHouse={selectedHouse}/>Image</Card.Title>
+                                </Card.Header>
                             <Card.Body className='card-display-house-info-container'>
                             {displayAddress(house)}
                             {displayHouseStatus(house)}

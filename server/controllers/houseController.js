@@ -39,11 +39,13 @@ module.exports = {
     uploadFile: (req,res) => {
         const s3 = new aws.S3();  // Create a new instance of S3
         const fileName = req.body.fileName;
+        // console.log(req.session.user)
+        // const fileName = req.session.user
         const fileType = req.body.fileType;
       // Set up the payload of what we are sending to the S3 api
         const s3Params = {
             Bucket: S3_BUCKET,
-            Key: fileName,
+            Key: `house_images/${fileName}`,
             Expires: 500,
             ContentType: fileType,
             ACL: 'public-read'
@@ -59,6 +61,23 @@ module.exports = {
             url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`};
             // Send it all back
             res.json({success:true, data:{returnData}});
-        });
+        })
+    },
+    updateImage: async (req, res) => {
+        try {
+            db = req.app.get('db')
+            if (req.session.user) {
+                console.log(req.params)
+                const {id} = req.params
+                const imageName = `https://property-management-images.s3-us-west-1.amazonaws.com/house_images/${id}`
+                console.log(fileName)
+                console.log(imageName)
+                const image = await db.houses.update_house_image(imageName,id)
+                res.status(200).send(image)
+            }
+        } catch (error) {
+            console.log('Error updating image.', error)
+            res.status(500).send(error)
+        }
     }
 }
