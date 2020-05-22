@@ -20,14 +20,17 @@ function DisplayHouses (props) {
     const [displayTasks, setDisplayTasks] = useState([])
 
     useEffect(() => {
+        // console.log('houses useeffect ran')
         axios.get('/api/houses').then(res => {
             setHouses(res.data)
             // console.log(res.data)
             if (res.data[0]){
             setSelectedHouse(res.data[0].house_id)}
-        })}, [houses]
+        })}, []
     )
+
     useEffect(() => {
+        // console.log(`task useeffect ran`)
         selectedHouse &&
         axios.get(`/api/tasks/${selectedHouse}`)
         .then(res => {
@@ -116,7 +119,7 @@ function DisplayHouses (props) {
     })
     return (
         <div>
-            {/* <button onClick={() => console.log(displayTasks)} >console log button</button> */}
+            <button onClick={() => console.log(selectedHouse)} >console log button</button>
             <Tabs>
                 <TabList>
                     {mappedNames}
