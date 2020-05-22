@@ -13,6 +13,7 @@ import displayAddress from '../Functions/displayAddress'
 import displayHouseStatus from '../Functions/displayHouseStatus'
 import AddHouse from '../AddHouse/AddHouse'
 import ImageUpload from '../Functions/ImageUpload'
+import defaultHouseImage from '../../media/add-house-button.jpeg'
 
 function DisplayHouses (props) {
     const [houses, setHouses] = useState(null)
@@ -101,7 +102,7 @@ function DisplayHouses (props) {
                                     <Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title>
                                     </Link>
                                     <Card.Title className='upload-image-button-container'>
-                                        <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>Image
+                                        <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>
                                     </Card.Title>
                                 </Card.Header>
                             <Card.Body className='card-display-house-info-container'>
@@ -110,20 +111,26 @@ function DisplayHouses (props) {
                             </Card.Body>
                         </Card> 
                     </Grid.Col>
-                        <Grid.Col md={4}><Card body="Short content" /></Grid.Col>
+                        {/* <Grid.Col md={4}><Card body="Short content" /></Grid.Col> */}
                     </Grid.Row>
 
                 </div>
             </TabPanel>
         )
     })
+    // `url(${props.image})`
     return (
         <div>
-            <button onClick={() => console.log(selectedHouse)} >console log button</button>
+            <button onClick={() => console.log(houses)} >console log button</button>
             <Tabs>
                 <TabList>
                     {mappedNames}
-                    <Tab>ADD HOUSE</Tab>
+                    <Tab>
+                    <HouseButton 
+                    // selectedHouse={selectedHouse} 
+                    image={defaultHouseImage}
+                    title='Add New House'></HouseButton>
+                    </Tab>
                 </TabList>
                 {mappedHouses}
                 <TabPanel>

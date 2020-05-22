@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Swal from 'sweetalert2'
 
@@ -49,16 +49,17 @@ function sendFile(e) {
         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
         .then(() => {
             axios.put(`/api/houses/${props.selectedHouse}`, {fileName})
-        console.log("File upload successful.")
+            .then(() => {
+                console.log("File upload successful.")
+                // props.setHouses('')
+                    console.log('starting the axios call to update houses')
+                axios.get('/api/houses').then(res => {
+                    props.setHouses(res.data)
+                    console.log('all complete')
+                    // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
+        })
+            })
         // setSuccess(true)
-    }).then(() => {
-        // props.setHouses('')
-            console.log('starting the axios call to update houses')
-        axios.get('/api/houses').then(res => {
-            props.setHouses(res.data)
-            console.log('all complete')
-            // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
-})
     })
     .catch(err => {
         alert("ERROR " + JSON.stringify(err));
@@ -80,7 +81,11 @@ function sendFile(e) {
     <div>
         {/* <button onClick={() => {console.log(Date.now())}}>console log</button> */}
         {/* <button onClick={sendFile}>UPLOAD</button> */}
-            <IconButton onClick={() => {
+            <Button 
+            variant='contained'
+            color='default'
+            startIcon={<PhotoCamera/>}
+            onClick={() => {
                             Swal.mixin({
                                 confirmButtonText: 'Next &rarr;',
                                 showCancelButton: true,
@@ -101,7 +106,7 @@ function sendFile(e) {
                                         setSelectedFile(result.value[0])}
                                 })
                         }} color="primary" aria-label="upload picture" component="span">
-                <PhotoCamera />
-            </IconButton>
+                Upload
+            </Button>
     </div>)
 }

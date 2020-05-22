@@ -3,9 +3,11 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
+import { Button, Grid, Typography } from '@material-ui/core';
+import { Card } from 'tabler-react'
+import "tabler-react/dist/Tabler.css";
 import AddressForm from '../../Functions/AddressForm'
 import StatusForm from '../../Functions/StatusForm'
-import { Button, Grid } from '@material-ui/core';
 import {pleaseSignIn, errorUpdate, success, errorDelete} from '../../Functions/Sweetalerts'
 
 function UpdateHouse(props) {
@@ -58,11 +60,12 @@ function UpdateHouse(props) {
         }
 
     return (
-        <div>            
+        <Grid className='update-house-component-container'>
+        <Card>            
         {redirect ? <Redirect to="/main" /> : null}
-            <button onClick={() => console.log(props.location.state)}>state</button>
-            {/* <button onClick={() => console.log(newAddress)}>new</button> */}
-            {/* <button onClick={() => console.log(props.location.state.address)}>props</button> */}
+        <Typography variant='h6'>Enter values you would like to change. Click update when finished.</Typography>
+
+
             <div className='address-form'><AddressForm 
             address={address} setAddress={setAddress} required={false}
             city={city} setCity={setCity} 
@@ -98,7 +101,8 @@ function UpdateHouse(props) {
                     </Grid>
                 </Grid>
             </div>
-        </div>
+        </Card>
+        </Grid>
     )
 }
 
