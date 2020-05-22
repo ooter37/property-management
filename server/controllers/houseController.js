@@ -67,7 +67,6 @@ module.exports = {
         try {
             db = req.app.get('db')
             if (req.session.user) {
-                console.log(req.params)
                 const {id} = req.params
                 const imageName = `https://property-management-images.s3-us-west-1.amazonaws.com/house_images/${id}`
                 const image = await db.houses.update_house_image(imageName,id)

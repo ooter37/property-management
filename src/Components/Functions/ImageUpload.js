@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 
 export default function ImageUpload(props) {
     // const [success, setSuccess] = useState(false)
-    const [url, setUrl] = useState('')
+    // const [url, setUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState('')
     
     useEffect(() => {
@@ -44,7 +44,6 @@ export default function ImageUpload(props) {
         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
         .then(() => {
             axios.put(`/api/houses/${fileName}`)
-            console.log(`fileName`)
         console.log("File upload successful.")
         // setSuccess(true)
     })
