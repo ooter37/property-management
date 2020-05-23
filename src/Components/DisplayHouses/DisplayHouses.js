@@ -37,6 +37,7 @@ function DisplayHouses (props) {
         .then(res => {
             let pushTasks = []
             if (res.data[0])
+            // eslint-disable-next-line
             {res.data.map(task => {
                 if (task.urgent) {
                     let type = task.type
@@ -63,28 +64,30 @@ function DisplayHouses (props) {
     
     const mappedNames = houses && houses.map((house) => {
         return (
-            <Tab onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
+            <Tab className='container-tab' onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
                 <HouseButton selectedHouse={selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>
             </Tab>
+           
         )
     })
     const mappedHouses = houses && houses.map((house) => {
         return (
             <TabPanel className='tab-panel' key={house.link_id}>
                 <div className='modules'>
-                    <Grid.Row cards deck>
-                        <Grid.Col md={4}>
-                            <Card>
+                    {/* <Grid.Row cards deck> */}
+                        {/* <Grid.Col md={4}> */}
+                            <Card className='tasks-card'>
                                 <Card.Header><Link to={`task/${house.house_id}`}><Card.Title><Button color='primary' variant='outlined'>Manage Tasks</Button></Card.Title></Link></Card.Header>
                                 <Card.Body>
                                     <h5>Urgent</h5>
                                     {mappedTasks}
+                                    <div className='card-height-fixer'></div>
                                 </Card.Body>
                             </Card> 
-                        </Grid.Col>
+                        {/* </Grid.Col> */}
 
-                        <Grid.Col md={4}>
-                            <Card>
+                        {/* <Grid.Col md={4}> */}
+                            <Card className='tasks-card'>
                                 <Card.Header className='update-house-card-header'>
                                     <Link 
                                     to={{
@@ -109,10 +112,11 @@ function DisplayHouses (props) {
                             {displayAddress(house)}
                             {displayHouseStatus(house)}
                             </Card.Body>
+                            <div className='card-height-fixer'></div>
                         </Card> 
-                    </Grid.Col>
+                    {/* </Grid.Col> */}
                         {/* <Grid.Col md={4}><Card body="Short content" /></Grid.Col> */}
-                    </Grid.Row>
+                    {/* </Grid.Row> */}
 
                 </div>
             </TabPanel>
@@ -121,9 +125,25 @@ function DisplayHouses (props) {
     // `url(${props.image})`
     return (
         <div>
+            {/* <div className='horizontal-scroll'>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+                <div className='test-div'>test div</div>
+            </div> */}
             <button onClick={() => console.log(houses)} >console log button</button>
             <Tabs>
                 <TabList>
+                <div className='horizontal-scroll'>
                     {mappedNames}
                     <Tab>
                     <HouseButton 
@@ -131,6 +151,7 @@ function DisplayHouses (props) {
                     image={defaultHouseImage}
                     title='Add New House'></HouseButton>
                     </Tab>
+                    </div>
                 </TabList>
                 {mappedHouses}
                 <TabPanel>

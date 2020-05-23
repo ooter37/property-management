@@ -28,6 +28,7 @@ export default function ImageUpload(props) {
             }
             reader.readAsDataURL(selectedFile)
         }
+        // eslint-disable-next-line
     }, [selectedFile])
 
     // function changeHandler(e) {
@@ -83,7 +84,6 @@ function sendFile(e) {
         {/* <button onClick={sendFile}>UPLOAD</button> */}
             <Button 
             variant='contained'
-            color='default'
             startIcon={<PhotoCamera/>}
             onClick={() => {
                             Swal.mixin({
