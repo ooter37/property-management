@@ -4,21 +4,32 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import moment from "moment";
-import {ListItem, Button} from '@material-ui/core/';
-import { Card, Grid } from 'tabler-react'
-import "tabler-react/dist/Tabler.css";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import {ListItem, Button, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, makeStyles, Grid} from '@material-ui/core/';
+// import { Card } from 'tabler-react'
+// import "tabler-react/dist/Tabler.css";
 import HouseButton from '../Functions/HouseButton'
 import displayAddress from '../Functions/displayAddress'
 import displayHouseStatus from '../Functions/displayHouseStatus'
 import AddHouse from '../AddHouse/AddHouse'
 import ImageUpload from '../Functions/ImageUpload'
 import defaultHouseImage from '../../media/add-house-button.jpeg'
+import ScrollContainer from '../ScrollContainer/ScrollContainer'
 
-function DisplayHouses (props) {
-    const [houses, setHouses] = useState(null)
+const useStyles = makeStyles({
+    root: {
+      maxWidth: 345,
+    },
+    media: {
+      height: 140,
+    },
+  });
+
+
+function DisplayHouses () {
+    const [houses, setHouses] = useState([])
     const [selectedHouse, setSelectedHouse] = useState(null)
     const [displayTasks, setDisplayTasks] = useState([])
+    const classes = useStyles();
 
     useEffect(() => {
         // console.log('houses useeffect ran')
@@ -53,30 +64,96 @@ function DisplayHouses (props) {
         })}, [selectedHouse]
     )
 
-    const mappedTasks = displayTasks && displayTasks.map((task) => {
+    // const mappedTasks = displayTasks && displayTasks.map((task) => {
+    //     return (
+    //         <div className='mapped-urgent-tasks' key={`mappedUrgentTasks ${task.id}`}>
+    //             <ListItem>{task.type}</ListItem>
+    //             <ListItem>{moment(task.date).format("MMMM Do YYYY")}</ListItem>
+    //         </div>
+    //     )
+    // })
+
+    const scrollArray = houses.map((house) => {
         return (
-            <div className='mapped-urgent-tasks' key={`mappedUrgentTasks ${task.id}`}>
-                <ListItem>{task.type}</ListItem>
-                <ListItem>{moment(task.date).format("MMMM Do YYYY")}</ListItem>
-            </div>
+            {name: <div className='container-tab' onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
+            <HouseButton selectedHouse={selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>
+        </div>}
         )
     })
+
+    // console.log(scrollArray)
     
-    const mappedNames = houses && houses.map((house) => {
-        return (
-            <Tab className='container-tab' onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
-                <HouseButton selectedHouse={selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>
-            </Tab>
+    // let container = []
+    // const mappedNames = houses && houses.map((house) => {
+    //     container.push({name: <div className='container-tab' onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
+    //     <HouseButton selectedHouse={selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>
+    // </div>})
+    //     return (
+    //         <Tab className='container-tab' onClick={() => setSelectedHouse(house.house_id)} key={`Tab Label ${house.house_id}`}>
+    //             <HouseButton selectedHouse={selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>
+    //         </Tab>
            
-        )
-    })
+    //     )
+    // })
     const mappedHouses = houses && houses.map((house) => {
-        return (
-            <TabPanel className='tab-panel' key={house.link_id}>
-                <div className='modules'>
-                    {/* <Grid.Row cards deck> */}
-                        {/* <Grid.Col md={4}> */}
-                            <Card className='tasks-card'>
+        if (house.house_id === selectedHouse)
+        // if (1 === 1)
+
+        {return (
+                <div className='modules' key={`mappedHouses-${house.house_id}`}>
+                    <Grid container spacing={2}>
+                        <Grid item>
+                    <Card style = {{ maxWidth: 350, minHeight: 350}}>
+                                <CardMedia
+                                style = {{ height: 0, paddingTop: '70%'}}
+                                image= {house.image}
+                                title="House Info"/>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">{house.address}</Typography>
+                                    <div className='update-house-card-header'>
+                                    <Link 
+                                    to={{
+                                        pathname: '/update_house',
+                                        state: {
+                                            selectedHouse: selectedHouse,
+                                            address: house.address,
+                                            city: house.city,
+                                            state: house.state,
+                                            zipcode: house.zipcode,
+                                            status: house.status,
+                                            rent: house.rent
+                                        }
+                                    }}>
+                                    <Button color='primary' variant='outlined'>Update House</Button>
+                                    </Link>
+                                    <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>
+                                    </div>
+                                    {/* <Typography variant="body2" color="textSecondary" component="p">dfg sdf ghsfd gsdfhsdgh gh gf hfgfrdgdfgfdg dfsgfdsg dsfgfdgfdgdfg</Typography> */}
+                                </CardContent>
+                    </Card>
+                    </Grid>
+                    <Grid item>
+                    <Card style = {{ maxWidth: 350, minHeight: 350}}>
+                        <Link to={`task/${house.house_id}`}>
+                            <CardActionArea>
+                                <CardMedia
+                                style = {{ height: 0, paddingTop: '70%'}}
+                                image= {require ("../../media/mowing.jpeg")}
+                                title="House Tasks"/>
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="h2">Tasks</Typography>
+                                    <Typography variant="body2" color="textSecondary" component="p">View and manage a list of tasks for each house. </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Link>
+                    </Card>
+                    </Grid>
+                    </Grid>
+
+
+
+
+                            {/* <Card className='tasks-card'>
                                 <Card.Header><Link to={`task/${house.house_id}`}><Card.Title><Button color='primary' variant='outlined'>Manage Tasks</Button></Card.Title></Link></Card.Header>
                                 <Card.Body>
                                     <h5>Urgent</h5>
@@ -84,9 +161,7 @@ function DisplayHouses (props) {
                                     <div className='card-height-fixer'></div>
                                 </Card.Body>
                             </Card> 
-                        {/* </Grid.Col> */}
 
-                        {/* <Grid.Col md={4}> */}
                             <Card className='tasks-card'>
                                 <Card.Header className='update-house-card-header'>
                                     <Link 
@@ -102,6 +177,7 @@ function DisplayHouses (props) {
                                             rent: house.rent
                                         }
                                     }}>
+
                                     <Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title>
                                     </Link>
                                     <Card.Title className='upload-image-button-container'>
@@ -113,52 +189,22 @@ function DisplayHouses (props) {
                             {displayHouseStatus(house)}
                             </Card.Body>
                             <div className='card-height-fixer'></div>
-                        </Card> 
-                    {/* </Grid.Col> */}
-                        {/* <Grid.Col md={4}><Card body="Short content" /></Grid.Col> */}
-                    {/* </Grid.Row> */}
+                        </Card>  */}
+
 
                 </div>
-            </TabPanel>
-        )
+        )}
     })
-    // `url(${props.image})`
+
     return (
         <div>
-            {/* <div className='horizontal-scroll'>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-                <div className='test-div'>test div</div>
-            </div> */}
-            <button onClick={() => console.log(houses)} >console log button</button>
-            <Tabs>
-                <TabList>
-                <div className='horizontal-scroll'>
-                    {mappedNames}
-                    <Tab>
-                    <HouseButton 
+            <ScrollContainer setSelectedHouse={setSelectedHouse} selectedHouse={selectedHouse} houses={houses} data={scrollArray}/>
+                    {/* <HouseButton 
                     // selectedHouse={selectedHouse} 
                     image={defaultHouseImage}
-                    title='Add New House'></HouseButton>
-                    </Tab>
-                    </div>
-                </TabList>
+                    title='Add New House'></HouseButton> */}
                 {mappedHouses}
-                <TabPanel>
-                    <AddHouse setHouses={setHouses} setSelectedHouse={setSelectedHouse}/>
-                </TabPanel>
-            </Tabs>
-            
+                    {/* <AddHouse setHouses={setHouses} setSelectedHouse={setSelectedHouse}/>            */}
         </div>
     )
 }

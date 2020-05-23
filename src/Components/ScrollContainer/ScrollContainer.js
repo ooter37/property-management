@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './ScrollContainer.scss';
+import HouseButton from '../Functions/HouseButton'
 
 // list of items
 
@@ -8,7 +9,9 @@ export default function ScrollContainer(props) {
   const [selected, setSelected] = useState(0)
 
   const list = props.data
-  
+  const houses = props.houses
+//   console.log(props.houses)
+
   // One item component
   // selected prop will be passed
   const MenuItem = ({ text, selected }) => {
@@ -23,13 +26,13 @@ export default function ScrollContainer(props) {
   
   // All items component
   // Important! add unique key
-  const Menu = (list) => list.map(el => {
-    const { name } = el;
+  const Menu = () => houses.map(house => {
+    // const { name } = el;
   
     return (
-      <MenuItem
-        text={name}
-        key={name}
+      <MenuItem onClick={() => props.setSelectedHouse(house.house_id)}
+        text={<HouseButton  selectedHouse={props.selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>}
+        key={house.house_id}
       />
     );
   });
