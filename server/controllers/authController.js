@@ -15,7 +15,6 @@ module.exports = {
             if (!isAuthenticated) {
                 return res.status(401).send('Email or password incorrect.')
             }
-
             delete user.hashed_password
             req.session.user = user
             res.send(req.session.user)

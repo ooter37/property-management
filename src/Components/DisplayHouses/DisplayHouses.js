@@ -12,7 +12,6 @@ import displayAddress from '../Functions/displayAddress'
 import displayHouseStatus from '../Functions/displayHouseStatus'
 import AddHouse from '../AddHouse/AddHouse'
 import ImageUpload from '../Functions/ImageUpload'
-import defaultHouseImage from '../../media/add-house-button.jpeg'
 import ScrollContainer from '../ScrollContainer/ScrollContainer'
 
 const useStyles = makeStyles({

@@ -8,11 +8,12 @@ import {Redirect} from 'react-router-dom'
 import {requestUserData} from './redux/reducers/user'
 import useRedirect from './Components/Hooks/useRedirect'
 import Main from './Components/Main/Main'
-import Auth from './Components/Auth/Auth'
+import Landing from './Components/Auth/Landing'
 import Header from './Components/Header/Header'
 import ModuleTasks from './Components/ModuleTasks/ModuleTasks'
 import UpdateHouse from './Components/ModuleHouse/UpdateHouse/UpdateHouse'
 import AddHouse from './Components/AddHouse/AddHouse'
+import Register from './Components/Auth/Register'
 
 function App(props) {
   // console.log(props.user)
@@ -42,7 +43,8 @@ function App(props) {
       }
       <div>
         <Switch>
-          <Route exact path='/' component={Auth}/>
+          <Route exact path='/' component={Landing}/>
+          <Route path='/register' component={Register} />
           <Route path='/main' component={Main}/>
           <Route path='/add_house' component={AddHouse}/>
           <Route path='/update_house' component={UpdateHouse}/>
