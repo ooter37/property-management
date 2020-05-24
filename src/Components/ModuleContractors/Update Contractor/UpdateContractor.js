@@ -1,0 +1,1 @@
+import './UpdateContractor.scss'

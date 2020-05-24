@@ -10,7 +10,7 @@ const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env
 const { login, register, logout, getUser, userData } = require('./controllers/authController')
 const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
-
+const { getContractorsByUser, addNewContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 //TOP-LEVEL MIDDLEWARE
 const app=express()
 app.use(express.json())
@@ -52,6 +52,12 @@ app.get('/api/tasks/:id', getTasksByHouse)
 app.post('/api/tasks', addTask)
 app.delete('/api/tasks/:id', deleteTask)
 app.post('/sign_s3', uploadFile)
+
+//CONTRACTOR ENDPOINTS
+app.get('/api/contractors', getContractorsByUser)
+app.post('/api/contractors', addNewContractor)
+app.delete('/api/contractors/:id', deleteContractor)
+app.put('/api/contractors', updateContractor)
 
 
 // Configure aws with your accessKeyId and your secretAccessKey -- MIGHT NEED THIS WHEN ACCESS PRIVS ARE FIXED

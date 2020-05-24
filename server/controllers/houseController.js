@@ -6,7 +6,7 @@ const {S3_BUCKET} = process.env
 module.exports = {
     getHousesByLinked: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
                 const houses = await db.houses.get_houses_by_linked(req.session.user.user_id)
                 res.status(200).send(houses)
@@ -18,7 +18,7 @@ module.exports = {
     },
     addHouse: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
                 const {address, city, state, zipcode, rent, status, ownership} = req.body
                 const googleResult = await axios.get(`https://maps.googleapis.com/maps/api/streetview/metadata?location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
@@ -38,7 +38,7 @@ module.exports = {
     },
     deleteHouse: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
             const houses = await db.houses.delete_house_by_id(req.params.id)
             res.status(200).send(houses)
@@ -50,7 +50,7 @@ module.exports = {
     },
     updateHouse: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
                 const {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus} = req.body
                 const house = await db.houses.update_house(houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus)
@@ -90,7 +90,7 @@ module.exports = {
     },
     updateImage: async (req, res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
                 const {id} = req.params
                 const {fileName} = req.body

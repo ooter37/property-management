@@ -1,7 +1,7 @@
 module.exports = {
     getTasksByHouse: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             // console.log(req.params.id)
             if (req.session.user) {
                 const tasks = await db.tasks.get_tasks_by_house(req.params.id)
@@ -16,7 +16,7 @@ module.exports = {
     },
     addTask: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
                 // console.log(req.body)
                 const {userId, houseId,type,date,price,urgent,note,contact} = req.body
@@ -32,7 +32,7 @@ module.exports = {
     },
     deleteTask: async (req,res) => {
         try {
-            db = req.app.get('db')
+            const db = req.app.get('db')
             if (req.session.user) {
                 const tasks = await db.tasks.delete_task(req.params.id)
                 res.status(200).send(tasks)
