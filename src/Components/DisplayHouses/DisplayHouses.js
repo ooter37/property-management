@@ -100,12 +100,12 @@ function DisplayHouses () {
         // if (1 === 1)
 
         {return (
-                <div className='modules' key={`mappedHouses-${house.house_id}`}>
+                <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
                     <Grid container spacing={2}>
                         <Grid item>
-                    <Card style = {{ maxWidth: 350, minHeight: 350}}>
+                            <Card style = {{ maxWidth: 350, minHeight: 400}}>
                                 <CardMedia
-                                style = {{ height: 0, paddingTop: '70%'}}
+                                style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}
                                 image= {house.image}
                                 title="House Info"/>
                                 <CardContent>
@@ -130,68 +130,62 @@ function DisplayHouses () {
                                     </div>
                                     {/* <Typography variant="body2" color="textSecondary" component="p">dfg sdf ghsfd gsdfhsdgh gh gf hfgfrdgdfgfdg dfsgfdsg dsfgfdgfdgdfg</Typography> */}
                                 </CardContent>
-                    </Card>
-                    </Grid>
-                    <Grid item>
-                    <Card style = {{ maxWidth: 350, minHeight: 350}}>
-                        <Link to={`task/${house.house_id}`}>
-                            <CardActionArea>
-                                <CardMedia
-                                style = {{ height: 0, paddingTop: '70%'}}
-                                image= {require ("../../media/mowing.jpeg")}
-                                title="House Tasks"/>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">Tasks</Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">View and manage a list of tasks for each house. </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Link>
-                    </Card>
-                    </Grid>
-                    </Grid>
-
-
-
-
-                            {/* <Card className='tasks-card'>
-                                <Card.Header><Link to={`task/${house.house_id}`}><Card.Title><Button color='primary' variant='outlined'>Manage Tasks</Button></Card.Title></Link></Card.Header>
-                                <Card.Body>
-                                    <h5>Urgent</h5>
-                                    {mappedTasks}
-                                    <div className='card-height-fixer'></div>
-                                </Card.Body>
-                            </Card> 
-
-                            <Card className='tasks-card'>
-                                <Card.Header className='update-house-card-header'>
-                                    <Link 
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <Card style = {{ maxWidth: 350, minHeight: 400}}>
+                                <Link to={`task/${house.house_id}`}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                        style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}
+                                        image= {require ("../../media/mowing.jpeg")}
+                                        title="House Tasks"/>
+                                    </CardActionArea>
+                                </Link>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">Tasks</Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">View and manage a list of tasks for each house. </Typography>
+                                    </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <Card style = {{ maxWidth: 350, minHeight: 400}}>
+                                <Link 
                                     to={{
-                                        pathname: '/update_house',
-                                        state: {
-                                            selectedHouse: selectedHouse,
-                                            address: house.address,
-                                            city: house.city,
-                                            state: house.state,
-                                            zipcode: house.zipcode,
-                                            status: house.status,
-                                            rent: house.rent
-                                        }
+                                        pathname: '/add_house',
+                                        // state: {
+                                        //     setHouses: setHouses,
+                                        //     setSelectedHouse: setSelectedHouse
+                                        // }
                                     }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                        style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}
+                                        image= {require ("../../media/add-house-button.jpeg")}
+                                        title="Add New House"/>
+                                    </CardActionArea>
+                                </Link>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">Add a New House</Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">An image of your house will be automatically fetched from Google Street View. You can replace it with the upload button. </Typography>
 
-                                    <Card.Title><Button color='primary' variant='outlined'>Update House</Button></Card.Title>
-                                    </Link>
-                                    <Card.Title className='upload-image-button-container'>
-                                        <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>
-                                    </Card.Title>
-                                </Card.Header>
-                            <Card.Body className='card-display-house-info-container'>
-                            {displayAddress(house)}
-                            {displayHouseStatus(house)}
-                            </Card.Body>
-                            <div className='card-height-fixer'></div>
-                        </Card>  */}
+                                    </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item>
+                            <Card style = {{ maxWidth: 350, minHeight: 400}}>
+                                <CardMedia
+                                style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}
+                                image= {require ("../../media/construction.jpeg")}
+                                title="New Features Coming"/>
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">More Modules to Come</Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">Check back regularly to see new features, or add your e-mail address and we'll keep you up to date. </Typography>
 
-
+                                    </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
                 </div>
         )}
     })

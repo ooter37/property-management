@@ -12,6 +12,7 @@ import Auth from './Components/Auth/Auth'
 import Header from './Components/Header/Header'
 import ModuleTasks from './Components/ModuleTasks/ModuleTasks'
 import UpdateHouse from './Components/ModuleHouse/UpdateHouse/UpdateHouse'
+import AddHouse from './Components/AddHouse/AddHouse'
 
 function App(props) {
   // console.log(props.user)
@@ -43,6 +44,7 @@ function App(props) {
         <Switch>
           <Route exact path='/' component={Auth}/>
           <Route path='/main' component={Main}/>
+          <Route path='/add_house' component={AddHouse}/>
           <Route path='/update_house' component={UpdateHouse}/>
           <Route path='/task/:id' component={ModuleTasks} />
       </Switch>

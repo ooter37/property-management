@@ -52,9 +52,10 @@ function UpdateHouse(props) {
                 const newRent = parseInt(newStringRent, 10)
                 axios.put('/api/houses', {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus})
                 .then(() => {
-                    setRedirect(true)})
+                    setRedirect(true)
                     success.fire({title: `${props.location.state.address} has been updated.`})
-            } } else {
+                })
+            }   } else {
                 pleaseSignIn.fire()
             }
         }

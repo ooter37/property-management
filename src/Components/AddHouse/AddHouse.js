@@ -1,10 +1,12 @@
 import './AddHouse.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 import AddressForm from '../Functions/AddressForm'
 import StatusForm from '../Functions/StatusForm'
 import { TextField, Button, Grid, MenuItem } from '@material-ui/core';
+import {pleaseSignIn, success} from '../Functions/Sweetalerts'
 
 function AddHouse (props) {
     const [address, setAddress] = useState('')
@@ -14,7 +16,8 @@ function AddHouse (props) {
     const [status, setStatus] = useState('')
     const [stringRent, setStringRent] = useState(0)
     const [ownership, setOwnership] = useState('')
-    
+    const [redirect, setRedirect] = useState(false)
+
     const submitNewHouse = () => {
         if (props.user.data) {
             const userId = props.user.data.user_id
@@ -22,12 +25,12 @@ function AddHouse (props) {
             const rent = parseInt(stringRent, 10)
             axios.post('/api/houses', {address,city,state,zipcode,rent,status,userId,ownership})
             .then(() => {
-                axios.get('/api/houses').then(res => {
-                    props.setHouses(res.data)
-                    if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
-        })
-    })
-}
+                setRedirect(true)
+                success.fire({title: `${address} has been added.`})
+            })
+        } else {
+            pleaseSignIn.fire()
+        }
 }
     
     //TEST HERE
@@ -46,6 +49,7 @@ function AddHouse (props) {
 
     return (
         <div>            
+            {redirect ? <Redirect to="/main" /> : null}
             <div className='address-form'><AddressForm 
             address={address} setAddress={setAddress} required={true}
             city={city} setCity={setCity} 

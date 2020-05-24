@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './ScrollContainer.scss';
 import HouseButton from '../Functions/HouseButton'
+import ArrowBackIcon from '@material-ui/icons/ArrowBackIos';
 
 // list of items
 
@@ -46,7 +47,7 @@ export default function ScrollContainer(props) {
     );
   };
   
-  const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
+  const ArrowLeft = Arrow({ text: {ArrowBackIcon}, className: 'arrow-prev' });
   const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
   
   function onSelect(key) {
