@@ -9,7 +9,6 @@ import {requestUserData} from './redux/reducers/user'
 import useRedirect from './Components/Hooks/useRedirect'
 import Main from './Components/Main/Main'
 import Landing from './Components/Auth/Landing'
-import Header from './Components/Header/Header'
 import ModuleTasks from './Components/ModuleTasks/ModuleTasks'
 import UpdateHouse from './Components/ModuleHouse/UpdateHouse/UpdateHouse'
 import AddHouse from './Components/AddHouse/AddHouse'
@@ -35,7 +34,6 @@ function App(props) {
 
   return (
     <div className="App">
-      <Header />
       {
         redirect
         &&
