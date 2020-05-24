@@ -3,10 +3,10 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
-import AddressForm from '../Functions/AddressForm'
-import StatusForm from '../Functions/StatusForm'
+import AddressForm from '../../Functions/AddressForm'
+import StatusForm from '../../Functions/StatusForm'
 import { TextField, Button, Grid, MenuItem } from '@material-ui/core';
-import {pleaseSignIn, success} from '../Functions/Sweetalerts'
+import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 
 function AddHouse (props) {
     const [address, setAddress] = useState('')

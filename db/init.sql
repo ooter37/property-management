@@ -58,8 +58,14 @@ CREATE TABLE contractors (
     city VARCHAR,
     state VARCHAR,
     zipcode VARCHAR,
-    phone INT
+    phone INT,
 );
 INSERT INTO contractors (user_id, name, email, address, city, state, zipcode, phone)
 VALUES
 (0, 'Derek Lamarr', 'derekpropman@pineapplelighting.com', '123 Fake St.', 'Phoenix', 'AZ', 85020, 1234567890);
+
+CREATE TABLE contractor_notes (
+    contractor_note_id SERIAL PRIMARY KEY,
+    user_id  INT REFERENCES users(user_id),
+    contractor_id  INT REFERENCES contractor(contractor_id)
+);

@@ -2,18 +2,11 @@ import './DisplayTasksTable.scss'
 import React, {useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux' 
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-import Button from '@material-ui/core/Button'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import moment from "moment"
 import {confirmDelete, pleaseSignIn} from '../../Functions/Sweetalerts'
-import axiosDelete from '../../Functions/axisoDelete'
+import axiosDelete from '../../Functions/axiosDelete'
 
 function DisplayTasksTable(props) {
 
@@ -43,7 +36,7 @@ function DisplayTasksTable(props) {
 
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
       <Table className='display-tasks-table' aria-label="simple table">
         <TableHead>
           <TableRow>

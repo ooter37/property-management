@@ -10,9 +10,10 @@ import useRedirect from './Components/Hooks/useRedirect'
 import Main from './Components/Main/Main'
 import Landing from './Components/Auth/Landing'
 import ModuleTasks from './Components/ModuleTasks/ModuleTasks'
-import UpdateHouse from './Components/ModuleHouse/UpdateHouse/UpdateHouse'
-import AddHouse from './Components/AddHouse/AddHouse'
+import UpdateHouse from './Components/ModuleHouses/UpdateHouse/UpdateHouse'
+import AddHouse from './Components/ModuleHouses/AddHouse/AddHouse'
 import Register from './Components/Auth/Register'
+import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
 
 function App(props) {
   // console.log(props.user)
@@ -47,6 +48,7 @@ function App(props) {
           <Route path='/add_house' component={AddHouse}/>
           <Route path='/update_house' component={UpdateHouse}/>
           <Route path='/task/:id' component={ModuleTasks} />
+          <Route path='/contractors' component={ModuleContractors} />
       </Switch>
       </div>
     </div>
