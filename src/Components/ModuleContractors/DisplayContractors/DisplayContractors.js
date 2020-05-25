@@ -1,14 +1,22 @@
 import './DisplayContractors.scss'
 import React from 'react'
+import axios from 'axios'
 import {connect} from 'react-redux' 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
-import {confirmDelete, pleaseSignIn} from '../../Functions/Sweetalerts'
-import axiosDelete from '../../Functions/axiosDelete'
+import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 
 function DisplayContractors(props) {
 
-  
+  function deleteContractor(id) {
+    axios.delete(`/api/contractors/${id}`)
+    .then(() => {success.fire({title: 'Contractor Deleted'})})
+      .then (() => {
+        axios.get('/api/contractors').then(res => {
+            props.setContractors(res.data)
+    })
+    }).catch((err) => console.log('Error deleting contractor.', err))
+  }
 
     const mappedContractors = props.contractors && props.contractors.map((contractor) => {
         return (
@@ -22,7 +30,7 @@ function DisplayContractors(props) {
                 if (props.user.data) {
                         confirmDelete.fire({
                             text: 'Are you sure you want to delete this contractor? This action is irreversible.'}).then((result) => {
-                            if (result.value) {axiosDelete('contractors',contractor.contractor_id)}})
+                            if (result.value) {deleteContractor(contractor.contractor_id)}})
                         } else {pleaseSignIn.fire()}
                     } else {
                         console.log('cant delete')

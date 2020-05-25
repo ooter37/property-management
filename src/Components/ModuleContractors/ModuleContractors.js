@@ -2,6 +2,7 @@ import './ModuleContractors.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import DisplayContractors from './DisplayContractors/DisplayContractors'
+import AddContractor from './Add Contractor/AddContractor'
 
 export default function ModuleContractors(){
     const [contractors, setContractors] = useState('')
@@ -16,7 +17,9 @@ return (
     <div>
         <DisplayContractors 
         contractors={contractors}
+        setContractors={setContractors}
         />
+        <AddContractor />
     </div>
 )
 }

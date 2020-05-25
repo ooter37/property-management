@@ -20,10 +20,9 @@ function AddHouse (props) {
 
     const submitNewHouse = () => {
         if (props.user.data) {
-            const userId = props.user.data.user_id
             const zipcode = parseInt(stringZipcode, 10)
             const rent = parseInt(stringRent, 10)
-            axios.post('/api/houses', {address,city,state,zipcode,rent,status,userId,ownership})
+            axios.post('/api/houses', {address,city,state,zipcode,rent,status,ownership})
             .then(() => {
                 setRedirect(true)
                 success.fire({title: `${address} has been added.`})
@@ -32,20 +31,6 @@ function AddHouse (props) {
             pleaseSignIn.fire()
         }
 }
-    
-    //TEST HERE
-    // const imageChecker = () => {
-    //     axios.get(
-    //         `https://maps.googleapis.com/maps/api/streetview/metadata?location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`
-    //         ).then(res => {
-    //     if (res.data.location) {
-    //         setImage(`https://maps.googleapis.com/maps/api/streetview?size=300x200&location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
-    //     } else {
-    //         setImage(noImageAvailable)
-    //     }
-    //     submitNewHouse()
-    //     })
-    // }
 
     return (
         <div>            

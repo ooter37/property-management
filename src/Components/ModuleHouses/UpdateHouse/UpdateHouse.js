@@ -72,11 +72,13 @@ function UpdateHouse(props) {
             city={city} setCity={setCity} 
             state={state} setState={setState} 
             zipcode={stringZipcode} setZipcode={setStringZipcode} 
-            /></div>
+            />
+            </div>
             <div className='address-form'><StatusForm
             status={status} setStatus={setStatus} required={false}
             rent={stringRent} setRent={setStringRent} 
-            /></div>
+            />
+            </div>
             <div className='address-form'> 
                 <Grid container spacing={1}>
                     {/* <Grid item xs={12} sm={6}>

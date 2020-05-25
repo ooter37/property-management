@@ -14,6 +14,25 @@ import UpdateHouse from './Components/ModuleHouses/UpdateHouse/UpdateHouse'
 import AddHouse from './Components/ModuleHouses/AddHouse/AddHouse'
 import Register from './Components/Auth/Register'
 import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
+// import green from '@material-ui/core/colors/green';
+// import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: green,
+//     // secondary: green,
+//   },
+//   status: {
+//     // danger: 'orange',
+//   },
+//   overrides: {
+//     MuiButton: {
+//       raisedPrimary: {
+//         color: 'white',
+//       },
+//     },
+//   }
+// });
 
 function App(props) {
   // console.log(props.user)
@@ -34,6 +53,7 @@ function App(props) {
   // }
 
   return (
+    // <MuiThemeProvider theme={theme}>
     <div className="App">
       {
         redirect
@@ -52,6 +72,7 @@ function App(props) {
       </Switch>
       </div>
     </div>
+    // </MuiThemeProvider>
   );
 }
 

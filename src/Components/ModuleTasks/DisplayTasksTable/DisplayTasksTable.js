@@ -5,16 +5,26 @@ import {connect} from 'react-redux'
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import moment from "moment"
-import {confirmDelete, pleaseSignIn} from '../../Functions/Sweetalerts'
-import axiosDelete from '../../Functions/axiosDelete'
+import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 
 function DisplayTasksTable(props) {
+const {setTasks, selectedHouse} = props
 
   useEffect(() => {
-    axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
-        props.setTasks(res.data)
-    })}, [props]
+    axios.get(`/api/tasks/${selectedHouse}`).then(res => {
+        setTasks(res.data)
+        // eslint-disable-next-line
+    })}, []
 )
+    function deleteTask(id) {
+      axios.delete(`/api/tasks/${id}`)
+      .then(() => {success.fire({title: 'Task Deleted'})})
+        .then (() => {
+          axios.get(`/api/tasks/${selectedHouse}`).then(res => {
+              setTasks(res.data)
+      })
+      }).catch((err) => console.log('Error deleting task.', err))
+    }
 
     const mappedTasks = props.tasks && props.tasks.map((task) => {
         return (
@@ -26,14 +36,13 @@ function DisplayTasksTable(props) {
             <TableCell align="right">{task.note}</TableCell>
             <TableCell align="right"><Button onClick={() => { if (props.user.data) {
                         confirmDelete.fire({
-                            text: 'Are you sure you want to delete this task?'}).then((result) => {
-                            if (result.value) {axiosDelete('task',task.task_id)}})
+                            text: 'Are you sure you want to delete this task? This action is irreversible.'}).then((result) => {
+                            if (result.value) {deleteTask(task.task_id)}})
                         } else {pleaseSignIn.fire()}}} 
                         startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
         </TableRow>
         )
     })
-
 
   return (
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
