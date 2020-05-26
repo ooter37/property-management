@@ -18,8 +18,8 @@ module.exports = {
             const db = req.app.get('db')
             if (req.session.user) {
                 const userId = req.session.user.user_id
-                const {houseId,name,email,phone,primary} = req.body
-                const renter = await db.renters.add_new_renter(userId,houseId,name,email,phone,primary)
+                const {houseId,name,email,phone} = req.body
+                const renter = await db.renters.add_new_renter(userId,houseId,name,email,phone)
                 res.status(200).send(renter)
             } else {
                 res.status(401).send('User not logged in.')

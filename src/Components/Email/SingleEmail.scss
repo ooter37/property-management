@@ -1,0 +1,18 @@
+@import '../../App.scss';
+
+.email-subject-add-container {
+    display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+}
+.send-email-button {
+    margin-right: 20px !important;
+	width: 100px;
+}
+.cancel-email-button {
+	margin-right: 20px !important;
+	width: 100px;
+	background-color: #DC004E !important;
+}

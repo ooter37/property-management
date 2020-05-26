@@ -3,8 +3,15 @@
 .renter-textfield {
     margin-left: 10px;
 }
+.house-submit-container {
+    display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	justify-content: space-between !important;
+	align-items: flex-end !important;
+}
 
 .add-renter-button {
-    margin-left: 10px !important;
+    margin-right: 10px !important;
     margin-bottom: 10px !important;
 }

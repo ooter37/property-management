@@ -12,6 +12,7 @@ const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, delet
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
 const { getContractorsByUser, addNewContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 const { getRentersByUser, addNewRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
+const { singleEmail, multiEmail } = require('./controllers/mailController')
 
 //TOP-LEVEL MIDDLEWARE
 const app=express()
@@ -34,6 +35,7 @@ massive({
     console.log('connected to db')
 }).catch(err => console.log('error getting db', err))
 app.listen(SERVER_PORT, () => console.log(`server listening on port ${SERVER_PORT}`))
+
 
 //AUTH ENDPOINTS
 app.post('/auth/login', login)
@@ -66,6 +68,10 @@ app.get('/api/renters', getRentersByUser)
 app.post('/api/renters', addNewRenter)
 app.delete('/api/renters/:id', deleteRenter)
 app.put('/api/renters', updateRenter)
+
+//EMAIL ENDPOINTS
+app.post('/email/single', singleEmail)
+app.post('/email/multi', multiEmail)
 
 
 // Configure aws with your accessKeyId and your secretAccessKey -- MIGHT NEED THIS WHEN ACCESS PRIVS ARE FIXED

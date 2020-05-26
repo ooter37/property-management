@@ -18,7 +18,7 @@ function DisplayContractors(props) {
     }).catch((err) => console.log('Error deleting contractor.', err))
   }
 
-    const mappedContractors = props.contractors && props.contractors.map((contractor) => {
+    const mappedContractors = props.contractors ? props.contractors.map((contractor) => {
         return (
           <TableRow key={`contractor-display-${contractor.contractor_id}`} className={`global-${contractor.user_id.toString()}`}>
             <TableCell component="th" scope="row">{contractor.name}</TableCell>
@@ -40,7 +40,7 @@ function DisplayContractors(props) {
                         startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
         </TableRow>
         )
-    })
+    }) : null
 
 
   return (

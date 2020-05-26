@@ -53,6 +53,8 @@ export default function CustomInput(props) {
         </InputLabel>
       ) : null}
       <Input
+      // required
+      multiline
         classes={{
           root: marginTop,
           disabled: classes.disabled,

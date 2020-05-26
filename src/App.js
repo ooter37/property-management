@@ -6,6 +6,7 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {requestUserData} from './redux/reducers/user'
+import {getHouses} from './redux/reducers/houses'
 import useRedirect from './Components/Hooks/useRedirect'
 import Main from './Components/Main/Main'
 import Landing from './Components/Auth/Landing'
@@ -16,16 +17,18 @@ import Register from './Components/Auth/Register'
 import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
 import Header from './Components/Header/Header'
 import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
+// import singleEmail from './Components/Email/singleEmail'
 
 function App(props) {
   // console.log(props.user)
   // const [redirect, useRedirect] = useState(false)
   const {redirect} = useRedirect(false)
-  const {user, requestUserData} = props
+  const {user, requestUserData, getHouses} = props
 
   useEffect(() => {
     if (user) {
       requestUserData()
+      getHouses()
     }
   },
   // eslint-disable-next-line
@@ -60,6 +63,7 @@ function App(props) {
           <Route path='/task/:id' component={ModuleTasks} />
           <Route path='/contractors' component={ModuleContractors} />
           <Route path='/renters' component={ModuleRenters} />
+          {/* <Route path='/email' component={singleEmail} /> */}
       </Switch>
       </div>
     </div>
@@ -67,7 +71,7 @@ function App(props) {
   );
 }
 
-const mapDispatchToProps = {requestUserData}
+const mapDispatchToProps = {requestUserData, getHouses}
 
 const mapStateToProps = state => state
 

@@ -82,7 +82,7 @@ const changeHandler = (e) => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate onSubmit={registrationHandler}>
+        <form className={classes.form} onSubmit={registrationHandler}>
           <Grid container spacing={2}>
             {/* <Grid item xs={12} sm={6}>
               <TextField

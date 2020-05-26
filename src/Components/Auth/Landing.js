@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { connect } from "react-redux";
 import {Redirect} from 'react-router-dom'
 import {Link} from 'react-router-dom'
-import {Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography} from '@material-ui/core/';
+import {FormControl, Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";
@@ -76,7 +76,7 @@ function Login(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate onSubmit={loginHandler}>
+          <form className={classes.form} onSubmit={loginHandler}>
             <TextField
               variant="outlined"
               margin="normal"

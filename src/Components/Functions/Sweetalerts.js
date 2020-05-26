@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import './Sweetalerts.scss'
 
 // START AUTH
 const pleaseSignIn = Swal.mixin({
@@ -69,6 +70,7 @@ const success = Swal.mixin({
     icon: 'success',
     toast: true,
     position: 'top-end',
+    customClass: {container: 'swal-success-container'},
     showConfirmButton: false,
     timer: 10000,
     timerProgressBar: true,

@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
 });
 
-function DisplayHouses () {
+function DisplayHouses (props) {
     const [houses, setHouses] = useState([])
     const [selectedHouse, setSelectedHouse] = useState(null)
     const [selectedTasks, setSelectedTasks] = useState([])
@@ -39,6 +39,7 @@ function DisplayHouses () {
 
     useEffect(() => {
         // console.log('houses useeffect ran')
+        props.user.data && 
         axios.get('/api/houses').then(res => {
             setHouses(res.data)
             // console.log(res.data)
@@ -80,7 +81,7 @@ function DisplayHouses () {
 
         {return (
             <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
-                {/* <button onClick={()=>console.log(selectedTasks)}>console log</button> */}
+                {/* <button onClick={()=>console.log(props.user.houses)}>console log</button> */}
             <Grid>
                 <Grid container spacing={2} justify="center">
                     <Grid item style = {{ width: 800}}>
