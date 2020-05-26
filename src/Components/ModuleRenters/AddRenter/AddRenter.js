@@ -1,0 +1,252 @@
+import './AddRenter.scss'
+import React, {useState} from 'react'
+import axios from 'axios'
+import {connect} from 'react-redux'
+import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Select, MenuItem, TextField, Input, FormControl, InputLabel } from "@material-ui/core";
+import CustomInput from "../../UI/CustomInput.js";
+import Button from "../../UI/Button.js";
+import Card from "../../UI/Card";
+import CardHeader from "../../UI/CardHeader.js";
+import {primaryColor,dangerColor,successColor,grayColor,defaultFont} from "../../UI/material-dashboard-react";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+    overrides: {
+      MuiInput: {
+        underline: {
+            "&:hover:not($disabled):before,&:before": {
+              borderColor: grayColor[4] + " !important",
+              borderWidth: "1px !important"
+            },
+            "&:after": {
+              borderColor: primaryColor[0] + '!important'
+            }
+          },
+          underlineError: {
+            "&:after": {
+              borderColor: dangerColor[0]
+            }
+          },
+          underlineSuccess: {
+            "&:after": {
+              borderColor: successColor[0]
+            }
+          },
+      }
+    }
+})
+
+
+const styles = {
+    disabled: {
+        "&:before": {
+          backgroundColor: "transparent !important"
+        }
+      },
+      labelRoot: {
+        ...defaultFont,
+        color: grayColor[3] + " !important",
+        fontWeight: "400",
+        fontSize: "14px",
+        lineHeight: "1.42857",
+        letterSpacing: "unset"
+      },
+      labelRootError: {
+        color: dangerColor[0]
+      },
+      labelRootSuccess: {
+        color: successColor[0]
+      },
+      feedback: {
+        position: "absolute",
+        top: "18px",
+        right: "0",
+        zIndex: "2",
+        display: "block",
+        width: "24px",
+        height: "24px",
+        textAlign: "center",
+        pointerEvents: "none"
+      },
+      marginTop: {
+        marginTop: "16px"
+      },
+      formControl: {
+        paddingBottom: "10px",
+        margin: "27px 0 0 0",
+        position: "relative",
+        verticalAlign: "unset"
+      },
+    grid: {
+        padding: "0 15px !important"
+      },
+    cardCategoryWhite: {
+      color: "rgba(255,255,255,.62)",
+      margin: "0",
+      fontSize: "14px",
+      marginTop: "0",
+      marginBottom: "0"
+    },
+    cardTitleWhite: {
+      color: "#FFFFFF",
+      marginTop: "0px",
+      minHeight: "auto",
+      fontWeight: "300",
+      fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      marginBottom: "3px",
+      textDecoration: "none"
+    }
+  };
+  
+  const useStyles = makeStyles(styles);
+
+function AddRenter(props) {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState();
+    const [address, setAddress] = useState('')
+    const [house, setHouse] = useState()
+    const classes = useStyles();
+
+
+    function submitNewRenter() {
+        if (props.user.data) {
+            axios.post('/api/renters', {name,email,phone,address,house})
+            .then(() => {
+                success.fire({title: `${name} added as a new renter.`})
+                axios.get('/api/renters').then(res => {
+                    props.setRenters(res.data)
+            })
+            })
+        } else {
+            pleaseSignIn.fire()
+        }
+    }
+
+    return (
+        <form onSubmit={submitNewRenter}>
+            <Grid container>
+                <Grid item xs={12} sm={12} md={8} className={classes.grid}>
+                    <Card>
+                        <CardHeader color="primary" className='add-renter-header'>
+                            <h4 className={classes.cardTitleWhite}>Add Renter</h4>
+                            <p className={classes.cardCategoryWhite}>Enter the renter's details.</p>
+                        </CardHeader>
+                        <Grid container>
+                            <Grid item xs={12} sm={12} md={5} className={classes.grid}>
+                                <CustomInput
+                                labelText="Name"
+                                id="name"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{
+                                    value: name,
+                                    onChange: (e) => setName(e.target.value)
+                                }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={3} className={classes.grid}>
+                                <CustomInput
+                                labelText="Phone Number"
+                                id="phone"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                inputProps={{
+                                    value: phone,
+                                    onChange: (e) => setPhone(e.target.value),
+                                }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={4} className={classes.grid}>
+                                <CustomInput
+                                labelText="Email"
+                                formControlProps={{
+                                    fullWidth: true,
+                                }}
+                                inputProps={{
+                                    value: email,
+                                    onChange: (e) => setEmail(e.target.value),
+                                    type: 'email'
+                                }}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container>
+                            <Grid item xs={12} sm={12} md={6} className={classes.grid}>
+                            <MuiThemeProvider theme={theme}>
+                                <FormControl
+                                className={classes.formControl}
+                                fullWidth
+                                >
+                                    <InputLabel
+                                    classes={{root: classes.labelRoot}}
+                                    //   className={classes.labelRoot + labelClasses}
+                                    > House
+                                    </InputLabel>
+                                    <TextField
+                                    select
+                                    // className={classes.underline}
+                                    classes={{
+                                        root: classes.marginTop,
+                                        disabled: classes.disabled,
+                                        underline: classes.underline
+                                      }}
+                                    >
+                                        <MenuItem value="AL">Alabama</MenuItem>
+                                        <MenuItem value="AK">Alaska</MenuItem>
+                                        <MenuItem value="AZ">Arizona</MenuItem>
+                                    </TextField>
+                                </FormControl>
+                                </MuiThemeProvider>
+                                {/* <FormControl>
+
+                                <InputLabel>House</InputLabel>
+                            <TextField
+                            classesName={classes.select}
+                            required
+                            select
+                            fullWidth
+                            id="ownership"
+                            name="ownership"
+                            // label='Ownership'
+                            // autoComplete="fname"
+                            // value={ownership}
+                            // onChange={(e) => setOwnership(e.target.value)}
+                            label='Ownership'>
+                                <MenuItem value='Owner'>Owner</MenuItem>
+                                <MenuItem value='Property Manager'>Property Manager</MenuItem>
+                                <MenuItem value='Other'>Other</MenuItem>                       
+                            </TextField>
+                            </FormControl> */}
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={6} className={classes.grid}>
+                                <CustomInput
+                                labelText="Address"
+                                id="address"
+                                formControlProps={{
+                                    fullWidth: true
+                                }}
+                                select
+                                inputProps={{
+                                    value: address,
+                                    onChange: (e) => setAddress(e.target.value)
+                                }}
+                                />
+                            </Grid>
+                            <Button type='submit' variant='contained' color="primary" className='add-renter-button'>Add</Button>
+                        </Grid>
+                 
+                    </Card>
+                </Grid>
+            </Grid>
+        </form>
+    )
+}
+
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, null)(AddRenter)

@@ -2,7 +2,7 @@ import './ModuleRenters.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import DisplayRenters from './Display Renters/DisplayRenters'
-// import AddContractor from './Add Contractor/AddContractor'
+import AddRenter from './AddRenter/AddRenter'
 
 export default function ModuleRenters(){
     const [renters, setRenters] = useState('')
@@ -15,11 +15,12 @@ export default function ModuleRenters(){
 
 return (
     <div>
+        <button onClick={() => console.log(renters)}>log renters</button>
         <DisplayRenters 
         renters={renters}
         setRenters={setRenters}
         />
-        {/* <AddContractor setContractors={setContractors} /> */}
+        <AddRenter setRenters={setRenters} />
     </div>
 )
 }
