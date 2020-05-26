@@ -48,11 +48,10 @@ function SingleEmail(props) {
         } else {pleaseSignIn.fire()}
     }
         
-    const joinedEmails = (props.emailing.length > 1) ? props.emailing.join(' // ') : props.emailing
+    const joinedEmails = (typeof props.emailing ==! 'string') ? props.emailing.join(' // ') : props.emailing
 
     return (
         <form onSubmit={singleEmail} >
-            {console.log(joinedEmails)}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "server/",
-  "proxy": "http://localhost:4200",
+  "proxy": "http://localhost:4244",
   "nodemonConfig": {
     "ext": "js,sql",
     "ignore": [

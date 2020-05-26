@@ -38,14 +38,14 @@ function DisplayHouses (props) {
     const classes = useStyles();
 
     useEffect(() => {
+        console.log(props.user.data)
         // console.log('houses useeffect ran')
-        props.user.data && 
         axios.get('/api/houses').then(res => {
             setHouses(res.data)
             // console.log(res.data)
             if (res.data[0]){
             setSelectedHouse(res.data[0].house_id)}
-        })}, []
+        })}, [props.user.data]
     )
     useEffect(() => {
         // console.log(`task useeffect ran`)
@@ -81,7 +81,7 @@ function DisplayHouses (props) {
 
         {return (
             <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
-                {/* <button onClick={()=>console.log(props.user.houses)}>console log</button> */}
+                <button onClick={()=>console.log(props.user)}>console log</button>
             <Grid>
                 <Grid container spacing={2} justify="center">
                     <Grid item style = {{ width: 800}}>
