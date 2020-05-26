@@ -69,3 +69,19 @@ CREATE TABLE contractor_notes (
     user_id  INT REFERENCES users(user_id),
     contractor_id  INT REFERENCES contractor(contractor_id)
 );
+
+CREATE TABLE renters (
+    renter_id SERIAL PRIMARY KEY,
+    user_id  INT REFERENCES users(user_id),
+    house_id INT REFERENCES houses(house_id),
+    name VARCHAR,
+    email VARCHAR,
+    phone INT,
+    main BOOLEAN
+);
+INSERT INTO renters (user_id, house_id, name, email, phone, main)
+VALUES
+(1,24,'Derek Lamarr','derek@derek.com',5551112233,true),
+(1,23,'Chicken','chicken@chicken.com',5551112233,true),
+(1,25,'Leo Lamarr','leo@derek.com',5551112233,true),
+(1,25,'Harriet Lamarr','harriet@derek.com',1234567890,false);

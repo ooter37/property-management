@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
-import { login } from "../../redux/reducers/user";
+import { login } from "../src/redux/reducers/user";
 
 const Login = (props) => {
     const [state, setState] = useState({email: '', password: ''})

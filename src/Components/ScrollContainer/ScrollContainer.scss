@@ -1,5 +1,10 @@
 @import '../../App.scss';
 
+// .scroll-container-parent{
+//   width: 50%;
+//   background-color: yellow;
+// }
+
 .menu-item {
     // padding: 0 40px;
     margin: 5px 10px;
@@ -13,48 +18,36 @@
   .menu-item.active {
     border: 1px green solid;
   }
-  
   .scroll-menu-arrow {
     padding: 20px;
     cursor: pointer;
   }
-
-  // .arrow-next {
-  //   border: solid black;
-  //   border-width: 0 3px 3px 0;
-  //   display: inline-block;
-  //   padding: 3px;
-  //   transform: rotate(-45deg);
-  //   -webkit-transform: rotate(-45deg);
-  // }
-  
-
 .arrow:before {
-    font-size: 200%;
+    font-size: 100%;
     position: relative;
     /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
     content: "";
     display: inline-block;
     /* By using an em scale, the arrows will size with the font */
-    width: 1.8em;
-    height: 1.8em;
+    width: .8em;
+    height: .8em;
 }
 .arrow:hover {
-  color: darkgrey; 
+  color: $theme-600; 
 }
 .arrow:hover:before {
-  border-color: darkgrey; 
+  border-color: $theme-600; 
 }
 .next:before {
-  border-right: 0.2em solid black;
-  border-top: 0.2em solid black;
+  border-right: 0.2em solid $theme-800;
+  border-top: 0.2em solid $theme-800;
   transform: rotate(45deg);
   margin-right: .5em;
   float: left;
 }
 .prev:before {
-  border-left: 0.2em solid black;
-  border-top: 0.2em solid black;
+  border-left: 0.2em solid $theme-800;
+  border-top: 0.2em solid $theme-800;
   transform: rotate(315deg);
   margin-left: 0em;
 }
@@ -65,6 +58,6 @@
   margin-left: -.3em;
 }
 .arrow-container {
-  width: 50px;
+  width: 10px;
 
 }

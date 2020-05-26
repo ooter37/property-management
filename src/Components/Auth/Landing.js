@@ -1,3 +1,4 @@
+import './Auth.scss'
 import React, {useState} from 'react';
 import { connect } from "react-redux";
 import {Redirect} from 'react-router-dom'
@@ -49,7 +50,6 @@ function Login(props) {
 
   const loginHandler = (e) => {
     e.preventDefault()
-    console.log(state)
     props.login(state)
     .then(() => {
         setState({email: '', password: ''})

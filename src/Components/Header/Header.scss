@@ -1,7 +1,31 @@
 @import '../../App.scss';
+.react-router-link {
+    text-decoration: none !important;
+  }
+  
 
-.header {
+.header-appbar {
+
+}
+.header-toolbar {
     // background-color: lightblue;
-    height: 10%;
-    width: 100%;
+    background-color: #1b5e20;
+    display: flex;
+    justify-content: space-between;
+}
+.login-goback-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    // background-color: red;
+    
+}
+.login-logout-container {
+}
+.header-logout-button {
+    background-color: $theme-500 !important;
+}
+.up-icon {
+    background-color: $theme-500 !important;
 }

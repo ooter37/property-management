@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
     image: {
         position: 'relative',
-        height: 200,
+        height: 170,
         [theme.breakpoints.down('xs')]: {
             width: '100% !important', // Overrides inline-style
             height: 100,
@@ -26,7 +26,12 @@ const useStyles = makeStyles((theme) => ({
                 opacity: 0,
             },
             '& $imageTitle': {
-                border: '2px solid currentColor',
+                border: '2px solid #4caf50',
+                borderRadius: 4,
+                fontWeight: 'bolder',
+                // color: '#4caf50',
+                // backgroundColor: theme.palette.common.black,
+                // opacity: 0.4,
             },
         },
     },

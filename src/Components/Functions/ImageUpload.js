@@ -1,3 +1,4 @@
+import '../DisplayHouses/DisplayHouses'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
@@ -82,7 +83,7 @@ function sendFile(e) {
     <div>
         {/* <button onClick={() => {console.log(Date.now())}}>console log</button> */}
         {/* <button onClick={sendFile}>UPLOAD</button> */}
-            <Button 
+            <Button  className='house-update-buttons' 
             variant='contained'
             startIcon={<PhotoCamera/>}
             onClick={() => {

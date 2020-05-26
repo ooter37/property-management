@@ -17,7 +17,7 @@ module.exports = {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
-                userId = req.session.user.user_id
+                const userId = req.session.user.user_id
                 const {name,email,address,city,state,zipcode,phone} = req.body
                 const contractor = await db.contractors.add_new_contractor(userId,name,email,address,city,state,zipcode,phone)
                 res.status(200).send(contractor)

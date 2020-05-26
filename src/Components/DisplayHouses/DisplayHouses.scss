@@ -1,140 +1,88 @@
 @import '../../App.scss';
 
-.display-houses-header-bar {
-  // background-color: lightgreen;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
+// .scroller-display-container {
+//   // background-color: red;
+//   // width: 98%;
+// }
+// .selected-grid-item {
+//   width: 25%;
+//   padding-left: 10px;
+//   padding-top: 10px;
+//   box-sizing: border-box;
+// }
+// .scroller-grid-item {
+//   // background-color: orange;
+//   // width: 75%;
+// }
+
+.scroll-container {
+  margin-top: 10px;
+  // background-color: red;
 }
 
-.house-address-container {
-  // background-color: red;
-  margin-left: 10px;
-}
-.status-container {
-  // background-color: lightblue;
-  margin-right: 10px;
-}
 .modules-container {
-  margin: 20px;
-  // width: 100%;
-  // display: flex;
-  // background-color: red;
-}
-.module-container {
-  width: 45%;
-  height: 300px;
-  background-color: yellow;
-}
-.module-button {
-  background-color: orange;
-  width: 200px;
-  height: 100px;
-}
-.card-display-house-info-container {
-  display: flex;
-  justify-content: space-between;
+  margin-top:10px;
 }
 
-.tasks-card {
-  // color: red;
-  margin-left: 10px;
-  margin-right: 10px;
-  max-height: 400px;
-  max-width: 400px;
+// START SELECTED HOUSE CARD STYLING
+.selected-house-card-content {
+  // background-color: red;
+  height: 100%;
+  width: 100%;
+  display: flex;
 }
-.card-height-fixer {
-  height: 200px;
-  width: 0px;
-  background-color: red;
-  // z-index: 1;
-}
+  .avatar-upload-container {
+    // background-color: green;
+    width: 200px;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .selected-house-card-body {
+    // background-color: blue;
+    margin-left: 15px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+    .avatar-title-container {
+      // background-color: orange;
+      text-align: center;
+    }
+    .status-address-container {
+      // background-color: pink;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+    .selected-house-tasks {
+      // background-color: grey;
+      margin-top: 10px;
+      flex-grow: 1;
+      overflow: auto;
+    }
+    .update-house-button-container {
+      // background-color: black;
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-end;
+    }
+// END SELECTED HOUSE CARD STYLING
+
 
 // START CARD CSS
-.update-house-card-header {
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
-  margin-top: 45px;
-}
-.upload-image-button-container {
-  display: flex;
-  justify-content: flex-end;
-  // flex-direction: column;
-  align-items: center;
-}
+// .update-house-card-header {
+//   display: flex;
+//   justify-content: space-between;
+//   width: 300px;
+//   margin-top: 45px;
+// }
 // END CARD CSS
 
-
-
-//START MAPPED URGENT TASKS
-.mapped-urgent-tasks {
-  // background-color:red;
-  display: flex;
-  justify-content: space-between;
+.house-update-buttons {
+  background-color: $theme-500 !important;
 }
-//END MAPPED URGENT TASKS
 
-
-// //REACT TABS
-// .react-tabs {
-//     // -webkit-tap-highlight-color: transparent;
-  
-//     &__tab-list {
-//       // border-bottom: 1px solid $light-highlight;
-//       // margin: 0 0 10px;
-//       // padding: 0;
-//     }
-  
-//     &__tab {
-//       display: inline-block;
-//       // border: 1px solid transparent;
-//       // border-bottom: none;
-//       // bottom: -1px;
-//       position: relative;
-//       list-style: none;
-//       // margin: 0px 3px;
-//       color: $font-color;
-//       cursor: pointer;
-  
-//       &--selected {
-//         // background: $primary-color;
-//         // filter: brightness(130%);
-//         border: 4px solid white;
-//         color: $font-color;
-//         font-weight: bolder;
-//         // border-radius: 5px 5px 0 0;
-//       }
-  
-//       &--disabled {
-//         // color: GrayText;
-//         cursor: default;
-//       }
-  
-//       &:focus {
-//         // box-shadow: 0 0 5px hsl(208, 99%, 50%);
-//         // border-color: hsl(208, 99%, 50%);
-//         // outline: none;
-  
-//         &:after {
-//           // content: "";
-//           // position: absolute;
-//           // height: 5px;
-//           // left: -4px;
-//           // right: -4px;
-//           // bottom: -5px;
-//           // background: #fff;
-//         }
-//       }
-//     }
-  
-//     &__tab-panel {
-//       display: none;
-  
-//       &--selected {
-//         display: block;
-//       }
-//     }
-//   }
-  

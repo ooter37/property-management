@@ -12,18 +12,22 @@ $dark-highlight: #06623b;
 $urgent: lightpink;
 $selected: #f6d743;
 $theme-300: #81c784;
-$theme-400: #81c784;
-$theme-500: #4caf50;
+$theme-400: #81c784; // button hover
+$theme-500: #4caf50; // button, header
 $theme-600: #43a047;
-
+$theme-800: #2e7d32;
 
 // GLOBAL STYLING
 a {
   color: inherit;
+  
 }
 A:hover {
   color: inherit;
+  text-decoration: none !important;
 }
-
+.react-router-link {
+  text-decoration: none !important;
+}
 
 // SWEETALERTS

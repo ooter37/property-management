@@ -14,25 +14,8 @@ import UpdateHouse from './Components/ModuleHouses/UpdateHouse/UpdateHouse'
 import AddHouse from './Components/ModuleHouses/AddHouse/AddHouse'
 import Register from './Components/Auth/Register'
 import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
-// import green from '@material-ui/core/colors/green';
-// import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-
-// const theme = createMuiTheme({
-//   palette: {
-//     primary: green,
-//     // secondary: green,
-//   },
-//   status: {
-//     // danger: 'orange',
-//   },
-//   overrides: {
-//     MuiButton: {
-//       raisedPrimary: {
-//         color: 'white',
-//       },
-//     },
-//   }
-// });
+import Header from './Components/Header/Header'
+import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
 
 function App(props) {
   // console.log(props.user)
@@ -61,6 +44,13 @@ function App(props) {
         <Redirect to='/' />
       }
       <div>
+        {
+          props.location.pathname === '/' || props.location.pathname === '/register'
+          ?
+          null
+          :
+          <Header/>
+        }
         <Switch>
           <Route exact path='/' component={Landing}/>
           <Route path='/register' component={Register} />
@@ -69,6 +59,7 @@ function App(props) {
           <Route path='/update_house' component={UpdateHouse}/>
           <Route path='/task/:id' component={ModuleTasks} />
           <Route path='/contractors' component={ModuleContractors} />
+          <Route path='/renters' component={ModuleRenters} />
       </Switch>
       </div>
     </div>

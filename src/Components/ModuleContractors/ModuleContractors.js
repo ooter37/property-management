@@ -19,7 +19,7 @@ return (
         contractors={contractors}
         setContractors={setContractors}
         />
-        <AddContractor />
+        <AddContractor setContractors={setContractors} />
     </div>
 )
 }

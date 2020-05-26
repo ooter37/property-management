@@ -1,3 +1,4 @@
+import './Auth.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {logout} from '../../redux/reducers/user'
@@ -24,7 +25,7 @@ const Logout = (props) => {
             &&
             <Redirect to='/' />
             }
-            <Button onClick={() => logoutHandler()} color="inherit">Logout</Button>
+            <Button className='logout-button' onClick={() => logoutHandler()} color="inherit">Logout</Button>
         </div>
     )
 }

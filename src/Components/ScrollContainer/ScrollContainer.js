@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './ScrollContainer.scss';
-import HouseButton from '../Functions/HouseButton'
+import HouseButton from '../HouseButton/HouseButton'
 
 // list of items
 
@@ -60,7 +60,7 @@ export default function ScrollContainer(props) {
     const menu = Menu(list, selected);
 
     return (
-      <div className="App">
+      <div className="scroll-container-parent">
         <ScrollMenu
           data={menu}
           arrowLeft={ArrowLeft}

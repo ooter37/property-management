@@ -1,0 +1,1 @@
+import './UpdateRenter.scss'

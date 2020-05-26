@@ -1,4 +1,4 @@
-import './DisplayContractors.scss'
+import './DisplayRenters.scss'
 import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux' 
@@ -6,35 +6,32 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
 import DeleteIcon from '@material-ui/icons/Delete'
 import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 
-function DisplayContractors(props) {
+function DisplayRenters(props) {
 
-  function deleteContractor(id) {
-    axios.delete(`/api/contractors/${id}`)
-    .then(() => {success.fire({title: 'Contractor Deleted'})})
+  function deleteRenter(id) {
+    axios.delete(`/api/renters/${id}`)
+    .then(() => {success.fire({title: 'Renter Deleted'})})
       .then (() => {
-        axios.get('/api/contractors').then(res => {
-            props.setContractors(res.data)
+        axios.get('/api/renters').then(res => {
+            props.setRenters(res.data)
     })
-    }).catch((err) => console.log('Error deleting contractor.', err))
+    }).catch((err) => console.log('Error deleting renter.', err))
   }
 
-    const mappedContractors = props.contractors && props.contractors.map((contractor) => {
+    const mappedRenters = props.renters && props.renters.map((renter) => {
         return (
-          <TableRow key={`contractor-display-${contractor.contractor_id}`} className={`global-${contractor.user_id.toString()}`}>
-            <TableCell component="th" scope="row">{contractor.name}</TableCell>
-            <TableCell align="right">{contractor.email}</TableCell>
-            <TableCell align="right">{contractor.phone}</TableCell>
-            <TableCell align="right">{contractor.address}</TableCell>
+          <TableRow key={`renter-display-${renter.renter_id}`} className={`global-${renter.user_id.toString()}`}>
+            <TableCell component="th" scope="row">{renter.name}</TableCell>
+            <TableCell align="right">{renter.email}</TableCell>
+            <TableCell align="right">{renter.phone}</TableCell>
+            <TableCell align="right">{renter.address}</TableCell>
             <TableCell align="right"><Button 
-            onClick={() => { if (contractor.user_id !== 0) {
+            onClick={() => { 
                 if (props.user.data) {
                         confirmDelete.fire({
-                            text: 'Are you sure you want to delete this contractor? This action is irreversible.'}).then((result) => {
-                            if (result.value) {deleteContractor(contractor.contractor_id)}})
+                            text: 'Are you sure you want to delete this renter? This action is irreversible.'}).then((result) => {
+                            if (result.value) {deleteRenter(renter.renter_id)}})
                         } else {pleaseSignIn.fire()}
-                    } else {
-                        console.log('cant delete')
-                    }
                     }
                 } 
                         startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
@@ -56,7 +53,7 @@ function DisplayContractors(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {mappedContractors}
+          {mappedRenters}
         </TableBody>
       </Table>
     </TableContainer>
@@ -65,4 +62,4 @@ function DisplayContractors(props) {
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(DisplayContractors)
+export default connect(mapStateToProps, null)(DisplayRenters)
