@@ -1,6 +1,7 @@
 import './AddHouse.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {getHouses} from '../../../redux/reducers/houses'
 import {Redirect} from 'react-router-dom'
 import axios from 'axios'
 import AddressForm from '../../Functions/AddressForm'
@@ -24,6 +25,7 @@ function AddHouse (props) {
             const rent = parseInt(stringRent, 10)
             axios.post('/api/houses', {address,city,state,zipcode,rent,status,ownership})
             .then(() => {
+                props.getHouses()
                 setRedirect(true)
                 success.fire({title: `${address} has been added.`})
             })
@@ -73,6 +75,8 @@ function AddHouse (props) {
     )
 }
 
+const mapDispatchToProps = {getHouses}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(AddHouse)
+export default connect(mapStateToProps, mapDispatchToProps)(AddHouse)

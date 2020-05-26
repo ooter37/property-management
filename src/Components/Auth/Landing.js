@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { connect } from "react-redux";
 import {Redirect} from 'react-router-dom'
 import {Link} from 'react-router-dom'
-import {FormControl, Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography} from '@material-ui/core/';
+import { Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";

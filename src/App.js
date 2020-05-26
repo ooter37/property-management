@@ -23,16 +23,20 @@ function App(props) {
   // console.log(props.user)
   // const [redirect, useRedirect] = useState(false)
   const {redirect} = useRedirect(false)
-  const {user, requestUserData, getHouses} = props
+  const {requestUserData} = props
 
   useEffect(() => {
-    if (user) {
       requestUserData()
-      getHouses()
-    }
   },
   // eslint-disable-next-line
   [])
+
+  // useEffect(() => {
+  //   if (props.user.data) {
+  //     getHouses()
+  //   }
+  // },
+  // [props.user.data])
 
   // const toggleRedirect = () => {
   //   useRedirect(!redirect)

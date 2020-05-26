@@ -1,11 +1,13 @@
 import '../DisplayHouses/DisplayHouses'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux'
+import {getHouses} from '../../redux/reducers/houses'
 import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Swal from 'sweetalert2'
 
-export default function ImageUpload(props) {
+function ImageUpload(props) {
     // const [success, setSuccess] = useState(false)
     // const [url, setUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState('')
@@ -54,9 +56,9 @@ function sendFile(e) {
             .then(() => {
                 console.log("File upload successful.")
                 // props.setHouses('')
-                    console.log('starting the axios call to update houses')
+                    console.log('starting the axios call to update houses --- via redux')
                 axios.get('/api/houses').then(res => {
-                    props.setHouses(res.data)
+                    props.getHouses()
                     console.log('all complete')
                     // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
         })
@@ -111,3 +113,9 @@ function sendFile(e) {
             </Button>
     </div>)
 }
+
+const mapDispatchToProps = {getHouses}
+
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageUpload)

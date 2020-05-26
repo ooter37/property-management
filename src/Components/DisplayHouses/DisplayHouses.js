@@ -2,8 +2,10 @@ import './DisplayHouses.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {getHouses} from '../../redux/reducers/houses'
+import {requestUserData} from '../../redux/reducers/user'
 import {Link} from 'react-router-dom'
-import {Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Card, CardActionArea, CardMedia, CardContent, Typography, Grid, Avatar, makeStyles} from '@material-ui/core/';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Card, CardActionArea, CardMedia, CardContent, Typography, Grid, Avatar, makeStyles} from '@material-ui/core/';
 import ImageUpload from '../Functions/ImageUpload'
 import ScrollContainer from '../ScrollContainer/ScrollContainer'
 import DisplayAddress from './DisplayAddress'
@@ -32,21 +34,34 @@ const useStyles = makeStyles((theme) => ({
 });
 
 function DisplayHouses (props) {
-    const [houses, setHouses] = useState([])
     const [selectedHouse, setSelectedHouse] = useState(null)
     const [selectedTasks, setSelectedTasks] = useState([])
     const classes = useStyles();
+    const data = props.user
+    const {getHouses} = props
+    
+    // useEffect(() => {
+    //     console.log(props.user.data)
+    //     // console.log('houses useeffect ran')
+    //     axios.get('/api/houses').then(res => {
+    //         setHouses(res.data)
+    //         // console.log(res.data)
+    //         if (res.data[0]){
+    //         setSelectedHouse(res.data[0].house_id)}
+    //     })}, []
+    // )
 
     useEffect(() => {
-        console.log(props.user.data)
-        // console.log('houses useeffect ran')
-        axios.get('/api/houses').then(res => {
-            setHouses(res.data)
-            // console.log(res.data)
-            if (res.data[0]){
-            setSelectedHouse(res.data[0].house_id)}
-        })}, [props.user.data]
-    )
+        if (data) {
+            getHouses().then((res) => {
+              res.value.length &&
+              setSelectedHouse(res.value[0].house_id)
+          })
+        }
+      },
+      [getHouses, data])
+
+    
     useEffect(() => {
         // console.log(`task useeffect ran`)
         selectedHouse &&
@@ -74,14 +89,15 @@ function DisplayHouses (props) {
         </TableRow>
         )
     })
-
-    const mappedHouses = houses && houses.map((house) => {
+// eslint-disable-next-line
+    const mappedHouses = props.houses.houses.map((house) => {
         if (house.house_id === selectedHouse)
         // if (1 === 1)
 
-        {return (
+        {
+            return (
             <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
-                <button onClick={()=>console.log(props.user)}>console log</button>
+                
             <Grid>
                 <Grid container spacing={2} justify="center">
                     <Grid item style = {{ width: 800}}>
@@ -92,7 +108,7 @@ function DisplayHouses (props) {
 
                                     <Avatar  alt="House Image" src={house.image} className={classes.avatar} />
                                     {/* </Box> */}
-                                    <ImageUpload houses={houses} setHouses={setHouses} selectedHouse={selectedHouse}/>
+                                    <ImageUpload houses={props.houses.houses} selectedHouse={selectedHouse}/>
                                 </div>
                                 <div className='selected-house-card-body'>
                                     <Typography className='avatar-title-container' variant="h4" component="h2">{house.address}</Typography>
@@ -226,8 +242,9 @@ function DisplayHouses (props) {
     // })
     return (
         <div>
+            {/* <button onClick={() => console.log(props.houses.houses)}>console log</button> */}
             <div className='scroll-container'>
-                <ScrollContainer setSelectedHouse={setSelectedHouse} selectedHouse={selectedHouse} houses={houses}/>
+                <ScrollContainer setSelectedHouse={setSelectedHouse} selectedHouse={selectedHouse} houses={props.houses.houses}/>
             </div>
             {mappedHouses}
             { 
@@ -266,6 +283,8 @@ function DisplayHouses (props) {
     )
 }
 
+const mapDispatchToProps = {requestUserData, getHouses}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(DisplayHouses)
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayHouses)
