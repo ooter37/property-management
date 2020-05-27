@@ -4,9 +4,8 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, MenuItem, FormControl, InputLabel, Select, FormHelperText } from "@material-ui/core";
+import { Grid, MenuItem, FormControl, InputLabel, Select, FormHelperText, Button } from "@material-ui/core";
 import CustomInput from "../../UI/CustomInput.js";
-import Button from "../../UI/Button.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
 import {primaryColor,dangerColor,successColor,grayColor,defaultFont} from "../../UI/material-dashboard-react";
@@ -24,26 +23,12 @@ const theme = createMuiTheme({
               borderColor: primaryColor[0] + '!important'
             }
           },
-        //   underlineError: {
-        //     "&:after": {
-        //       borderColor: dangerColor[0]
-        //     }
-        //   },
-        //   underlineSuccess: {
-        //     "&:after": {
-        //       borderColor: successColor[0]
-        //     }
-        //   },
       }
     }
 })
 
 const styles = {
-    // disabled: {
-    //     "&:before": {
-    //       backgroundColor: "transparent !important"
-    //     }
-    //   },
+
       labelRoot: {
         ...defaultFont,
         color: grayColor[3] + " !important",

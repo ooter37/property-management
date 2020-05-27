@@ -10,3 +10,46 @@
     width: 300px;
     // background-color: green;
 }
+
+
+
+
+
+// .address-cancel-container {
+//     display: flex !important;
+// 	flex-direction: row !important;
+// 	flex-wrap: nowrap !important;
+// 	justify-content: space-between !important;
+// 	align-items: center !important;
+// }
+.status-rent-cancel-add-container {
+    display: flex !important;
+	flex-direction: row !important;
+	flex-wrap: nowrap !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+}
+.delete-house-button {
+    margin-left: 5px !important;
+    margin-bottom: 5px !important;
+}
+.cancel-submit-container {
+    margin-right: 10px !important;
+    margin-bottom: 5px !important;
+}
+.cancel-update-button {
+	margin-right: 10px !important;
+}
+.submit-update-button {
+    background-color: $theme-500 !important;
+}
+// .delete-house-button {
+//     margin-right: 20px !important;
+//     // width: 100px !important;
+//     background-color: #DC004E !important;
+// }
+// .cancel-add-button {
+//     display: flex;
+//     // justify-content: space-between;
+// }
+
