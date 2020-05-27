@@ -312,53 +312,6 @@ function UpdateHouse(props) {
                 </Grid>
             </Grid>
         </form>
-
-
-        // <Grid className='update-house-component-container'>
-        // <Card>            
-        // {redirect ? <Redirect to="/main" /> : null}
-        // <Typography variant='h6'>Enter values you would like to change. Click update when finished.</Typography>
-
-
-        //     <div className='address-form'><AddressForm 
-        //     address={address} setAddress={setAddress} required={false}
-        //     city={city} setCity={setCity} 
-        //     state={state} setState={setState} 
-        //     zipcode={stringZipcode} setZipcode={setStringZipcode} 
-        //     />
-        //     </div>
-        //     <div className='address-form'><StatusForm
-        //     status={status} setStatus={setStatus} required={false}
-        //     rent={stringRent} setRent={setStringRent} 
-        //     />
-        //     </div>
-        //     <div className='address-form'> 
-        //         <Grid container spacing={1}>
-        //             {/* <Grid item xs={12} sm={6}>
-        //             <TextField
-        //             required
-        //             select
-        //             fullWidth
-        //             id="ownership"
-        //             name="ownership"
-        //             // label='Ownership'
-        //             // autoComplete="fname"
-        //             value={ownership}
-        //             onChange={(e) => setOwnership(e.target.value)}
-        //             label='Ownership'>
-        //                 <MenuItem value='Owner'>Owner</MenuItem>
-        //                 <MenuItem value='Property Manager'>Property Manager</MenuItem>
-        //                 <MenuItem value='Other'>Other</MenuItem>                       
-        //             </TextField>
-        //             </Grid> */}
-        //             <Grid item xs={12} sm={6} className='update-house-component-buttons'>
-        //                 <Button color='primary' className='add-house-button' onClick={() => updateExistingHouse()} variant='contained'>Update House</Button>
-        //                 <Button color='secondary' className='delete-house-button' onClick={() => deleteExistingHouse()} variant='contained'>Delete House</Button>
-        //             </Grid>
-        //         </Grid>
-        //     </div>
-        // </Card>
-        // </Grid>
     )
 }
 

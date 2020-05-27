@@ -1,6 +1,57 @@
 @import '../../../App.scss';
 
-.address-form {
-    width: 400px;
-    margin-left: 20px;
+// .status-rent-cancel-add-container {
+//     display: flex !important;
+// 	flex-direction: row !important;
+// 	flex-wrap: nowrap !important;
+// 	justify-content: space-between !important;
+// 	align-items: center !important;
+// }
+// .delete-house-button {
+//     margin-left: 5px !important;
+//     margin-bottom: 5px !important;
+// }
+// .cancel-submit-container {
+//     margin-right: 10px !important;
+//     margin-bottom: 5px !important;
+// }
+// .cancel-update-button {
+// 	margin-right: 10px !important;
+// }
+// .submit-update-button {
+//     background-color: $theme-500 !important;
+// }
+.update-contents-container{
+    // background-color: red;
+    // display: flex !important;
+    // flex-direction: row !important;
+    // flex-wrap: nowrap !important;
+	// justify-content: flex-start !important;
+	// align-items: stretch !important;
+	// align-content: stretch !important;
+}
+.image-panel {
+    // background-color: grey;
+    // display: flex;
+    // flex-direction: column;
+}
+.form-contents-container {
+    // background-color: blue;
+}
+// .image-panel-background {
+//     background-color: lightgrey;
+//     height: 350px;
+//     width: 90%;
+// }
+.text-preview {
+    margin-bottom: 5px !important;
+    // margin-top: 30px !important;
+}
+.remove-image-button {
+    margin-top: 15px !important;
+    // margin-bottom: 30px !important;
+}
+.cancel-submit-container {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
 }
