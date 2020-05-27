@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
-import {getHouses} from '../../../redux/reducers/houses'
+import {getHouses, setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography, FormHelperText } from "@material-ui/core";
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
@@ -94,7 +94,7 @@ function AddHouse(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState()
     const [status, setStatus] = useState('')
-    const [rent, setRent] = useState('')
+    const [rent, setRent] = useState()
     // const [ownership, setOwnership] = useState('')
     const [redirect, setRedirect] = useState(false)
     const [image, setImage] = useState('')
@@ -120,6 +120,9 @@ function AddHouse(props) {
             axios.post('/api/houses', {address,city,state,zipcode,rent,status})
             .then(() => {
                 props.getHouses()
+                // console.log(props.houses.houses)
+                // props.setSelectedHouseRedux(props.houses.houses[0])
+                // console.log(props.houses.selectedHouse)
                 setRedirect(true)
                 success.fire({title: `${address} has been added.`})
             })
@@ -186,7 +189,7 @@ function AddHouse(props) {
                                         labelText="Address"
                                         id="address"
                                         formControlProps={{
-                                            required: 'true',
+                                            required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -200,7 +203,7 @@ function AddHouse(props) {
                                         labelText="City"
                                         id="city"
                                         formControlProps={{
-                                            required: 'true',
+                                            required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -299,7 +302,7 @@ function AddHouse(props) {
                                         labelText="Postal Code"
                                         id="postal-code"
                                         formControlProps={{
-                                            required: 'true',
+                                            required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -313,7 +316,7 @@ function AddHouse(props) {
                                         labelText="Status"
                                         id="status"
                                         formControlProps={{
-                                            // required: 'true',
+                                            // required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -333,7 +336,7 @@ function AddHouse(props) {
                                         labelText="Rent"
                                         id="rent"
                                         formControlProps={{
-                                            required: 'true',
+                                            required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -367,7 +370,7 @@ function AddHouse(props) {
     )
 }
 
-const mapDispatchToProps = {getHouses}
+const mapDispatchToProps = {getHouses, setSelectedHouseRedux}
 
 const mapStateToProps = state => state
 

@@ -52,11 +52,23 @@ function AddContractor(props) {
                 success.fire({title: `${name} added as a new contractor.`})
                 axios.get('/api/contractors').then(res => {
                     props.setContractors(res.data)
+                    resetForm()
             })
             })
         } else {
             pleaseSignIn.fire()
         }
+    }
+
+    function resetForm() {
+        setName('')
+        setEmail('')
+        setPhone('')
+        setAddress('')
+        setCity('')
+        setState('')
+        setZipcode('')
+        setService()
     }
 
     return (
@@ -74,6 +86,7 @@ function AddContractor(props) {
                                 labelText="Name"
                                 id="name"
                                 formControlProps={{
+                                    required: true,
                                     fullWidth: true
                                 }}
                                 inputProps={{

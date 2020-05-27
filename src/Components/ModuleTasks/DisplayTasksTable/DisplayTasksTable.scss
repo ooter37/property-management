@@ -2,7 +2,7 @@
 
 .table-container {
     margin: 0 auto;
-    margin-top: 20px;
+    // margin-top: 20px;
 }
 
 .display-tasks-table {
@@ -12,4 +12,9 @@
 
 .urgent-true {
     background-color: $urgent;
+}
+
+.overflow-container {
+    max-height: 40vh;
+    overflow-y: auto
 }

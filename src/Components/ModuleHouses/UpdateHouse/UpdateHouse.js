@@ -1,7 +1,8 @@
 import './UpdateHouse.scss'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getHouses} from '../../../redux/reducers/houses'
+import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
@@ -91,48 +92,84 @@ function UpdateHouse(props) {
     const [status, setStatus] = useState('')
     const [rent, setRent] = useState('')
     const [redirect, setRedirect] = useState(false)
+
     const classes = useStyles();
+
+    const existingAddress = props.houses.selectedHouse.address
+    const existingCity = props.houses.selectedHouse.city
+    const existingState = props.houses.selectedHouse.state
+    const existingZipcode = props.houses.selectedHouse.zipcode
+    const existingStatus = props.houses.selectedHouse.status
+    const existingRent = props.houses.selectedHouse.rent
+    const id = props.houses.selectedHouse.house_id
+
+    useEffect(() => {
+        if (existingAddress) {
+            setAddress(existingAddress)
+        }
+    },[existingAddress])
+
+    useEffect(() => {
+        if (existingCity) {
+            setCity(existingCity)
+        }
+    },[existingCity])
+
+    useEffect(() => {
+        if (existingState) {
+            setState(existingState)
+        }
+    },[existingState])
+
+    useEffect(() => {
+        if (existingZipcode) {
+            setZipcode(existingZipcode)
+        }
+    },[existingZipcode])
+
+    useEffect(() => {
+        if (existingStatus) {
+            setStatus(existingStatus)
+        }
+    },[existingStatus])
+
+    useEffect(() => {
+        if (existingRent) {
+            setRent(existingRent)
+        }
+    },[existingRent])
 
     const deleteExistingHouse = () => {
         if (props.user.data) {
-            if (!props.location.state) {
-                setRedirect(true)
-                errorDelete.fire()
-            } else {
-                const id = props.location.state.selectedHouse
                 axios.delete(`/api/houses/${id}`)
                 .then(() => {
                     props.getHouses()
                     setRedirect(true)})
-                    success.fire({title: `${props.location.state.address} has been deleted.`})
-            } } else {
+                    success.fire({title: `${props.houses.selectedHouse.address} has been deleted.`})
+            }  else {
                 pleaseSignIn.fire()
             }
         }
     
     const updateExistingHouse = () => {
         if (props.user.data) {
-            if (!props.location.state) {
-                setRedirect(true)
-                errorUpdate.fire()
-            } else {
-                const newAddress = address ? address : props.location.state.address
-                const newCity = city ? city : props.location.state.city
-                const newState = state ? state : props.location.state.state
-                // const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
-                const newZipcode = zipcode ? zipcode : props.location.state.zipcode
-                const newRent = rent ? rent : props.location.state.rent
-                const newStatus = status ? status : props.location.state.status
-                const houseId = props.location.state.selectedHouse
+                // const newAddress = address ? address : props.location.state.address
+                // const newCity = city ? city : props.location.state.city
+                // const newState = state ? state : props.location.state.state
+                // // const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
+                // const newZipcode = zipcode ? zipcode : props.location.state.zipcode
+                // const newRent = rent ? rent : props.location.state.rent
+                // const newStatus = status ? status : props.location.state.status
+                // const houseId = props.location.state.selectedHouse
                 // const newZipcode = parseInt(newStringZipcode, 10)
                 // const newRent = parseInt(newStringRent, 10)
-                axios.put('/api/houses', {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus})
+                axios.put('/api/houses', {id,address,city,state,zipcode,rent,status})
                 .then(() => {
                     props.getHouses()
                     setRedirect(true)
-                    success.fire({title: `${props.location.state.address} has been updated.`})
+                    success.fire({title: `${existingAddress} has been updated.`})
                 })
-            }   } else {
+               } else {
                 pleaseSignIn.fire()
             }
         }
@@ -154,6 +191,7 @@ function UpdateHouse(props) {
                                 labelText="Address"
                                 id="address"
                                 formControlProps={{
+                                    required: true,
                                     fullWidth: true
                                 }}
                                 inputProps={{
@@ -202,6 +240,7 @@ function UpdateHouse(props) {
                                 labelText="City"
                                 id="city"
                                 formControlProps={{
+                                    required: true,
                                     fullWidth: true
                                 }}
                                 inputProps={{
@@ -296,6 +335,7 @@ function UpdateHouse(props) {
                                 labelText="Postal Code"
                                 id="postal-code"
                                 formControlProps={{
+                                    required: true,
                                     fullWidth: true
                                 }}
                                 inputProps={{
@@ -328,7 +368,7 @@ function UpdateHouse(props) {
     )
 }
 
-const mapDispatchToProps = {getHouses}
+const mapDispatchToProps = {getHouses, setSelectedHouseRedux}
 
 const mapStateToProps = state => state
 

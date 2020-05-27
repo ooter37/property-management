@@ -46,6 +46,7 @@ const {setTasks, selectedHouse} = props
 
   return (
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
+        <div className='overflow-container'>
       <Table className='display-tasks-table' aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -57,10 +58,11 @@ const {setTasks, selectedHouse} = props
             <TableCell align="right">Completed</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody className='display-tasks-table-body'>
           {mappedTasks}
         </TableBody>
       </Table>
+        </div>
     </TableContainer>
   );
 }

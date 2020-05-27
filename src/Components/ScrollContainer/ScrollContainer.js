@@ -1,15 +1,17 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux'
+import {setSelectedHouseRedux} from '../../redux/reducers/houses'
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import './ScrollContainer.scss';
 import HouseButton from '../HouseButton/HouseButton'
 
 // list of items
 
-export default function ScrollContainer(props) {
-  const [selected, setSelected] = useState(0)
+function ScrollContainer(props) {
+  // const [selected, setSelected] = useState(0)
 
   const list = props.data
-  const houses = props.houses
+  const houses = props.houses.houses
 //   console.log(props.houses)
 
   // One item component
@@ -30,8 +32,8 @@ export default function ScrollContainer(props) {
     // const { name } = el;
   
     return (
-      <MenuItem onClick={() => props.setSelectedHouse(house.house_id)}
-        text={<HouseButton  selectedHouse={props.selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>}
+      <MenuItem onClick={() => props.setSelectedHouseRedux(house)}
+        text={<HouseButton  selectedHouse={houses.selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>}
         key={house.house_id}
       />
     );
@@ -52,12 +54,13 @@ export default function ScrollContainer(props) {
   const ArrowLeft = Arrow({ text: '', className: 'arrow prev' });
   const ArrowRight = Arrow({ text: '', className: 'arrow next' });
   
-  function onSelect(key) {
-      setSelected({ selected: key })
-  }
+  // function onSelect(key) {
+  //     setSelected({ selected: key })
+  //     // props.setSelectedHouseRedux(key)
+  // }
     
     // Create menu from items
-    const menu = Menu(list, selected);
+    const menu = Menu(list, props.houses.selectedHouse);
 
     return (
       <div className="scroll-container-parent">
@@ -65,10 +68,17 @@ export default function ScrollContainer(props) {
           data={menu}
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
-          selected={selected}
-          onSelect={onSelect}
+          selected={props.houses.selectedHouse}
+          // onSelect={onSelect}
         />
       </div>
     );
   
 }
+
+
+const mapDispatchToProps = {setSelectedHouseRedux}
+
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScrollContainer)

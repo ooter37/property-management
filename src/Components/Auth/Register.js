@@ -3,8 +3,6 @@ import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -15,6 +13,7 @@ import { connect } from "react-redux";
 import { register } from "../../redux/reducers/user";
 import {Redirect} from 'react-router-dom'
 import {Link} from 'react-router-dom'
+import CustomInput from '../UI/CustomInput'
 
 // function Copyright() {
 //   return (
@@ -50,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Register(props) {
-    const [state, setState] = useState({email: '', password: ''})
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
 
@@ -60,18 +60,17 @@ function Register(props) {
 
 const registrationHandler = (e) => {
     e.preventDefault()
-    props.register(state)
+    props.register({email,password})
     .then(() => {
-        setState({email: '', password: ''})
+        setEmail('')
+        setPassword('')
         toggleRedirect()
     })
     .catch((err) => {
         console.log("Error with login.", err)
     })
 }
-const changeHandler = (e) => {
-    setState({...state, [e.target.name]: e.target.value})
-}
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -108,31 +107,32 @@ const changeHandler = (e) => {
               />
             </Grid> */}
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
+                <CustomInput
+                labelText="Email"
                 id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={state.email}
-                onChange={(e) => changeHandler(e)}
-              />
+                formControlProps={{
+                    required: true,
+                    fullWidth: true
+                }}
+                inputProps={{
+                    value: email,
+                    onChange: (e) => setEmail(e.target.value)
+                }}
+                />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
+                <CustomInput
+                labelText="Password"
                 id="password"
-                autoComplete="current-password"
-                value={state.password}
-                onChange={(e) => changeHandler(e)}
-              />
+                formControlProps={{
+                    required: true,
+                    fullWidth: true
+                }}
+                inputProps={{
+                    value: password,
+                    onChange: (e) => setPassword(e.target.value)
+                }}
+                />
             </Grid>
             {/* <Grid item xs={12}>
               <FormControlLabel

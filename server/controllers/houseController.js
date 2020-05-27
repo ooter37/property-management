@@ -52,8 +52,8 @@ module.exports = {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
-                const {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus} = req.body
-                const house = await db.houses.update_house(houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus)
+                const {id,address,city,state,zipcode,rent,status} = req.body
+                const house = await db.houses.update_house(id,address,city,state,zipcode,rent,status)
                 res.status(200).send(house)
             }
         } catch (error) {

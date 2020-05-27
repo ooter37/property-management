@@ -63,7 +63,7 @@ function SingleEmail(props) {
                                 <CustomInput
                                 labelText="Subject"
                                 formControlProps={{
-                                    required: 'true',
+                                    required: true,
                                     fullWidth: true,
                                 }}
                                 inputProps={{
@@ -74,7 +74,7 @@ function SingleEmail(props) {
                                 />
                             </Grid>
                             <Grid item>
-                                <Button  onClick={() => props.setEmailing(null)} className='cancel-email-button'>Cancel</Button>
+                                <Button  onClick={() => props.setEmailing(null)} variant='contained' color='secondary' className='cancel-email-button'>Cancel</Button>
                                 <Button type='submit' variant='contained' color="primary" className='send-email-button'>Send</Button>
                             </Grid>
                         </Grid>
@@ -83,7 +83,7 @@ function SingleEmail(props) {
                                 <CustomInput
                                 labelText="Message"
                                 formControlProps={{
-                                    required: 'true',
+                                    required: true,
                                     fullWidth: true,
                                 }}
                                 inputProps={{

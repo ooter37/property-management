@@ -2,11 +2,12 @@ import './Auth.scss'
 import React, {useState} from 'react';
 import { connect } from "react-redux";
 import {Redirect, Link} from 'react-router-dom'
-import { Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography} from '@material-ui/core/';
+import { Avatar, Button, CssBaseline, Paper, Box, Grid, Typography} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";
 import CustomInput from '../UI/CustomInput'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -39,7 +40,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login(props) {
-  const [state, setState] = useState({email: '', password: ''})
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [redirect, setRedirect] = useState(false)
   const classes = useStyles();
 
@@ -49,18 +51,15 @@ function Login(props) {
 
   const loginHandler = (e) => {
     e.preventDefault()
-    props.login(state)
+    props.login({email,password})
     .then(() => {
-        setState({email: '', password: ''})
+        setEmail('')
+        setPassword('')
         toggleRedirect()
     })
     .catch((err) => {
         console.log("Error with login.", err)
     })
-}
-
-  const changeHandler = (e) => {
-    setState({...state, [e.target.name]: e.target.value})
 }
 
   return (
@@ -76,58 +75,31 @@ function Login(props) {
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={loginHandler}>
-          <CustomInput
-                                labelText="Name"
-                                id="name"
-                                formControlProps={{
-                                    required: 'true',
-                                    fullWidth: true
-                                }}
-                                inputProps={{
-                                    // required: 'true',
-                                    // value: name,
-                                    // onChange: (e) => setName(e.target.value)
-                                }}
-                                />
-            {/* <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              value={state.email}
-              onChange={(e) => changeHandler(e)}
-            /> */}
             <CustomInput
-                                labelText="Name"
-                                id="name"
-                                formControlProps={{
-                                    required: 'true',
-                                    fullWidth: true
-                                }}
-                                inputProps={{
-                                    // required: 'true',
-                                    // value: name,
-                                    // onChange: (e) => setName(e.target.value)
-                                }}
-                                />
-            {/* <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={state.password}
-              onChange={(e) => changeHandler(e)}
-            /> */}
+            labelText="Email"
+            id="email"
+            formControlProps={{
+                required: true,
+                fullWidth: true
+            }}
+            inputProps={{
+                value: email,
+                onChange: (e) => setEmail(e.target.value)
+            }}
+            />
+            <CustomInput
+            labelText="Password"
+            id="password"
+            formControlProps={{
+                required: true,
+                fullWidth: true
+            }}
+            inputProps={{
+                value: password,
+                onChange: (e) => setPassword(e.target.value)
+            }}
+            />
+
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"

@@ -22,23 +22,18 @@ function App(props) {
   // console.log(props.user)
   // const [redirect, useRedirect] = useState(false)
   const {redirect} = useRedirect(false)
-  const {requestUserData} = props
+  const {requestUserData, getHouses} = props
 
   useEffect(() => {
       requestUserData()
   },
   [requestUserData])
 
-  // useEffect(() => {
-  //   if (props.user.data) {
-  //     getHouses()
-  //   }
-  // },
-  // [props.user.data])
+  useEffect(() => {
+    getHouses()
+  },
+  [getHouses])
 
-  // const toggleRedirect = () => {
-  //   useRedirect(!redirect)
-  // }
 
   return (
     // <MuiThemeProvider theme={theme}>

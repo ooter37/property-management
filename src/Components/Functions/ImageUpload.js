@@ -2,7 +2,7 @@ import '../DisplayHouses/DisplayHouses'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux'
-import {getHouses} from '../../redux/reducers/houses'
+import {getHouses, setSelectedHouseRedux} from '../../redux/reducers/houses'
 import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Swal from 'sweetalert2'
@@ -46,20 +46,20 @@ function ImageUpload(props) {
 function sendFile(e) {
     let fileParts = e.name.split('.')
     // let fileName = fileParts[0]
-    const fileName = `${props.selectedHouse}_${Date.now()}`
+    const fileName = `${props.selectedHouse.house_id}_${Date.now()}`
     axios.post('/sign_s3', {fileName : fileName,fileType : fileParts[1]}).then(res => {
         // setUrl(res.data.data.returnData.url)
-        console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
+        // console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
         .then(() => {
-            axios.put(`/api/houses/${props.selectedHouse}`, {fileName})
+            axios.put(`/api/houses/${props.selectedHouse.house_id}`, {fileName})
             .then(() => {
-                console.log("File upload successful.")
+                // console.log("File upload successful.")
                 // props.setHouses('')
-                    console.log('starting the axios call to update houses --- via redux')
+                    // console.log('starting the axios call to update houses --- via redux')
                 axios.get('/api/houses').then(res => {
                     props.getHouses()
-                    console.log('all complete')
+                    // console.log('all complete')
                     // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
         })
             })
@@ -114,7 +114,7 @@ function sendFile(e) {
     </div>)
 }
 
-const mapDispatchToProps = {getHouses}
+const mapDispatchToProps = {getHouses,setSelectedHouseRedux}
 
 const mapStateToProps = state => state
 

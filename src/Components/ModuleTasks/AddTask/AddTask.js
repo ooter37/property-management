@@ -153,6 +153,7 @@ function AddTask(props) {
             .then(() => {
                 axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
                     props.setTasks(res.data)
+                    resetForm()
                 })
                 success.fire({title: `${type} has been added.`})
             })
@@ -160,17 +161,26 @@ function AddTask(props) {
           pleaseSignIn.fire()
         }
     }
+
+    function resetForm() {
+      setType('')
+      setDate(new Date())
+      setPrice(0)
+      setChecked([])
+      setNote('')
+      setContact('')
+  }
         
         
     return (
         <form onSubmit={submitNewTask}>
-          <button onClick={() => console.log(checked)}>console</button>
+          {/* <button onClick={() => console.log(checked)}>console</button> */}
             {redirect ? <Redirect to="/main" /> : null}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-task-header'>
-                            <h4 className={classes.cardTitleWhite}>Add House</h4>
+                            <h4 className={classes.cardTitleWhite}>Add Task</h4>
                             {/* <p className={classes.cardCategoryWhite}>An image the house will be pulled from Google Maps Street View.</p> */}
                         </CardHeader>
                         <Grid 
@@ -232,7 +242,7 @@ function AddTask(props) {
                                             <CustomInput
                                             labelText="Notes"
                                             formControlProps={{
-                                                // required: 'true',
+                                                // required: true,
                                                 fullWidth: true
                                             }}
                                             inputProps={{
@@ -268,7 +278,7 @@ function AddTask(props) {
                                         labelText="Serviceman"
                                         id="serviceman"
                                         formControlProps={{
-                                            required: true,
+                                            // required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -277,15 +287,11 @@ function AddTask(props) {
                                         }}
                                         />
                                     </Grid>
-                                    <Grid item className='cancel-submit-container'  md={12}>
-                                        <Grid 
-                                        container
-                                        direction="row"
-                                        justify="flex-end"
-                                        alignItems="flex-end">
-                                            <Button onClick={()=> setRedirect(true)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>
+                                    <Grid item className='cancel-submit-container' md={12}>
+                                        {/* <Grid container> */}
+                                            {/* <Button onClick={()=> setRedirect(true)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button> */}
                                             <Button type='submit' variant='contained' color="primary" className='submit-update-button'>Submit</Button>
-                                        </Grid>
+                                        {/* </Grid> */}
                                     </Grid>
                                 </Grid>
                             </Grid> 

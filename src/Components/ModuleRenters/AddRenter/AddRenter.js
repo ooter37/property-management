@@ -131,6 +131,7 @@ function AddRenter(props) {
 
     return (
         <form onSubmit={submitNewRenter}>
+            <button onClick={()=> console.log(props)}>loglogg</button>
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
@@ -144,11 +145,11 @@ function AddRenter(props) {
                                 labelText="Name"
                                 id="name"
                                 formControlProps={{
-                                    required: 'true',
+                                    required: true,
                                     fullWidth: true
                                 }}
                                 inputProps={{
-                                    // required: 'true',
+                                    // required: true,
                                     value: name,
                                     onChange: (e) => setName(e.target.value)
                                 }}
@@ -159,7 +160,7 @@ function AddRenter(props) {
                                 labelText="Phone Number"
                                 id="phone"
                                 formControlProps={{
-                                    required: 'true',
+                                    required: true,
                                     fullWidth: true
                                 }}
                                 inputProps={{
@@ -172,14 +173,14 @@ function AddRenter(props) {
                                 <CustomInput
                                 labelText="Email"
                                 formControlProps={{
-                                    required: 'true',
+                                    required: true,
                                     fullWidth: true,
                                 }}
                                 inputProps={{
                                     value: email,
                                     onChange: (e) => setEmail(e.target.value),
                                     type: 'email',
-                                    // required: 'true'
+                                    // required: 
                                 }}
                                 />
                             </Grid>
