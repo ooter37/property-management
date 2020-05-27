@@ -1,11 +1,10 @@
 import './AddTask.scss'
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
-import {getHouses} from '../../../redux/reducers/houses'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, FormControl, InputLabel, Select, MenuItem, Checkbox, FormHelperText } from "@material-ui/core";
+import { Grid, Button, FormControl, InputLabel, Checkbox } from "@material-ui/core";
 import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Check from "@material-ui/icons/Check";
@@ -15,7 +14,7 @@ import SelectInput from '../../Functions/SelectInput'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import { primaryColor, dangerColor, successColor, grayColor, blackColor, hexToRgb } from "../../UI/material-dashboard-react";
+import { primaryColor, grayColor, blackColor, hexToRgb } from "../../UI/material-dashboard-react";
 
 const theme = createMuiTheme({
     overrides: {
@@ -59,22 +58,6 @@ const styles = {
         border: "1px solid rgba(" + hexToRgb(blackColor) + ", .54)",
         borderRadius: "3px"
       },
-      radio: {
-        color: primaryColor[0] + "!important"
-      },
-      radioChecked: {
-        width: "20px",
-        height: "20px",
-        border: "1px solid " + primaryColor[0],
-        borderRadius: "50%"
-      },
-      radioUnchecked: {
-        width: "0px",
-        height: "0px",
-        padding: "10px",
-        border: "1px solid rgba(" + hexToRgb(blackColor) + ", .54)",
-        borderRadius: "50%",
-      },
     labelRoot: {
     //   ...defaultFont,
       color: grayColor[3] + " !important",
@@ -83,12 +66,12 @@ const styles = {
       lineHeight: "1.42857",
       letterSpacing: "unset"
     },
-    labelRootError: {
-        color: dangerColor[0]
-    },
-    labelRootSuccess: {
-        color: successColor[0]
-    },
+    // labelRootError: {
+    //     color: dangerColor[0]
+    // },
+    // labelRootSuccess: {
+    //     color: successColor[0]
+    // },
     feedback: {
       position: "absolute",
       top: "18px",
@@ -147,7 +130,6 @@ function AddTask(props) {
     const [note, setNote] = useState('')
     const [contact, setContact] = useState('')
     const [redirect, setRedirect] = useState(false)
-    const [error, setError] = useState(false)
     const classes = useStyles();
 
     const checkHandler = value => {
@@ -162,30 +144,27 @@ function AddTask(props) {
         setChecked(newChecked);
       };
 
-
-    // function clickHandler() {
-    //     setError(false)
-    //     if (!type) {
-    //         setError(true)
-    //     }
-    // }
-
     const submitNewTask = () => {
         if (props.user.data) {
             const userId = props.user.data.user_id
             const houseId = props.selectedHouse
-            axios.post('/api/tasks', {userId, houseId, type, date, price, checked, note, contact})
+            const urgent = checked.length === 1 ? true : false
+            axios.post('/api/tasks', {userId, houseId, type, date, price, urgent, note, contact})
             .then(() => {
                 axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
                     props.setTasks(res.data)
                 })
+                success.fire({title: `${type} has been added.`})
             })
+        } else {
+          pleaseSignIn.fire()
         }
     }
         
         
     return (
         <form onSubmit={submitNewTask}>
+          <button onClick={() => console.log(checked)}>console</button>
             {redirect ? <Redirect to="/main" /> : null}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
@@ -204,70 +183,51 @@ function AddTask(props) {
                             <Grid item 
                             className='name-notes-container' 
                             md={8}>
-                                {/* <Grid 
-                                // spacingTop={4}
-                                // container
-                                // direction="column"
-                                // justify="center"
-                                // alignItems="flex-start"
-                                > */}
-
-
                                     <Grid item  md={12}>
-
-
-
-                                        <Grid item  className={classes.grid} md={12}>
-                                            <MuiThemeProvider theme={theme}>
-                                                <FormControl
-                                                className={classes.formControl}
-                                                fullWidth
-                                                required
-                                                error={error}
-                                                >
-                                                    <SelectInput
-                                                    // required
-                                                    value={type}
-                                                    setValue={setType}
-                                                    classes={{
-                                                        root: classes.marginTop,
-                                                        disabled: classes.disabled,
-                                                        underline: classes.underline
-                                                    }}
-                                                    >
-                                                        {/* <MenuItem value="PR">Puerto Rico</MenuItem>
-                                                        <MenuItem value="UM">United States Minor Outlying Islands</MenuItem>
-                                                        <MenuItem value="VI">Virgin Islands</MenuItem> */}
-                                                    </SelectInput>
-                                                    {/* {error && <FormHelperText>This is required!</FormHelperText>} */}
-                                                </FormControl>
-                                            </MuiThemeProvider>
+                                        <Grid container
+                                        direction="row"
+                                        justify="space-between"
+                                        alignItems="flex-end">
+                                            <Grid item  className={classes.grid} md={9}>
+                                                <MuiThemeProvider theme={theme}>
+                                                    <FormControl
+                                                    className={classes.formControl}
+                                                    fullWidth
+                                                    required>
+                                                        <SelectInput
+                                                        // required
+                                                        label='Task Name (start typing to add your own)'
+                                                        selections={taskSelections}
+                                                        value={type}
+                                                        setValue={setType}
+                                                        classes={{
+                                                            root: classes.marginTop,
+                                                            disabled: classes.disabled,
+                                                            underline: classes.underline
+                                                        }}>
+                                                        </SelectInput>
+                                             
+                                                    </FormControl>
+                                                </MuiThemeProvider>
+                                            </Grid>
+                                            <Grid item md={3}>
+                                                <InputLabel
+                                                classes={{root: classes.labelRoot}}
+                                                > 
+                                                Urgent
+                                                </InputLabel>
+                                                <Checkbox
+                                                tabIndex={-1}
+                                                onClick={() => checkHandler(1)}
+                                                checkedIcon={<Check className={classes.checkedIcon} />}
+                                                icon={<Check className={classes.uncheckedIcon} />}
+                                                classes={{
+                                                checked: classes.checked
+                                                }}
+                                                />
+                                            </Grid>
                                         </Grid>
-                                        {/* <FormControl> */}
-                                        <Grid item>
-                                        <InputLabel
-                                                    classes={{root: classes.labelRoot}}
-                                                    > 
-                                                    Urgent
-                                                    </InputLabel>
-                                        <Checkbox
-                                        tabIndex={-1}
-                                        onClick={() => checkHandler(1)}
-                                        checkedIcon={<Check className={classes.checkedIcon} />}
-                                        icon={<Check className={classes.uncheckedIcon} />}
-                                        classes={{
-                                        checked: classes.checked
-                                        }}
-                                        ></Checkbox>
-                                        </Grid>
-                                        {/* </FormControl> */}
-
-
-
                                     </Grid>
-
-
-                                    {/* <Grid item className={classes.grid} md={12}> */}
                                         <Grid item className={classes.grid} md={12}>
                                             <CustomInput
                                             labelText="Notes"
@@ -283,26 +243,19 @@ function AddTask(props) {
                                             }}
                                             />
                                         </Grid>
-                                    {/* </Grid> */}
-                                {/* </Grid> */}
                             </Grid>
-                                
-
-
-
-                            <Grid item 
-                            className='task-form-contents-container' 
-                            md={4}>
+                            <Grid item className='task-form-contents-container' md={4}>
                                 <Grid 
                                 container
-                                // direction="column"
-                                // justify="space-between"
-                                // alignItems="flex-end"
+                                direction="column"
+                                justify="center"
+                                alignItems="center"
                                 >   
-                                    
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}> <DatePicker value={date} onChange={setDate}/> </MuiPickersUtilsProvider>
-
-                                    <Grid item  className={classes.grid} md={6}>
+                                    <Grid item md={12}>
+                                        <InputLabel classes={{root: classes.labelRoot}}>Date Due</InputLabel>
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils}> <DatePicker value={date} onChange={setDate}/></MuiPickersUtilsProvider>
+                                    </Grid>
+                                    <Grid item  className={classes.grid} md={12}>
                                         <FormControl required className={classes.formControl} >
                                             <PriceInput
                                             price={price}
@@ -312,10 +265,10 @@ function AddTask(props) {
                                     </Grid>
                                     <Grid item className={classes.grid} md={12}>
                                         <CustomInput
-                                        labelText="Contact"
-                                        id="contact"
+                                        labelText="Serviceman"
+                                        id="serviceman"
                                         formControlProps={{
-                                            required: 'true',
+                                            required: true,
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -324,7 +277,6 @@ function AddTask(props) {
                                         }}
                                         />
                                     </Grid>
-
                                     <Grid item className='cancel-submit-container'  md={12}>
                                         <Grid 
                                         container
@@ -335,7 +287,6 @@ function AddTask(props) {
                                             <Button type='submit' variant='contained' color="primary" className='submit-update-button'>Submit</Button>
                                         </Grid>
                                     </Grid>
-
                                 </Grid>
                             </Grid> 
                         </Grid>

@@ -6,7 +6,7 @@ import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem} from "@material-ui/core";
-import {pleaseSignIn, errorUpdate, success, errorDelete} from '../../Functions/Sweetalerts'
+import {pleaseSignIn, errorUpdate, success, errorDelete, confirmDelete} from '../../Functions/Sweetalerts'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
@@ -307,7 +307,14 @@ function UpdateHouse(props) {
                         </Grid>
                         <Grid container className='status-rent-cancel-add-container'>
                             <Grid item className='delete-house-button'>
-                                <Button onClick={() => deleteExistingHouse()} variant='contained' color="secondary" className='delete-house-button'>Delete House</Button>
+                                <Button onClick={() => { 
+                if (props.user.data) {
+                        confirmDelete.fire({
+                            text: 'Are you sure you want to delete this house? Renters associated with this house will also be deleted. This action is irreversible.'}).then((result) => {
+                            if (result.value) {deleteExistingHouse()}})
+                        } else {pleaseSignIn.fire()}
+                    }
+                }  variant='contained' color="secondary" className='delete-house-button'>Delete House</Button>
                             </Grid>
                             <Grid item className='cancel-submit-container' >
                                 <Button onClick={()=> setRedirect(true)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>

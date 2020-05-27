@@ -29,13 +29,6 @@ import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete
 //     }
 // };
 
-const selections = [
-  'Tree Trimming',
-  'Pool Repair',
-  'House Repair',
-  'Exterior Painting'
-];
-
 const filter = createFilterOptions();
 
 // const useStyles = makeStyles(styles);
@@ -74,7 +67,7 @@ export default function FreeSoloCreateOption(props) {
       clearOnBlur
       handleHomeEndKeys
       // id="free-solo-with-text-demo"
-      options={selections}
+      options={props.selections}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
         if (typeof option === 'string') {
@@ -100,7 +93,7 @@ export default function FreeSoloCreateOption(props) {
       renderInput={params => ( 
 
         
-        <TextField className='select-textfield' required {...params} label="Task Name" 
+        <TextField className='select-textfield' required {...params} label={props.label} 
 
           // onChange={handleChange} 
         /> 
