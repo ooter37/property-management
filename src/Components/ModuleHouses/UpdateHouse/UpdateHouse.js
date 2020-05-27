@@ -12,6 +12,7 @@ import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import {primaryColor,grayColor} from "../../UI/material-dashboard-react";
+import PriceInput from '../../Functions/PriceInput'
 
 const theme = createMuiTheme({
     overrides: {
@@ -88,7 +89,7 @@ function UpdateHouse(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState()
     const [status, setStatus] = useState('')
-    const [stringRent, setStringRent] = useState(0)
+    const [rent, setRent] = useState('')
     const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
 
@@ -120,11 +121,11 @@ function UpdateHouse(props) {
                 const newState = state ? state : props.location.state.state
                 // const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
                 const newZipcode = zipcode ? zipcode : props.location.state.zipcode
-                const newStringRent = stringRent ? stringRent : props.location.state.rent
+                const newRent = rent ? rent : props.location.state.rent
                 const newStatus = status ? status : props.location.state.status
                 const houseId = props.location.state.selectedHouse
                 // const newZipcode = parseInt(newStringZipcode, 10)
-                const newRent = parseInt(newStringRent, 10)
+                // const newRent = parseInt(newStringRent, 10)
                 axios.put('/api/houses', {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus})
                 .then(() => {
                     props.getHouses()
@@ -175,7 +176,14 @@ function UpdateHouse(props) {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={3} className={classes.grid}>
-                                <CustomInput
+                                <FormControl required className={classes.formControl} >
+                                    <PriceInput
+                                    price={rent}
+                                    setPrice={setRent}
+                                    label='Rent (monthly)'/>
+                                </FormControl>
+                                
+                                {/* <CustomInput
                                 labelText="Rent"
                                 id="rent"
                                 formControlProps={{
@@ -185,7 +193,7 @@ function UpdateHouse(props) {
                                     value: stringRent,
                                     onChange: (e) => setStringRent(e.target.value)
                                 }}
-                                />
+                                /> */}
                             </Grid>
                         </Grid>
                         <Grid container>

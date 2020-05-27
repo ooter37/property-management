@@ -28,8 +28,7 @@ function App(props) {
   useEffect(() => {
       requestUserData()
   },
-  // eslint-disable-next-line
-  [])
+  [requestUserData])
 
   // useEffect(() => {
   //   if (props.user.data) {

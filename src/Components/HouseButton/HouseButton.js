@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
                 opacity: 0,
             },
             '& $imageTitle': {
-                border: '2px solid #4caf50',
+                border: '2px solid currentColor',
                 borderRadius: 4,
                 fontWeight: 'bolder',
                 // color: '#4caf50',
@@ -73,15 +73,15 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
     },
-    // imageMarked: {
-    //     height: 3,
-    //     width: 18,
-    //     backgroundColor: theme.palette.common.white,
-    //     position: 'absolute',
-    //     bottom: -2,
-    //     left: 'calc(50% - 9px)',
-    //     transition: theme.transitions.create('opacity'),
-    // },
+    imageMarked: {
+        height: 3,
+        width: 18,
+        backgroundColor: theme.palette.common.white,
+        position: 'absolute',
+        bottom: -2,
+        left: 'calc(50% - 9px)',
+        transition: theme.transitions.create('opacity'),
+    },
 }));
 
 export default function HouseButton(props) {

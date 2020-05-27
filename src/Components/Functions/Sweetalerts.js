@@ -14,7 +14,7 @@ const authSuccess = Swal.mixin({
     showConfirmButton: false,
     timer: 5000,
     timerProgressBar: true,
-    opOpen: (toast) => {
+    onOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
@@ -33,7 +33,7 @@ const addedSuccess = Swal.mixin({
     showConfirmButton: false,
     timer: 10000,
     timerProgressBar: true,
-    opOpen: (toast) => {
+    onOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
@@ -74,7 +74,7 @@ const success = Swal.mixin({
     showConfirmButton: false,
     timer: 10000,
     timerProgressBar: true,
-    opOpen: (toast) => {
+    onOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
         toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
