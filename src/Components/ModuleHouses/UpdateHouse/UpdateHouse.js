@@ -104,7 +104,6 @@ function UpdateHouse(props) {
                     props.getHouses()
                     setRedirect(true)})
                     success.fire({title: `${props.location.state.address} has been deleted.`})
-                    console.log(redirect)
             } } else {
                 pleaseSignIn.fire()
             }
@@ -131,7 +130,6 @@ function UpdateHouse(props) {
                     props.getHouses()
                     setRedirect(true)
                     success.fire({title: `${props.location.state.address} has been updated.`})
-                    console.log(redirect)
                 })
             }   } else {
                 pleaseSignIn.fire()

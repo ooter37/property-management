@@ -1,17 +1,17 @@
 import './AddHouse.scss'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getHouses} from '../../../redux/reducers/houses'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography } from "@material-ui/core";
-import {pleaseSignIn, errorUpdate, success, errorDelete} from '../../Functions/Sweetalerts'
+import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography, FormHelperText } from "@material-ui/core";
+import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import {primaryColor,grayColor} from "../../UI/material-dashboard-react";
+import {primaryColor,dangerColor,successColor,grayColor} from "../../UI/material-dashboard-react";
 
 const theme = createMuiTheme({
     overrides: {
@@ -38,6 +38,12 @@ const styles = {
       fontSize: "14px",
       lineHeight: "1.42857",
       letterSpacing: "unset"
+    },
+    labelRootError: {
+        color: dangerColor[0]
+    },
+    labelRootSuccess: {
+        color: successColor[0]
     },
     feedback: {
       position: "absolute",
@@ -88,66 +94,51 @@ function AddHouse(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState()
     const [status, setStatus] = useState('')
-    const [stringRent, setStringRent] = useState(0)
+    const [rent, setRent] = useState(0)
+    // const [ownership, setOwnership] = useState('')
     const [redirect, setRedirect] = useState(false)
+    const [image, setImage] = useState('')
+    const [error, setError] = useState(false)
     const classes = useStyles();
 
-    const deleteExistingHouse = () => {
-        if (props.user.data) {
-            if (!props.location.state) {
-                setRedirect(true)
-                errorDelete.fire()
-            } else {
-                const id = props.location.state.selectedHouse
-                axios.delete(`/api/houses/${id}`)
-                .then(() => {
-                    props.getHouses()
-                    setRedirect(true)})
-                    success.fire({title: `${props.location.state.address} has been deleted.`})
-                    console.log(redirect)
-            } } else {
-                pleaseSignIn.fire()
-            }
+    function handleClick() {
+        console.log(state)
+        setError(false)
+        if (!state) {
+            setError(true)
         }
-    
-    const updateExistingHouse = () => {
-        if (props.user.data) {
-            if (!props.location.state) {
-                setRedirect(true)
-                errorUpdate.fire()
-            } else {
-                const newAddress = address ? address : props.location.state.address
-                const newCity = city ? city : props.location.state.city
-                const newState = state ? state : props.location.state.state
-                // const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
-                const newZipcode = zipcode ? zipcode : props.location.state.zipcode
-                const newStringRent = stringRent ? stringRent : props.location.state.rent
-                const newStatus = status ? status : props.location.state.status
-                const houseId = props.location.state.selectedHouse
-                // const newZipcode = parseInt(newStringZipcode, 10)
-                const newRent = parseInt(newStringRent, 10)
-                axios.put('/api/houses', {houseId,newAddress,newCity,newState,newZipcode,newRent,newStatus})
-                .then(() => {
-                    props.getHouses()
-                    setRedirect(true)
-                    success.fire({title: `${props.location.state.address} has been updated.`})
-                    console.log(redirect)
-                })
-            }   } else {
-                pleaseSignIn.fire()
-            }
-        }
-        
+    }
 
+    useEffect(() => {
+        if (image !== '/no-image-selected.png' && address && city && state) {
+            setImage(`https://maps.googleapis.com/maps/api/streetview?size=300x200&location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
+        }
+    },[address,city,state,image])
+
+
+    const submitNewHouse = () => {
+        if (props.user.data) { state &&
+            axios.post('/api/houses', {address,city,state,zipcode,rent,status})
+            .then(() => {
+                props.getHouses()
+                setRedirect(true)
+                success.fire({title: `${address} has been added.`})
+            })
+        } else {
+            pleaseSignIn.fire()
+        }
+}
+        
+        
     return (
-        <form onSubmit={updateExistingHouse}>
+        <form onSubmit={submitNewHouse}>
             {redirect ? <Redirect to="/main" /> : null}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
                             <h4 className={classes.cardTitleWhite}>Add House</h4>
-                            <p className={classes.cardCategoryWhite}>Please complete all fields.</p>
+                            <p className={classes.cardCategoryWhite}>Please complete all fields. An image the house will be pulled from Google Maps Street View.</p>
                         </CardHeader>
                         <Grid 
                             container
@@ -171,12 +162,13 @@ function AddHouse(props) {
                                         <CardMedia
                                         style = {{ height: 200, minWidth: 200}}
                                         // className={classes.cover}
-                                        image= {require ("../../../media/add-house-button.jpeg")}
+                                        image= {image}
+                                        // image= {`https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80`}
                                         title="Live from space album cover"
                                         />
                                     </Grid>
                                     <Grid item className='remove-image-button' md={12} >
-                                        <Button onClick={() => deleteExistingHouse()} variant='outlined' color="secondary" className='delete-house-button'>Remove</Button>
+                                        <Button onClick={() => setImage('/no-image-selected.png')} variant='outlined' color="secondary" className='delete-house-button'>Remove</Button>
                                     </Grid>
                                 </Grid>
                                 {/* </CardContent> */}
@@ -195,6 +187,7 @@ function AddHouse(props) {
                                         labelText="Address"
                                         id="address"
                                         formControlProps={{
+                                            required: 'true',
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -208,6 +201,7 @@ function AddHouse(props) {
                                         labelText="City"
                                         id="city"
                                         formControlProps={{
+                                            required: 'true',
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -221,6 +215,8 @@ function AddHouse(props) {
                                             <FormControl
                                             className={classes.formControl}
                                             fullWidth
+                                            required
+                                            error={error}
                                             >
                                                 <InputLabel
                                                 classes={{root: classes.labelRoot}}
@@ -229,7 +225,8 @@ function AddHouse(props) {
                                                 <Select
                                                 // required
                                                 value={state}
-                                                onChange={(e) => setState(e.target.value)}
+                                                onChange={(e) => {setError(false)
+                                                    setState(e.target.value)}}
                                                 classes={{
                                                     root: classes.marginTop,
                                                     disabled: classes.disabled,
@@ -294,6 +291,7 @@ function AddHouse(props) {
                                                     <MenuItem value="UM">United States Minor Outlying Islands</MenuItem>
                                                     <MenuItem value="VI">Virgin Islands</MenuItem>
                                                 </Select>
+                                                {error && <FormHelperText>This is required!</FormHelperText>}
                                             </FormControl>
                                         </MuiThemeProvider>
                                     </Grid>
@@ -302,6 +300,7 @@ function AddHouse(props) {
                                         labelText="Postal Code"
                                         id="postal-code"
                                         formControlProps={{
+                                            required: 'true',
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -315,6 +314,7 @@ function AddHouse(props) {
                                         labelText="Status"
                                         id="status"
                                         formControlProps={{
+                                            required: 'true',
                                             fullWidth: true
                                         }}
                                         inputProps={{
@@ -328,11 +328,12 @@ function AddHouse(props) {
                                         labelText="Rent"
                                         id="rent"
                                         formControlProps={{
+                                            required: 'true',
                                             fullWidth: true
                                         }}
                                         inputProps={{
-                                            value: stringRent,
-                                            onChange: (e) => setStringRent(e.target.value)
+                                            value: rent,
+                                            onChange: (e) => setRent(e.target.value)
                                         }}
                                         />
                                     </Grid>
@@ -344,7 +345,7 @@ function AddHouse(props) {
                                         alignItems="flex-end">
 
                                         <Button onClick={()=> setRedirect(true)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>
-                                        <Button type='submit' variant='contained' color="primary" className='submit-update-button'>Submit</Button>
+                                        <Button onClick={() => handleClick()} type='submit' variant='contained' color="primary" className='submit-update-button'>Submit</Button>
                                         </Grid>
                                     </Grid>
                                 </Grid>

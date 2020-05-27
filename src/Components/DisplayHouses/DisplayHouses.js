@@ -242,7 +242,7 @@ function DisplayHouses (props) {
     // })
     return (
         <div>
-            {/* <button onClick={() => console.log(props.houses.houses)}>console log</button> */}
+            {/* <button onClick={() => console.log()}>console log</button> */}
             <div className='scroll-container'>
                 <ScrollContainer setSelectedHouse={setSelectedHouse} selectedHouse={selectedHouse} houses={props.houses.houses}/>
             </div>
