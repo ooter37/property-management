@@ -1,16 +1,28 @@
 @import '../../../App.scss';
 
-.add-task-form {
-    display: flex;
-    justify-content: space-between;
-    // background-color: blue;
-    max-width: 900px;
+// .add-task-form {
+//     display: flex;
+//     justify-content: space-between;
+//     // background-color: blue;
+//     max-width: 900px;
+// }
+
+// .input-mini-container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     // background-color: red;
+//     height: 110px;
+// }
+
+.add-task-contents-container {
+    // background-color: grey !important;
 }
 
-.input-mini-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    // background-color: red;
-    height: 110px;
+.name-notes-container {
+    // background-color: blue !important;
+}
+
+.task-form-contents-container {
+    background-color: orange !important;
 }

@@ -89,6 +89,7 @@ function DisplayHouses (props) {
         </TableRow>
         )
     })
+    // eslint-disable-next-line
     const mappedHouses = props.houses.houses.map((house) => {
         if (house.house_id === selectedHouse)
         // if (1 === 1)
