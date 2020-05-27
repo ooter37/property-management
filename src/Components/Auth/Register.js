@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#4caf50',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -146,7 +146,8 @@ const changeHandler = (e) => {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className='auth-button'
+            // className={classes.submit}
           >
             Sign Up
           </Button>

@@ -1,5 +1,8 @@
 @import '../../App.scss';
 
-.logout-button {
+
+.auth-button {
     background-color: $theme-500 !important;
+    margin-top: 25px !important;
+    margin-bottom: 15px !important;
 }

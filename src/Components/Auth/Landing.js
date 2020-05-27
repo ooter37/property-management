@@ -1,13 +1,12 @@
 import './Auth.scss'
 import React, {useState} from 'react';
 import { connect } from "react-redux";
-import {Redirect} from 'react-router-dom'
-import {Link} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import { Avatar, Button, CssBaseline, TextField, Paper, Box, Grid, Typography} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";
-
+import CustomInput from '../UI/CustomInput'
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#4caf50',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -77,7 +76,20 @@ function Login(props) {
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={loginHandler}>
-            <TextField
+          <CustomInput
+                                labelText="Name"
+                                id="name"
+                                formControlProps={{
+                                    required: 'true',
+                                    fullWidth: true
+                                }}
+                                inputProps={{
+                                    // required: 'true',
+                                    // value: name,
+                                    // onChange: (e) => setName(e.target.value)
+                                }}
+                                />
+            {/* <TextField
               variant="outlined"
               margin="normal"
               required
@@ -89,8 +101,21 @@ function Login(props) {
               autoFocus
               value={state.email}
               onChange={(e) => changeHandler(e)}
-            />
-            <TextField
+            /> */}
+            <CustomInput
+                                labelText="Name"
+                                id="name"
+                                formControlProps={{
+                                    required: 'true',
+                                    fullWidth: true
+                                }}
+                                inputProps={{
+                                    // required: 'true',
+                                    // value: name,
+                                    // onChange: (e) => setName(e.target.value)
+                                }}
+                                />
+            {/* <TextField
               variant="outlined"
               margin="normal"
               required
@@ -102,7 +127,7 @@ function Login(props) {
               autoComplete="current-password"
               value={state.password}
               onChange={(e) => changeHandler(e)}
-            />
+            /> */}
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -112,7 +137,8 @@ function Login(props) {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              className='auth-button'
+              // className={classes.submit}
             >
               Sign In
             </Button>
