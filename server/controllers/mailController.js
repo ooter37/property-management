@@ -7,6 +7,7 @@ module.exports = {
   singleEmail: async (req, res) => {
     try {
       const {to,subject,message} = req.body
+      console.log('single',req.body)
       const msg = {
         to: to,
         from: 'dsl35@nau.edu',
@@ -24,7 +25,7 @@ module.exports = {
     try {
       const {to,subject,message} = req.body
       const msg = {
-        bcc: to,
+        to: to,
         from: 'dsl35@nau.edu',
         subject: subject,
         text: message,

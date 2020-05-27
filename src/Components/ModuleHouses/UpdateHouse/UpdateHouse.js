@@ -5,13 +5,12 @@ import {getHouses} from '../../../redux/reducers/houses'
 import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
-import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem} from "@material-ui/core";
 import {pleaseSignIn, errorUpdate, success, errorDelete, confirmDelete} from '../../Functions/Sweetalerts'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import {primaryColor,grayColor} from "../../UI/material-dashboard-react";
 import PriceInput from '../../Functions/PriceInput'
 
@@ -88,7 +87,7 @@ function UpdateHouse(props) {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
-    const [zipcode, setZipcode] = useState()
+    const [zipcode, setZipcode] = useState('')
     const [status, setStatus] = useState('')
     const [rent, setRent] = useState('')
     const [redirect, setRedirect] = useState(false)
@@ -201,7 +200,7 @@ function UpdateHouse(props) {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={3} className={classes.grid}>
-                                <CustomInput
+                                {/* <CustomInput
                                 labelText="Status"
                                 id="status"
                                 formControlProps={{
@@ -211,7 +210,34 @@ function UpdateHouse(props) {
                                     value: status,
                                     onChange: (e) => setStatus(e.target.value)
                                 }}
-                                />
+                                /> */}
+                                <MuiThemeProvider theme={theme}>
+                                    <FormControl
+                                    className={classes.formControl}
+                                    fullWidth
+                                    >
+                                        <InputLabel
+                                        classes={{root: classes.labelRoot}}
+                                        > Status
+                                        </InputLabel>
+                                        <Select
+                                        value={status}
+                                        onChange={(e) => setStatus(e.target.value)}
+                                        classes={{
+                                            root: classes.marginTop,
+                                            disabled: classes.disabled,
+                                            underline: classes.underline
+                                        }}
+                                        >
+                                            <MenuItem value='Rental - Long Term'>Monthly Rental</MenuItem>
+                                            <MenuItem value='Rental - Short Term'>Short Term Rental</MenuItem>
+                                            <MenuItem value='Residence - Primary'>Primary Residence </MenuItem>
+                                            <MenuItem value='Under Remodel'>Remodeling</MenuItem>
+                                            <MenuItem value='Unoccupied'>Unoccupied</MenuItem>
+                                            <MenuItem value='Other'>Other</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </MuiThemeProvider>
                             </Grid>
                             <Grid item xs={12} sm={12} md={3} className={classes.grid}>
                                 <FormControl required className={classes.formControl} >

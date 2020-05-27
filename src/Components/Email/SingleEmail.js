@@ -42,6 +42,7 @@ function SingleEmail(props) {
         const to = props.emailing
         if (props.user.data)
         {    axios.post('/email/multi', {to,subject,message}).then(() => {
+            props.setEmailing(null)
             success.fire({title: `Email sent to ${joinedEmails}`})
             }).catch((err) => console.log('Error sending single email.', err))
         } else {pleaseSignIn.fire()}

@@ -131,7 +131,7 @@ function AddRenter(props) {
 
     return (
         <form onSubmit={submitNewRenter}>
-            <button onClick={()=> console.log(props)}>loglogg</button>
+            {/* <button onClick={()=> console.log(props)}>loglogg</button> */}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>

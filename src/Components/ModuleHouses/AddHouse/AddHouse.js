@@ -92,10 +92,9 @@ function AddHouse(props) {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
-    const [zipcode, setZipcode] = useState()
+    const [zipcode, setZipcode] = useState('')
     const [status, setStatus] = useState('')
     const [rent, setRent] = useState()
-    // const [ownership, setOwnership] = useState('')
     const [redirect, setRedirect] = useState(false)
     const [image, setImage] = useState('')
     const [error, setError] = useState(false)
@@ -312,18 +311,33 @@ function AddHouse(props) {
                                         />
                                     </Grid>
                                     <Grid item className={classes.grid} md={6}>
-                                        <CustomInput
-                                        labelText="Status"
-                                        id="status"
-                                        formControlProps={{
-                                            // required: true,
-                                            fullWidth: true
-                                        }}
-                                        inputProps={{
-                                            value: status,
-                                            onChange: (e) => setStatus(e.target.value)
-                                        }}
-                                        />
+                                        <MuiThemeProvider theme={theme}>
+                                            <FormControl
+                                            className={classes.formControl}
+                                            fullWidth
+                                            >
+                                                <InputLabel
+                                                classes={{root: classes.labelRoot}}
+                                                > Status
+                                                </InputLabel>
+                                                <Select
+                                                value={status}
+                                                onChange={(e) => setStatus(e.target.value)}
+                                                classes={{
+                                                    root: classes.marginTop,
+                                                    disabled: classes.disabled,
+                                                    underline: classes.underline
+                                                }}
+                                                >
+                                                    <MenuItem value='Rental - Long Term'>Monthly Rental</MenuItem>
+                                                    <MenuItem value='Rental - Short Term'>Short Term Rental</MenuItem>
+                                                    <MenuItem value='Residence - Primary'>Primary Residence </MenuItem>
+                                                    <MenuItem value='Under Remodel'>Remodeling</MenuItem>
+                                                    <MenuItem value='Unoccupied'>Unoccupied</MenuItem>
+                                                    <MenuItem value='Other'>Other</MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </MuiThemeProvider>
                                     </Grid>
                                     <Grid item  className={classes.grid} md={6}>
                                         <FormControl required className={classes.formControl} >

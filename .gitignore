@@ -23,5 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .envsendgrid.env
-
+sendgrid.env
 .env

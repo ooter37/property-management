@@ -13,10 +13,10 @@
     border: none;
   }
   .menu-item-wrapper.active {
-    border: 1px blue solid;
+    border: 1px $theme-500 solid;
   }
   .menu-item.active {
-    border: 1px green solid;
+    border: 1px $theme-500 solid;
   }
   .scroll-menu-arrow {
     padding: 20px;

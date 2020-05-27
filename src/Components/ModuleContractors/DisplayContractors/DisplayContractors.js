@@ -22,9 +22,9 @@ function DisplayContractors(props) {
         return (
           <TableRow key={`contractor-display-${contractor.contractor_id}`} className={`global-${contractor.user_id.toString()}`}>
             <TableCell component="th" scope="row">{contractor.name}</TableCell>
-            <TableCell align="right">{contractor.email}</TableCell>
-            <TableCell align="right">{contractor.phone}</TableCell>
-            <TableCell align="right">{contractor.address}</TableCell>
+            <TableCell align="left">{contractor.email}</TableCell>
+            <TableCell align="left">{contractor.phone}</TableCell>
+            <TableCell align="left">{contractor.address} <p/>{contractor.city} {contractor.state} {contractor.zipcode}</TableCell>
             <TableCell align="right"><Button 
             onClick={() => { if (contractor.user_id !== 0) {
                 if (props.user.data) {
@@ -49,10 +49,10 @@ function DisplayContractors(props) {
       <Table className='display-tasks-table' aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Phone</TableCell>
-            <TableCell align="right">Address</TableCell>
+            <TableCell align="left">Name</TableCell>
+            <TableCell align="left">Email</TableCell>
+            <TableCell align="left">Phone</TableCell>
+            <TableCell align="left">Address</TableCell>
             <TableCell align="right">Delete</TableCell>
           </TableRow>
         </TableHead>
