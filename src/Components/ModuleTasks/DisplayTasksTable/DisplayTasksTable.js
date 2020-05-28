@@ -13,8 +13,7 @@ const {setTasks, selectedHouse} = props
   useEffect(() => {
     axios.get(`/api/tasks/${selectedHouse}`).then(res => {
         setTasks(res.data)
-        // eslint-disable-next-line
-    })}, []
+    })}, [selectedHouse, setTasks]
 )
     function deleteTask(id) {
       axios.delete(`/api/tasks/${id}`)

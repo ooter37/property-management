@@ -3,7 +3,6 @@ import './ModuleTasks.scss'
 // import DisplayTasks from './DisplayTasksTable/DisplayTasks'
 import AddTask from './AddTask/AddTask'
 import DisplayTasksTable from './DisplayTasksTable/DisplayTasksTable'
-import { Typography, Paper } from '@material-ui/core'
 // import useFetch from '../Hooks/useFetch'
 
 export default function ModuleTasks(props) {
@@ -21,11 +20,6 @@ export default function ModuleTasks(props) {
 
     return (
         <div className='task-module'>
-            <Paper>
-
-            <Typography align='center' variant='h3'>Tasks</Typography>
-            <Typography align='center' variant='body1'>A list of all tasks for the selected house is displayed below. Tasks marked urgent are highlighted.</Typography>
-            </Paper>
             <div className='table'>
                 <DisplayTasksTable tasks={tasks} setTasks={setTasks} selectedHouse={props.match.params.id} />
             </div>

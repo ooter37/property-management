@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import {setSelectedHouseRedux} from '../../redux/reducers/houses'
 import ScrollMenu from 'react-horizontal-scrolling-menu';

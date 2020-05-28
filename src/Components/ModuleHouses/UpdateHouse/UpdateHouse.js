@@ -6,7 +6,7 @@ import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem} from "@material-ui/core";
-import {pleaseSignIn, errorUpdate, success, errorDelete, confirmDelete} from '../../Functions/Sweetalerts'
+import {pleaseSignIn, success, confirmDelete} from '../../Functions/Sweetalerts'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";

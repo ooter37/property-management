@@ -2,7 +2,7 @@ import './AddTask.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, FormControl, InputLabel, Checkbox } from "@material-ui/core";
 import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
@@ -129,7 +129,7 @@ function AddTask(props) {
     const [checked, setChecked] = useState([])
     const [note, setNote] = useState('')
     const [contact, setContact] = useState('')
-    const [redirect, setRedirect] = useState(false)
+    // const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
 
     const checkHandler = value => {
@@ -175,13 +175,13 @@ function AddTask(props) {
     return (
         <form onSubmit={submitNewTask}>
           {/* <button onClick={() => console.log(checked)}>console</button> */}
-            {redirect ? <Redirect to="/main" /> : null}
+            {/* {redirect ? <Redirect to="/main" /> : null} */}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-task-header'>
                             <h4 className={classes.cardTitleWhite}>Add Task</h4>
-                            {/* <p className={classes.cardCategoryWhite}>An image the house will be pulled from Google Maps Street View.</p> */}
+                            <p className={classes.cardCategoryWhite}>*Tasks marked urgent will be highlighted.</p>
                         </CardHeader>
                         <Grid 
                         container

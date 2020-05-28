@@ -39,7 +39,7 @@ function DisplayHouses (props) {
     const data = props.user
     const {getHouses} = props
     const {selectedHouse} = props.houses
-    const house = props.houses.selectedHouse
+    // const house = props.houses.selectedHouse
     // useEffect(() => {
     //     console.log(props.user.data)
     //     // console.log('houses useeffect ran')
@@ -92,7 +92,7 @@ function DisplayHouses (props) {
         </TableRow>
         )
     })
-    // eslint-disable-next-line
+    // es-disable-next-line
     const mappedHouses = props.houses.houses.map((house) => {
         if (house.house_id === selectedHouse.house_id)
         // if (1 === 1)
