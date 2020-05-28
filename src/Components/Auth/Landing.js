@@ -2,7 +2,7 @@ import './Auth.scss'
 import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux";
 import {Redirect, Link} from 'react-router-dom'
-import { Avatar, Button, CssBaseline, Paper, Box, Grid, Typography} from '@material-ui/core/';
+import { Button, CssBaseline, Paper, Box, Grid, Typography} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";

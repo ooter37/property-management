@@ -22,7 +22,7 @@ function App(props) {
   // console.log(props.user)
   // const [redirect, useRedirect] = useState(false)
   const {redirect} = useRedirect(false)
-  const {requestUserData, getHouses} = props
+  const {requestUserData} = props
 
   useEffect(() => {
     requestUserData()

@@ -2,7 +2,7 @@ import './DisplayContractors.scss'
 import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux' 
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Chip} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 
@@ -21,7 +21,7 @@ function DisplayContractors(props) {
     const mappedContractors = props.contractors ? props.contractors.map((contractor) => {
       const mappedServices = (contractor.services) && contractor.services.map((service) => {
         return (
-          <p>{service}</p>
+          <Chip key={`${contractor}.${service}`} size='small' label={service}/>
         )
       })
         return (
@@ -51,7 +51,7 @@ function DisplayContractors(props) {
 
   return (
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
-    <button onClick={() => console.log(props.contractors)} >console log</button>
+    {/* <button onClick={() => console.log(props.contractors)} >console log</button> */}
       <div className='overflow-container'>
       <Table className='display-tasks-table' aria-label="simple table">
         <TableHead>

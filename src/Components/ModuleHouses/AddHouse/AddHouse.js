@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import {getHouses, setSelectedHouseRedux} from '../../../redux/reducers/houses'
-import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography, FormHelperText } from "@material-ui/core";
+import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography, FormHelperText, Box } from "@material-ui/core";
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import PriceInput from '../../Functions/PriceInput'
@@ -157,16 +157,20 @@ function AddHouse(props) {
                                 alignItems="center"
                                 >
                                     <Grid item  md={12}>
-                                        <Typography className='text-preview' variant='body1'>Preview</Typography>
+                                        {/* <Typography className='text-preview' variant='h6'>Preview</Typography> */}
                                     </Grid>
                                     <Grid item className={classes.grid} md={12}>
-                                        <CardMedia
-                                        style = {{ height: 200, minWidth: 200}}
+                                        {image ? (
+                                            <CardMedia
+                                        style = {{ height: 200, width: 200}}
                                         // className={classes.cover}
-                                        image= {image}
-                                        // image= {`https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80`}
-                                        title="Live from space album cover"
-                                        />
+                                        image={image}
+                                        title="House Image"
+                                        /> ) : (
+                                        <Box border={1}>
+                                            <Typography align='center' className='enter-address-for-image'>Enter address to generate an image from Google Street View.</Typography>
+                                        </Box>
+                                        )}
                                     </Grid>
                                     <Grid item className='remove-image-button' md={12} >
                                         <Button onClick={() => setImage('/no-image-selected.png')} variant='outlined' color="secondary" className='delete-house-button'>Remove</Button>

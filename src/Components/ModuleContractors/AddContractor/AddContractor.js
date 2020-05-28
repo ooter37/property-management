@@ -5,7 +5,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, FormControl, Select, InputLabel, MenuItem, SelectInput, TextField } from "@material-ui/core";
+import { Grid, Button, FormControl, Select, InputLabel, MenuItem, TextField } from "@material-ui/core";
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
@@ -59,10 +59,18 @@ const styles = {
   const useStyles = makeStyles(styles);
 
   const taskSelections = [
-    'Tree Trimming',
-    'Pool Repair',
-    'House Repair',
-    'Exterior Painting'
+    'General Contractor',
+    'Electrical',
+    'Handyman',
+    'Home Repair',
+    'House Cleaning',
+    'Landscaping',
+    'Painting',
+    'Plumbing',
+    'Restoration',
+    'Pool Maintenance',
+    'Roofing',
+    'Tree Care',
 ];
 
 function AddContractor(props) {
@@ -97,7 +105,7 @@ function AddContractor(props) {
 
     useEffect(() => {
         let filteredServices = []
-        value.map((elem) => {
+        value.forEach((elem) => {
             if (typeof elem === 'string') {
                 filteredServices.push(elem)
             } else {
@@ -186,7 +194,6 @@ function AddContractor(props) {
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
                                 <FormControl fullWidth className={classes.formControl}>
                                     <Autocomplete
-                                    labelText='Services Provided'
                                     id='service'
                                     value={value}
                                     onChange={(event, newValue) => {
@@ -219,7 +226,7 @@ function AddContractor(props) {
                                     }}
                                     freeSolo
                                     renderInput={(params) => (
-                                    <TextField {...params} variant="standard" label="Multiple values" placeholder="Favorites"/>)}/>
+                                    <TextField {...params} variant="standard" label="Services Provided" placeholder="Favorites"/>)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>

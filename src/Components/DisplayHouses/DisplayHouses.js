@@ -92,12 +92,10 @@ function DisplayHouses (props) {
         </TableRow>
         )
     })
-    // es-disable-next-line
+    
     const mappedHouses = props.houses.houses.map((house) => {
         // console.log(props.houses.houses[selectedHouse.house_id])
-        if (house.house_id === selectedHouse.house_id)
-        // // if (1 === 1)
-        // {
+        if (house.house_id === selectedHouse.house_id) {
             return (
                 <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
                 
@@ -238,7 +236,9 @@ function DisplayHouses (props) {
                     </Grid>
                 </Grid>
             </div>
-        )
+        )} else {
+            return null
+        }
     })
     // const selectedHouseInfo = houses.filter(house => {
     //     return house.house_id === selectedHouse
