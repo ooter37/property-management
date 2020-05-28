@@ -40,6 +40,7 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-promise-middleware": "^6.1.2",
+    "riteway": "^6.1.2",
     "sweetalert2": "^9.10.13",
     "sweetalert2-react-content": "^3.0.1",
     "tabler-react": "^1.30.1"
