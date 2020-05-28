@@ -13,13 +13,13 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    addNewContractor: async (req,res) => {
+    addContractor: async (req,res) => {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
                 const userId = req.session.user.user_id
                 const {name,email,address,city,state,zipcode,phone,services} = req.body
-                const contractor = await db.contractors.add_new_contractor(userId,name,email,address,city,state,zipcode,phone,services)
+                const contractor = await db.contractors.add_contractor(userId,name,email,address,city,state,zipcode,phone,services)
                 res.status(200).send(contractor)
             } else {
                 res.status(401).send('User not logged in.')
@@ -63,9 +63,8 @@ module.exports = {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
-                const {id} = req.params
-                const {name,email,address,city,state,zipcode,phone} = req.body
-                const contractor = await db.contractors.update_contractor(id,name,email,address,city,state,zipcode,phone)
+                const {id,name,email,phone,address,city,state,zipcode,services} = req.body
+                const contractor = await db.contractors.update_contractor(id,name,email,phone,address,city,state,zipcode,services)
                 res.status(200).send(contractor)
             } else {
                 res.status(401).send('User not logged in.')

@@ -148,8 +148,8 @@ function AddContractor(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <h4 className={classes.cardTitleWhite}>Add Contractor</h4>
-                            <p className={classes.cardCategoryWhite}>Enter the contractor's details.</p>
+                            <h4 className={classes.cardTitleWhite}>Add Service Provider</h4>
+                            {/* <p className={classes.cardCategoryWhite}>Enter the provider's details.</p> */}
                         </CardHeader>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={5} className={classes.grid}>

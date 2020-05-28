@@ -44,7 +44,7 @@ function DisplayContractors(props) {
             <TableCell align="left">{contractor.address} <p/>{contractor.city} {contractor.state} {contractor.zipcode}</TableCell>
             <TableCell align="left">{mappedServices}</TableCell>
             <TableCell align="right">
-              <Button onClick={() => props.toggleUpdating(contractor.contractor_id)}>Update</Button>
+              <Button onClick={() => props.toggleUpdating(true,contractor)}>Update</Button>
               <Button 
             // Prevent delete of global contractors is disabled.
             onClick={() => { if (contractor.user_id || !contractor.user_id) {

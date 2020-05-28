@@ -10,7 +10,7 @@ const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env
 const { login, register, logout, getUser, userData } = require('./controllers/authController')
 const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
-const { getContractorsByUser, addNewContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
+const { getContractorsByUser, addContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 const { getRentersByUser, addNewRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
 const { singleEmail, multiEmail } = require('./controllers/mailController')
 
@@ -60,7 +60,7 @@ app.post('/sign_s3', uploadFile)
 
 //CONTRACTOR ENDPOINTS
 app.get('/api/contractors', getContractorsByUser)
-app.post('/api/contractors', addNewContractor)
+app.post('/api/contractors', addContractor)
 app.delete('/api/contractors/:id', deleteContractor)
 app.put('/api/contractors', updateContractor)
 

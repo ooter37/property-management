@@ -10,9 +10,8 @@ import UpdateContractor from './Update Contractor/UpdateContractor'
 function ModuleContractors(props){
     const [redirect,setRedirect] = useState(false)
     // const [contractors, setContractors] = useState('')
-    const [updating, setUpdating] = useState(true)
-    //change updating default state to false when component is ready
-    const [selectedContractor, setSelectedContractor] = useState(true)
+    const [updating, setUpdating] = useState(false)
+    const [selectedContractorFull, setSelectedContractorFull] = useState(true)
 
     const {data} = props.user
     const {getContractors} = props
@@ -29,9 +28,9 @@ function ModuleContractors(props){
       },
       [getContractors, data])
 
-      function toggleUpdating(selected) {
-        setUpdating(!updating)
-        setSelectedContractor(selected)
+      function toggleUpdating(updating,selected) {
+        setUpdating(updating)
+        setSelectedContractorFull(selected)
       }
         
         
@@ -53,7 +52,7 @@ return (
         {
             (updating)
             ?
-            <UpdateContractor selectedContractor={selectedContractor} />
+            <UpdateContractor toggleUpdating={toggleUpdating} selectedContractorFull={selectedContractorFull} />
             :
             
         <AddContractor />

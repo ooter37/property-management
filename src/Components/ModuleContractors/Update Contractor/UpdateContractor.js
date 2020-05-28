@@ -73,25 +73,28 @@ const styles = {
     'Tree Care',
 ];
 
-function UpdateContractor() {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [zipcode, setZipcode] = useState('')
+function UpdateContractor(props) {
+    const [name, setName] = useState(props.selectedContractorFull.name);
+    const [email, setEmail] = useState(props.selectedContractorFull.email);
+    const [phone, setPhone] = useState(props.selectedContractorFull.phone);
+    const [address, setAddress] = useState(props.selectedContractorFull.address)
+    const [city, setCity] = useState(props.selectedContractorFull.city)
+    const [state, setState] = useState(props.selectedContractorFull.state)
+    const [zipcode, setZipcode] = useState(props.selectedContractorFull.zipcode)
     const [services, setServices] = useState('')
-    const [value, setValue] = useState([])
+    const [value, setValue] = useState(props.selectedContractorFull.services)
+
     const classes = useStyles();
 
     const filter = createFilterOptions();
 
-    async function updateContractor(props) {
+    async function updateContractor() {
         try {
             if (props.user.data) {
-                await axios.put('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
+                const id = props.selectedContractorFull.contractor_id
+                await axios.put('/api/contractors', {id,name,email,phone,address,city,state,zipcode,services})
                 props.getContractors()
+                props.toggleUpdating(false)
                 resetForm()
                 success.fire({title: `${name} updated.`})
             } else {
@@ -104,6 +107,7 @@ function UpdateContractor() {
 
     useEffect(() => {
         let filteredServices = []
+        value && 
         value.forEach((elem) => {
             if (typeof elem === 'string') {
                 filteredServices.push(elem)
@@ -127,12 +131,12 @@ function UpdateContractor() {
 
     return (
         <form onSubmit={updateContractor}>
-            {/* <button onClick={() => console.log(services)} >service log</button> */}
+            {/* <button onClick={() => console.log(props.selectedContractorFull.services)} >service log</button> */}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <h4 className={classes.cardTitleWhite}>Update Contractor</h4>
+                            <h4 className={classes.cardTitleWhite}>Update Service Provider</h4>
                             <p className={classes.cardCategoryWhite}>Edit the fields you'd like to update.</p>
                         </CardHeader>
                         <Grid container>
@@ -186,7 +190,10 @@ function UpdateContractor() {
                                     onChange={(event, newValue) => {
                                         if (newValue && newValue.inputValue) {
                                             return setValue(newValue.inputValue)
-                                        } setValue(newValue)}}
+                                        } setValue(newValue)
+                                        console.log(value)
+                                    }
+                                    }
                                     filterOptions={(options, params) => {
                                         const filtered = filter(options, params);
                                         if (params.inputValue !== '') {
