@@ -2,6 +2,7 @@ import './AddContractor.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {getContractors} from '../../../redux/reducers/houses'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, FormControl, Select, InputLabel, MenuItem, TextField } from "@material-ui/core";
@@ -80,26 +81,41 @@ function AddContractor(props) {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
-    const [services, setServices] = useState('')
+    //service state must remain empty so data type is correct on service array
+    const [services, setServices] = useState()
     const [value, setValue] = useState([])
     const classes = useStyles();
 
     const filter = createFilterOptions();
 
-    function submitNewContractor() {
-        if (props.user.data) {
-            axios.post('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
-            .then(() => {
+    async function submitNewContractor() {
+        try {
+            if (props.user.data) {
+                await axios.post('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
+                props.getContractors()
+                resetForm()
                 success.fire({title: `${name} added as a new contractor.`})
-                axios.get('/api/contractors').then(res => {
-                    props.setContractors(res.data)
-                    resetForm()
-            })
-            })
-        } else {
-            pleaseSignIn.fire()
+            } else {
+                pleaseSignIn.fire()
+            }
+        } catch (error) {
+            console.log('Error adding contractor.', error)
         }
     }
+    // function submitNewContractor() {
+    //     if (props.user.data) {
+    //         axios.post('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
+    //         .then(() => {
+    //             success.fire({title: `${name} added as a new contractor.`})
+    //             axios.get('/api/contractors').then(res => {
+    //                 props.setContractors(res.data)
+    //                 resetForm()
+    //         })
+    //         })
+    //     } else {
+    //         pleaseSignIn.fire()
+    //     }
+    // }
 
     useEffect(() => {
         let filteredServices = []
@@ -113,18 +129,6 @@ function AddContractor(props) {
         setServices(filteredServices)
     },[value])
 
-    // function servicesFilter() {
-    //     let filteredServices = []
-    //     value.map((elem) => {
-    //         if (typeof elem === 'string') {
-    //             filteredServices.push(elem)
-    //         } else {
-    //             filteredServices.push(elem.inputValue)
-    //         }
-    //     })
-    //     setServices(filteredServices)
-    // }
-
     function resetForm() {
         setName('')
         setEmail('')
@@ -133,7 +137,8 @@ function AddContractor(props) {
         setCity('')
         setState('')
         setZipcode('')
-        setServices('')
+        //setServices must remain empty so data type is correct on service array
+        setServices()
     }
 
     return (
@@ -366,6 +371,8 @@ function AddContractor(props) {
     )
 }
 
+const mapDispatchToProps = {getContractors}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(AddContractor)
+export default connect(mapStateToProps, mapDispatchToProps)(AddContractor)

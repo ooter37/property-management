@@ -2,6 +2,7 @@ import './UpdateContractor.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {getContractors} from '../../../redux/reducers/houses'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, FormControl, Select, InputLabel, MenuItem, TextField } from "@material-ui/core";
@@ -86,18 +87,18 @@ function UpdateContractor() {
 
     const filter = createFilterOptions();
 
-    function updateContractor(props) {
-        if (props.user.data) {
-            axios.put('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
-            .then(() => {
-                axios.get('/api/contractors').then(res => {
-                    props.setContractors(res.data)
-                    success.fire({title: `${name} updated.`})
-                    resetForm()
-                })
-            })
-        } else {
-            pleaseSignIn.fire()
+    async function updateContractor(props) {
+        try {
+            if (props.user.data) {
+                await axios.put('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
+                props.getContractors()
+                resetForm()
+                success.fire({title: `${name} updated.`})
+            } else {
+                pleaseSignIn.fire()
+            }
+        } catch (error) {
+            console.log('Error updating contractor.', error)
         }
     }
 
@@ -354,6 +355,8 @@ function UpdateContractor() {
     )
 }
 
+const mapDispatchToProps = {getContractors}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(UpdateContractor)
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateContractor)

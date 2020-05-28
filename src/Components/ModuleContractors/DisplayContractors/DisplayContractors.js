@@ -1,35 +1,35 @@
 import './DisplayContractors.scss'
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux' 
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
 import {getContractors} from '../../../redux/reducers/houses'
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Chip} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 
 function DisplayContractors(props) {
-  const [redirect,setRedirect] = useState(false)
-  const {data} = props.user
-  const {getContractors} = props
+  // const [redirect,setRedirect] = useState(false)
+  // const {data} = props.user
+  // const {getContractors} = props
 
-  useEffect(() => {
-    if (!data) {setRedirect(true)}
-    else if (!data.loading) {
-      getContractors()
-    }
-  },
-  [getContractors, data])
+  // useEffect(() => {
+  //   if (!data) {setRedirect(true)}
+  //   else if (!data.loading) {
+  //     getContractors()
+  //   }
+  // },
+  // [getContractors, data])
 
   function deleteContractor(id) {
     axios.delete(`/api/contractors/${id}`)
     .then(() => {success.fire({title: 'Contractor Deleted'})})
       .then (() => {
-        getContractors()
+        props.getContractors()
     }).catch((err) => console.log('Error deleting contractor.', err))
   }
 
-    const mappedContractors = props.houses.contractors ? props.houses.contractors.map((contractor) => {
+    const mappedContractors = props.contractors ? props.contractors.map((contractor) => {
       const mappedServices = (contractor.services) && contractor.services.map((service) => {
         return (
           <Chip key={`${contractor}.${service}`} size='small' label={service}/>
@@ -44,7 +44,7 @@ function DisplayContractors(props) {
             <TableCell align="left">{contractor.address} <p/>{contractor.city} {contractor.state} {contractor.zipcode}</TableCell>
             <TableCell align="left">{mappedServices}</TableCell>
             <TableCell align="right">
-              <Button onClick={() => props.setUpdating(!props.updating)}>Update</Button>
+              <Button onClick={() => props.toggleUpdating(contractor.contractor_id)}>Update</Button>
               <Button 
             // Prevent delete of global contractors is disabled.
             onClick={() => { if (contractor.user_id || !contractor.user_id) {
@@ -78,12 +78,12 @@ function DisplayContractors(props) {
 
 
   return (
-    <div>
-    {
-      redirect
-      &&
-      <Redirect to='/' />
-    }
+    // <div>
+    // {
+    //   redirect
+    //   &&
+    //   <Redirect to='/' />
+    // }
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
     {/* <button onClick={() => console.log(props.contractors)} >console log</button> */}
       <div className='overflow-container'>
@@ -104,7 +104,7 @@ function DisplayContractors(props) {
       </Table>
       </div>
     </TableContainer>
-    </div>
+    // </div>
   );
 }
 const mapDispatchToProps = {getContractors}
