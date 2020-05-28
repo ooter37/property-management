@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-
+const cors = require('cors')
 
 //IMPORT 
 const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env
@@ -17,6 +17,7 @@ const { singleEmail, multiEmail } = require('./controllers/mailController')
 //TOP-LEVEL MIDDLEWARE
 const app=express()
 app.use(express.json())
+app.use(cors())
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -70,7 +71,7 @@ app.delete('/api/renters/:id', deleteRenter)
 app.put('/api/renters', updateRenter)
 
 //EMAIL ENDPOINTS
-app.post('/email/single', singleEmail)
+// app.post('/email/single', singleEmail)
 app.post('/email/multi', multiEmail)
 
 

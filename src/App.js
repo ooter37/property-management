@@ -16,7 +16,6 @@ import Register from './Components/Auth/Register'
 import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
 import Header from './Components/Header/Header'
 import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
-// import singleEmail from './Components/Email/singleEmail'
 
 function App(props) {
   // console.log(props.user)

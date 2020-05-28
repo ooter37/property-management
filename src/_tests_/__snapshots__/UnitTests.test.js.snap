@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Route testing  '/' renders login page (landing). 1`] = `
+<a
+  href="#/"
+  onClick={[Function]}
+/>
+`;
+
+exports[`Route testing  '/add_house' renders add house page. 1`] = `
+<a
+  href="#/add_house"
+  onClick={[Function]}
+/>
+`;
+
+exports[`Route testing  '/main' renders main page. 1`] = `
+<a
+  href="#/main"
+  onClick={[Function]}
+/>
+`;
+
+exports[`Route testing  '/register' renders registration page.' 1`] = `
+<a
+  href="#/register"
+  onClick={[Function]}
+/>
+`;
+
+exports[`Route testing  '/update_house' renders update house page. 1`] = `
+<a
+  href="#/update_house"
+  onClick={[Function]}
+/>
+`;
