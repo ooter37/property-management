@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const initialState = {
     data: null,
-    loading: null,
+    loading: true,
     // houses: []
 }
 

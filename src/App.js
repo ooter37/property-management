@@ -29,10 +29,10 @@ function App(props) {
   },
   [requestUserData])
 
-  useEffect(() => {
-    getHouses()
-  },
-  [getHouses])
+  // useEffect(() => {
+  //   getHouses()
+  // },
+  // [getHouses])
 
 
   return (

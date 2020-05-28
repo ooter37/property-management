@@ -256,7 +256,7 @@ function DisplayHouses (props) {
            </div>
             {
                 // (!props.houses.houses.loading && !props.houses.selectedHouse.loading)
-                (!props.houses.houses.loading && props.houses.selectedHouse !== 0)
+                (props.houses.houses.length > 0 && props.houses.selectedHouse)
                 ?
                 mappedHouses
                 :
