@@ -116,7 +116,7 @@ function AddHouse(props) {
 
     const submitNewHouse = () => {
         if (props.user.data) { state &&
-            axios.post('/api/houses', {address,city,state,zipcode,rent,status})
+            axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
             .then(() => {
                 props.getHouses()
                 // console.log(props.houses.houses)

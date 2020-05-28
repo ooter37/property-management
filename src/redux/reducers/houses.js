@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const initialState = {
-    loading: null,
+    loading: true,
     houses: [],
     selectedHouse: 0,
 }

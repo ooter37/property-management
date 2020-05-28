@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {logout} from '../../redux/reducers/user'
 import {Redirect} from 'react-router-dom'
 import {Button} from '@material-ui/core/';
-
+import {success} from '../Functions/Sweetalerts'
 
 const Logout = (props) => {
     const [redirect, setRedirect] = useState(false)
@@ -14,7 +14,7 @@ const Logout = (props) => {
     const logoutHandler = () => {
         toggleRedirect()
         props.logout().then(() => {
-            console.log('Logout successful.')
+            success.fire({title: `Logged out.`})
         })
         .catch(err => console.log('Error logging out.', err))
     }

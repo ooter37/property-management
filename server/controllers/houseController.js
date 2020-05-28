@@ -21,9 +21,12 @@ module.exports = {
             const db = req.app.get('db')
             if (req.session.user) {
                 const {address, city, state, zipcode, rent, status, ownership} = req.body
+                const frontImage = req.body.image
                 const googleResult = await axios.get(`https://maps.googleapis.com/maps/api/streetview/metadata?location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
                 let image
-                if (googleResult.data.location) {
+                if (frontImage === '/no-image-selected.png') {
+                    image = frontImage
+                } else if (googleResult.data.location) {
                     image = (`https://maps.googleapis.com/maps/api/streetview?size=300x200&location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
                 } else {
                     image = '/no-image-available.png'
