@@ -1,10 +1,10 @@
 import './Auth.scss'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect } from "react-redux";
 import {Redirect, Link} from 'react-router-dom'
 import { Avatar, Button, CssBaseline, Paper, Box, Grid, Typography} from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";
 import CustomInput from '../UI/CustomInput'
 
@@ -48,19 +48,26 @@ function Login(props) {
   const [password, setPassword] = useState('')
   const [redirect, setRedirect] = useState(false)
   const classes = useStyles();
+  const {data, loading} = props.user
 
-  const toggleRedirect = () => {
-    setRedirect(!redirect)
-}
+  useEffect(() => {
+    if (data && !loading) {
+      setRedirect(true)
+    }
+  },[data, loading])
+
+//   const toggleRedirect = () => {
+//     setRedirect(!redirect)
+// }
 
   const loginHandler = (e) => {
     e.preventDefault()
     props.login({email,password})
-    .then(() => {
-        setEmail('')
-        setPassword('')
-        toggleRedirect()
-    })
+    // .then(() => {
+    //     setEmail('')
+    //     setPassword('')
+    //     toggleRedirect()
+    // })
     .catch((err) => {
         console.log("Error with login.", err)
     })
@@ -68,8 +75,10 @@ function Login(props) {
 
   return (
     <Grid container component="main" className={classes.root}>
+    {/* {console.log(props)} */}
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image}>
+    {/* <button onClick={() => console.log(props)}>PROP GETTER!!!</button> */}
+      <Grid item xs={false} sm={4} md={7} className={classes.image + ' logo-container'}>
         <Typography component="h1" variant="h2" align='center' className='logo-prop'>Prop</Typography>
         <Typography component="h1" variant="h1" align='center' className='logo-aid'>Aid</Typography>
       </Grid>
@@ -146,4 +155,6 @@ function Login(props) {
   );
 }
 
-export default connect(null, { login })(Login);
+const mapStateToProps = state => state
+
+export default connect(mapStateToProps, { login })(Login);

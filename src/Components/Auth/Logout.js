@@ -13,9 +13,11 @@ const Logout = (props) => {
     }
     const logoutHandler = () => {
         toggleRedirect()
-        props.logout().then(() => {
-            success.fire({title: `Logged out.`})
-        })
+        props.logout()
+        // .then(() => {
+        //     // success.fire({title: `Logged out.`})
+        //     // console.log(props)
+        // })
         .catch(err => console.log('Error logging out.', err))
     }
     return (

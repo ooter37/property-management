@@ -140,11 +140,13 @@ function UpdateHouse(props) {
 
     const deleteExistingHouse = () => {
         if (props.user.data) {
-                axios.delete(`/api/houses/${id}`)
-                .then(() => {
-                    props.getHouses()
-                    setRedirect(true)})
-                    success.fire({title: `${props.houses.selectedHouse.address} has been deleted.`})
+            axios.delete(`/api/houses/${id}`)
+            .then(() => {props.getHouses()})
+            .then(() => {
+                props.setSelectedHouseRedux(props.houses.houses[0])
+                setRedirect(true)
+                success.fire({title: `${props.houses.selectedHouse.address} has been deleted.`})
+            })
             }  else {
                 pleaseSignIn.fire()
             }

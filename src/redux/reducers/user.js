@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const initialState = {
     data: null,
-    loading: true,
+    loading: null,
     // houses: []
 }
 
@@ -48,7 +48,7 @@ export default function(state = initialState,action) {
             }
         case LOGOUT_USER + '_PENDING':
             return {
-                ...state,
+                data: null,
                 loading: true
             }
         case LOGOUT_USER + '_FULFILLED':
