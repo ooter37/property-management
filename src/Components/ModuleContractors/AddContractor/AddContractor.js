@@ -73,7 +73,7 @@ function AddContractor(props) {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
-    const [service, setService] = useState('')
+    // const [service, setService] = useState('')
     const [services, setServices] = useState('')
     const [value, setValue] = useState([])
     const classes = useStyles();
@@ -82,7 +82,7 @@ function AddContractor(props) {
 
     function submitNewContractor() {
         if (props.user.data) {
-            axios.post('/api/contractors', {name,email,phone,address,city,state,zipcode})
+            axios.post('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
             .then(() => {
                 success.fire({title: `${name} added as a new contractor.`})
                 axios.get('/api/contractors').then(res => {
@@ -127,7 +127,7 @@ function AddContractor(props) {
         setCity('')
         setState('')
         setZipcode('')
-        setService('')
+        setServices('')
     }
 
     return (

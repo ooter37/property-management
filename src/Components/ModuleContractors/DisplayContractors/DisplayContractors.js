@@ -19,12 +19,18 @@ function DisplayContractors(props) {
   }
 
     const mappedContractors = props.contractors ? props.contractors.map((contractor) => {
+      const mappedServices = (contractor.services) && contractor.services.map((service) => {
+        return (
+          <p>{service}</p>
+        )
+      })
         return (
           <TableRow key={`contractor-display-${contractor.contractor_id}`} className={`global-${contractor.user_id.toString()}`}>
             <TableCell component="th" scope="row">{contractor.name}</TableCell>
             <TableCell align="left">{contractor.email}</TableCell>
             <TableCell align="left">{contractor.phone}</TableCell>
             <TableCell align="left">{contractor.address} <p/>{contractor.city} {contractor.state} {contractor.zipcode}</TableCell>
+            <TableCell align="left">{mappedServices}</TableCell>
             <TableCell align="right"><Button 
             onClick={() => { if (contractor.user_id !== 0) {
                 if (props.user.data) {
@@ -45,6 +51,7 @@ function DisplayContractors(props) {
 
   return (
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
+    <button onClick={() => console.log(props.contractors)} >console log</button>
       <div className='overflow-container'>
       <Table className='display-tasks-table' aria-label="simple table">
         <TableHead>
@@ -53,6 +60,7 @@ function DisplayContractors(props) {
             <TableCell align="left">Email</TableCell>
             <TableCell align="left">Phone</TableCell>
             <TableCell align="left">Address</TableCell>
+            <TableCell align="left">Services</TableCell>
             <TableCell align="right">Delete</TableCell>
           </TableRow>
         </TableHead>

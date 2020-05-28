@@ -25,8 +25,7 @@ function App(props) {
   const {requestUserData, getHouses} = props
 
   useEffect(() => {
-    console.log('requested user data')
-      requestUserData()
+    requestUserData()
   },
   [requestUserData])
 

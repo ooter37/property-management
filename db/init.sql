@@ -86,9 +86,9 @@ VALUES
 (1,25,'Leo Lamarr','leo@derek.com',5551112233,true),
 (1,25,'Harriet Lamarr','harriet@derek.com',1234567890,false);
 
-CREATE TABLE services (
-    service_id SERIAL PRIMARY KEY,
-    user_id  INT REFERENCES users(user_id),
-    contractor_id INT REFERENCES contractors(contractor_id),
-    service VARCHAR
-)
+-- CREATE TABLE services (
+--     service_id SERIAL PRIMARY KEY,
+--     user_id  INT REFERENCES users(user_id),
+--     contractor_id INT REFERENCES contractors(contractor_id),
+--     service VARCHAR
+-- );
