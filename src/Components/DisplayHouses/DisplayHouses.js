@@ -72,8 +72,7 @@ function DisplayHouses (props) {
         .then(res => {
             let pushTasks = []
             if (res.data[0])
-            // eslint-disable-next-line
-            {res.data.map(task => {
+            {res.data.forEach(task => {
                 if (task.urgent) {
                     let type = task.type
                     let date = task.date

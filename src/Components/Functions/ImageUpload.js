@@ -11,8 +11,40 @@ function ImageUpload(props) {
     // const [success, setSuccess] = useState(false)
     // const [url, setUrl] = useState('')
     const [selectedFile, setSelectedFile] = useState('')
+    const {house_id} = props.selectedHouse
+    const {getHouses} = props
     
     useEffect(() => {
+        function sendFile(e) {
+            let fileParts = e.name.split('.')
+            // let fileName = fileParts[0]
+            const fileName = `${house_id}_${Date.now()}`
+            axios.post('/sign_s3', {fileName : fileName,fileType : fileParts[1]}).then(res => {
+                // setUrl(res.data.data.returnData.url)
+                // console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
+                axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
+                .then(() => {
+                    axios.put(`/api/houses/${house_id}`, {fileName})
+                    .then(() => {
+                        // console.log("File upload successful.")
+                        // props.setHouses('')
+                            // console.log('starting the axios call to update houses --- via redux')
+                        axios.get('/api/houses').then(res => {
+                            getHouses()
+                            // console.log('all complete')
+                            // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
+                })
+                    })
+                // setSuccess(true)
+            })
+            .catch(err => {
+                alert("ERROR " + JSON.stringify(err));
+            })
+            })
+            .catch(err => {
+                alert(JSON.stringify(err));
+            })
+        }
         if (selectedFile) {
             const reader = new FileReader()
             reader.onload = (e) => {
@@ -31,8 +63,7 @@ function ImageUpload(props) {
             }
             reader.readAsDataURL(selectedFile)
         }
-        // eslint-disable-next-line
-    }, [selectedFile])
+    }, [selectedFile,house_id,getHouses])
 
     // function changeHandler(e) {
     //     setSuccess(false)
@@ -43,36 +74,36 @@ function ImageUpload(props) {
     //     props.setHouses(props.houses, changed)
     // }
 
-function sendFile(e) {
-    let fileParts = e.name.split('.')
-    // let fileName = fileParts[0]
-    const fileName = `${props.selectedHouse.house_id}_${Date.now()}`
-    axios.post('/sign_s3', {fileName : fileName,fileType : fileParts[1]}).then(res => {
-        // setUrl(res.data.data.returnData.url)
-        // console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
-        axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
-        .then(() => {
-            axios.put(`/api/houses/${props.selectedHouse.house_id}`, {fileName})
-            .then(() => {
-                // console.log("File upload successful.")
-                // props.setHouses('')
-                    // console.log('starting the axios call to update houses --- via redux')
-                axios.get('/api/houses').then(res => {
-                    props.getHouses()
-                    // console.log('all complete')
-                    // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
-        })
-            })
-        // setSuccess(true)
-    })
-    .catch(err => {
-        alert("ERROR " + JSON.stringify(err));
-    })
-    })
-    .catch(err => {
-        alert(JSON.stringify(err));
-    })
-}
+// function sendFile(e) {
+//     let fileParts = e.name.split('.')
+//     // let fileName = fileParts[0]
+//     const fileName = `${props.selectedHouse.house_id}_${Date.now()}`
+//     axios.post('/sign_s3', {fileName : fileName,fileType : fileParts[1]}).then(res => {
+//         // setUrl(res.data.data.returnData.url)
+//         // console.log(`Recieved signed request: ${res.data.data.returnData.signedRequest}`)
+//         axios.put(res.data.data.returnData.signedRequest,selectedFile,{headers: {'Content-Type': fileParts[1]}})
+//         .then(() => {
+//             axios.put(`/api/houses/${props.selectedHouse.house_id}`, {fileName})
+//             .then(() => {
+//                 // console.log("File upload successful.")
+//                 // props.setHouses('')
+//                     // console.log('starting the axios call to update houses --- via redux')
+//                 axios.get('/api/houses').then(res => {
+//                     props.getHouses()
+//                     // console.log('all complete')
+//                     // if (res.data[0]){props.setSelectedHouse(res.data[0].house_id)}
+//         })
+//             })
+//         // setSuccess(true)
+//     })
+//     .catch(err => {
+//         alert("ERROR " + JSON.stringify(err));
+//     })
+//     })
+//     .catch(err => {
+//         alert(JSON.stringify(err));
+//     })
+// }
 
 // const successMessage = () => (
 //     <div style={{padding:50}}>

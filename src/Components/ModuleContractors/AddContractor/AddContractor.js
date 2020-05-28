@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-duplicate-props */
 import './AddContractor.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
