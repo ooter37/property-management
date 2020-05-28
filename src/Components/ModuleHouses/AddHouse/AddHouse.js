@@ -322,7 +322,7 @@ function AddHouse(props) {
                                             >
                                                 <InputLabel
                                                 classes={{root: classes.labelRoot}}
-                                                > Status
+                                                > Occupied Status
                                                 </InputLabel>
                                                 <Select
                                                 value={status}
@@ -333,10 +333,10 @@ function AddHouse(props) {
                                                     underline: classes.underline
                                                 }}
                                                 >
-                                                    <MenuItem value='Rental - Long Term'>Monthly Rental</MenuItem>
-                                                    <MenuItem value='Rental - Short Term'>Short Term Rental</MenuItem>
-                                                    <MenuItem value='Residence - Primary'>Primary Residence </MenuItem>
-                                                    <MenuItem value='Under Remodel'>Remodeling</MenuItem>
+                                                    <MenuItem value='Monthly Rental'>Monthly Rental</MenuItem>
+                                                    <MenuItem value='Short Term Rental'>Short Term Rental</MenuItem>
+                                                    <MenuItem value='Primary Residence'>Primary Residence</MenuItem>
+                                                    <MenuItem value='Remodeling'>Remodeling</MenuItem>
                                                     <MenuItem value='Unoccupied'>Unoccupied</MenuItem>
                                                     <MenuItem value='Other'>Other</MenuItem>
                                                 </Select>
