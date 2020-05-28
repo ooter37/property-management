@@ -1,14 +1,16 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import './AddContractor.scss'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, FormControl, Select, InputLabel, MenuItem } from "@material-ui/core";
+import { Grid, Button, FormControl, Select, InputLabel, MenuItem, SelectInput, TextField } from "@material-ui/core";
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
 import {primaryColor,grayColor} from "../../UI/material-dashboard-react";
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 const theme = createMuiTheme({
     overrides: {
@@ -56,6 +58,13 @@ const styles = {
   
   const useStyles = makeStyles(styles);
 
+  const taskSelections = [
+    'Tree Trimming',
+    'Pool Repair',
+    'House Repair',
+    'Exterior Painting'
+];
+
 function AddContractor(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -65,8 +74,11 @@ function AddContractor(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [service, setService] = useState('')
+    const [services, setServices] = useState('')
+    const [value, setValue] = useState([])
     const classes = useStyles();
 
+    const filter = createFilterOptions();
 
     function submitNewContractor() {
         if (props.user.data) {
@@ -83,6 +95,30 @@ function AddContractor(props) {
         }
     }
 
+    useEffect(() => {
+        let filteredServices = []
+        value.map((elem) => {
+            if (typeof elem === 'string') {
+                filteredServices.push(elem)
+            } else {
+                filteredServices.push(elem.inputValue)
+            }
+        })
+        setServices(filteredServices)
+    },[value])
+
+    // function servicesFilter() {
+    //     let filteredServices = []
+    //     value.map((elem) => {
+    //         if (typeof elem === 'string') {
+    //             filteredServices.push(elem)
+    //         } else {
+    //             filteredServices.push(elem.inputValue)
+    //         }
+    //     })
+    //     setServices(filteredServices)
+    // }
+
     function resetForm() {
         setName('')
         setEmail('')
@@ -96,6 +132,7 @@ function AddContractor(props) {
 
     return (
         <form onSubmit={submitNewContractor}>
+            {/* <button onClick={() => console.log(services)} >service log</button> */}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
@@ -147,17 +184,43 @@ function AddContractor(props) {
                         </Grid>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
-                                <CustomInput
-                                labelText="Service"
-                                id="service"
-                                formControlProps={{
-                                    fullWidth: true
-                                }}
-                                inputProps={{
-                                    value: service,
-                                    onChange: (e) => setService(e.target.value)
-                                }}
-                                />
+                                <FormControl fullWidth className={classes.formControl}>
+                                    <Autocomplete
+                                    labelText='Services Provided'
+                                    id='service'
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        if (newValue && newValue.inputValue) {
+                                            return setValue(newValue.inputValue)
+                                        } setValue(newValue)}}
+                                    filterOptions={(options, params) => {
+                                        const filtered = filter(options, params);
+                                        if (params.inputValue !== '') {
+                                            filtered.push({
+                                            inputValue: params.inputValue,
+                                            title: `Add "${params.inputValue}"`,
+                                        });}
+                                        return filtered;}}
+                                    multiple
+                                    options={taskSelections}
+                                    getOptionLabel={(option) => {
+                                        if (typeof option === 'string') {
+                                            return option
+                                        }
+                                        if (option.inputValue) {
+                                            return option.inputValue
+                                        }
+                                        return option
+                                    }}
+                                    renderOption={(option) => {
+                                        if (!option.title) {
+                                        return option
+                                        } else {return option.title}
+                                    }}
+                                    freeSolo
+                                    renderInput={(params) => (
+                                    <TextField {...params} variant="standard" label="Multiple values" placeholder="Favorites"/>)}/>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
                                 <CustomInput
