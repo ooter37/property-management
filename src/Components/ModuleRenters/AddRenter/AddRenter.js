@@ -4,7 +4,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, MenuItem, FormControl, InputLabel, Select, FormHelperText, Button } from "@material-ui/core";
+import { Grid, MenuItem, FormControl, InputLabel, Select, FormHelperText, Button, Typography } from "@material-ui/core";
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
@@ -136,8 +136,8 @@ function AddRenter(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-renter-header'>
-                            <h4 className={classes.cardTitleWhite}>Add Renter</h4>
-                            <p className={classes.cardCategoryWhite}>Enter the renter's details.</p>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>View and manage renters</Typography>
+                            {/* <p className={classes.cardCategoryWhite}>Enter the renter's details.</p> */}
                         </CardHeader>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={5} className={classes.grid}>

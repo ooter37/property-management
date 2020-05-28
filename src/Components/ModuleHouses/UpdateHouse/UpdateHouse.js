@@ -5,7 +5,7 @@ import {getHouses} from '../../../redux/reducers/houses'
 import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import axios from 'axios'
 import {Redirect} from 'react-router-dom'
-import { Grid, Button, FormControl, InputLabel, Select, MenuItem} from "@material-ui/core";
+import { Grid, Button, FormControl, InputLabel, Select, MenuItem, Typography} from "@material-ui/core";
 import {pleaseSignIn, success, confirmDelete} from '../../Functions/Sweetalerts'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
@@ -193,8 +193,8 @@ function UpdateHouse(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <h4 className={classes.cardTitleWhite}>Update Address</h4>
-                            <p className={classes.cardCategoryWhite}>Enter the fields you would like to update.</p>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{existingAddress ? `Updating ${existingAddress}` : 'Something went wrong, please refresh the page.'} </Typography>
+                            {/* <p className={classes.cardCategoryWhite}>Enter the fields you would like to update.</p> */}
                         </CardHeader>
                         <Grid container className='address-cancel-container'>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
@@ -386,13 +386,12 @@ function UpdateHouse(props) {
                         <Grid container className='status-rent-cancel-add-container'>
                             <Grid item className='delete-house-button'>
                                 <Button onClick={() => { 
-                if (props.user.data) {
-                        confirmDelete.fire({
-                            text: 'Are you sure you want to delete this house? Renters associated with this house will also be deleted. This action is irreversible.'}).then((result) => {
-                            if (result.value) {deleteExistingHouse()}})
-                        } else {pleaseSignIn.fire()}
-                    }
-                }  variant='contained' color="secondary" className='delete-house-button'>Delete House</Button>
+                                    if (props.user.data) {
+                                        confirmDelete.fire({
+                                            text: 'Are you sure you want to delete this house? Renters associated with this house will also be deleted. This action is irreversible.'}).then((result) => {
+                                                if (result.value) {deleteExistingHouse()}})
+                                            } else {pleaseSignIn.fire()}}
+                                            }  variant='contained' color="secondary" className='delete-house-button'>Delete House</Button>
                             </Grid>
                             <Grid item className='cancel-submit-container' >
                                 <Button onClick={()=> setRedirect(true)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>

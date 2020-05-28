@@ -72,7 +72,7 @@ function Header(props) {
           <Link to='/main'>
             <IconButton edge="start"  color="inherit" aria-label="menu">
               <HomeIcon />
-              <Typography variant='h5'>&nbsp; Prop Aid</Typography>
+              <Typography variant='h4'>&nbsp; Prop Aid</Typography>
             </IconButton>
           </Link>
           <div className='login-goback-container'>

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {getContractors} from '../../../redux/reducers/houses'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, FormControl, Select, InputLabel, MenuItem, TextField } from "@material-ui/core";
+import { Grid, Button, FormControl, Select, InputLabel, MenuItem, TextField, Typography } from "@material-ui/core";
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
@@ -136,8 +136,8 @@ function UpdateContractor(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <h4 className={classes.cardTitleWhite}>Update Service Provider</h4>
-                            <p className={classes.cardCategoryWhite}>Edit the fields you'd like to update.</p>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedContractorFull.name ? `Updating ${props.selectedContractorFull.name}` : 'Something went wrong, please refresh the page.'}</Typography>
+                            {/* <p className={classes.cardCategoryWhite}>Edit the fields you'd like to update.</p> */}
                         </CardHeader>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={5} className={classes.grid}>
@@ -345,15 +345,31 @@ function UpdateContractor(props) {
                                 }}
                                 />
                             </Grid>
-                            {/* <Grid item xs={12} sm={12} md={4} className={classes.grid}> */}
-                                <Grid 
-                                container
-                                direction="row"
-                                justify="flex-end"
-                                alignItems="flex-end">
-                                    <Button type='submit' variant='contained' color="primary" className='add-contractor-button'>Add</Button>
-                                </Grid>
-                            {/* </Grid> */}
+                            <Grid container className='status-rent-cancel-add-container'>
+
+                            <Grid item className='delete-house-button'>
+                                <Button 
+                //                 onClick={() => { 
+                // if (props.user.data) {
+                //         confirmDelete.fire({
+                //             text: 'Are you sure you want to delete this house? Renters associated with this house will also be deleted. This action is irreversible.'}).then((result) => {
+                //             if (result.value) {deleteExistingHouse()}})
+                //         } else {pleaseSignIn.fire()}
+                //     }}  
+                    variant='contained' color="secondary" className='delete-house-button'>Delete Provider</Button>
+                            </Grid>
+                            <Grid item className='cancel-submit-container' >
+                                <Button onClick={()=> props.setUpdating(false)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>
+                                <Button type='submit' variant='contained' color="primary" className='submit-update-button'>Submit</Button>
+                            </Grid>
+                            {/* <Grid 
+                            container
+                            direction="row"
+                            justify="flex-end"
+                            alignItems="flex-end">
+                                <Button type='submit' variant='contained' color="primary" className='add-contractor-button'>Add</Button>
+                            </Grid> */}
+                        </Grid>
                         </Grid>
                     </Card>
                 </Grid>

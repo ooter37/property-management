@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 // import {Redirect} from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, FormControl, InputLabel, Checkbox } from "@material-ui/core";
+import { Grid, Button, FormControl, InputLabel, Checkbox, Typography } from "@material-ui/core";
 import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import Check from "@material-ui/icons/Check";
@@ -180,8 +180,8 @@ function AddTask(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-task-header'>
-                            <h4 className={classes.cardTitleWhite}>Add Task</h4>
-                            <p className={classes.cardCategoryWhite}>*Tasks marked urgent will be highlighted.</p>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedHouse ? 'Track tasks for this house.' : 'Something went wrong, please refresh the page.'}</Typography>
+                            <Typography variant='subtitle2' >&nbsp; &nbsp; &nbsp; *Tasks marked urgent will be highlighted.</Typography>
                         </CardHeader>
                         <Grid 
                         container

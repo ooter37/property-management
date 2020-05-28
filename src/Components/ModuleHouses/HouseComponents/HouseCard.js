@@ -141,8 +141,8 @@ function HouseCard(props) {
                                     </CardActionArea>
                                 </Link>
                                     <CardContent>
-                                        <Typography gutterBottom variant="h5" component="h2">Servicemen</Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">Manage your handymen, contractors, landscapers, and anyone else that provides service for your houses. </Typography>
+                                        <Typography gutterBottom variant="h5" component="h2">Service Provider</Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">Service providers are the people who work on your properties. Contractors, landscapers, electricians, etc. </Typography>
                                     </CardContent>
                             </Card>
                         </Grid>

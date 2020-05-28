@@ -22,7 +22,7 @@ function ModuleContractors(props){
     //     )
     useEffect(() => {
         if (!data) {setRedirect(true)}
-        else if (!data.loading) {
+        else if (data) {
           getContractors()
         }
       },
@@ -32,15 +32,16 @@ function ModuleContractors(props){
         setUpdating(updating)
         setSelectedContractorFull(selected)
       }
+      
         
         
 return (
     <div>
-         {
+         {/* {
         redirect
         &&
         <Redirect to='/' />
-        }
+        } */}
         <DisplayContractors 
         toggleUpdating={toggleUpdating}
         updating={updating}
@@ -52,7 +53,7 @@ return (
         {
             (updating)
             ?
-            <UpdateContractor toggleUpdating={toggleUpdating} selectedContractorFull={selectedContractorFull} />
+            <UpdateContractor setUpdating={setUpdating} selectedContractorFull={selectedContractorFull} />
             :
             
         <AddContractor />

@@ -137,7 +137,7 @@ function AddHouse(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <h4 className={classes.cardTitleWhite}>Add House</h4>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>Add a new house</Typography>
                             {/* <p className={classes.cardCategoryWhite}>An image the house will be pulled from Google Maps Street View.</p> */}
                         </CardHeader>
                         <Grid 
