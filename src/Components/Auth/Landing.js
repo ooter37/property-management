@@ -51,7 +51,7 @@ function Login(props) {
   const {data, loading} = props.user
 
   useEffect(() => {
-    if (data && !loading) {
+    if (data && loading !== true) {
       setRedirect(true)
     }
   },[data, loading])

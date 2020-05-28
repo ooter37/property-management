@@ -113,20 +113,19 @@ function AddHouse(props) {
         }
     },[address,city,state,image])
 
-
-    const submitNewHouse = () => {
-        if (props.user.data) { state &&
-            axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
-            .then(() => {
-                props.getHouses()
-                // console.log(props.houses.houses)
-                // props.setSelectedHouseRedux(props.houses.houses[0])
-                // console.log(props.houses.selectedHouse)
+    async function submitNewHouse() {
+        try {
+            if (props.user.data) { state &&
+                await axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
+                await props.getHouses()
+                await props.setSelectedHouseRedux(props.houses.houses[0])
                 setRedirect(true)
                 success.fire({title: `${address} has been added.`})
-            })
-        } else {
-            pleaseSignIn.fire()
+            } else {
+                pleaseSignIn.fire()
+            }
+        } catch (error) {
+            console.log('Error adding house.', error)
         }
 }
         

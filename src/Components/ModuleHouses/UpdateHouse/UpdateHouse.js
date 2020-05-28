@@ -89,7 +89,8 @@ function UpdateHouse(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [status, setStatus] = useState('')
-    const [rent, setRent] = useState('')
+    const [rent, setRent] = useState()
+    // rent initial state must be empty to prevent invalid data type submission
     const [redirect, setRedirect] = useState(false)
 
     const classes = useStyles();
@@ -138,42 +139,51 @@ function UpdateHouse(props) {
         }
     },[existingRent])
 
-    const deleteExistingHouse = () => {
-        if (props.user.data) {
-            axios.delete(`/api/houses/${id}`)
-            .then(() => {props.getHouses()})
-            .then(() => {
-                props.setSelectedHouseRedux(props.houses.houses[0])
-                setRedirect(true)
-                success.fire({title: `${props.houses.selectedHouse.address} has been deleted.`})
-            })
-            }  else {
+    async function deleteExistingHouse() {
+        try {
+            if (props.user.data) {
+              await axios.delete(`/api/houses/${id}`)
+              await props.getHouses()
+              await props.setSelectedHouseRedux(props.houses.houses[0])
+              setRedirect(true)
+            } else {
                 pleaseSignIn.fire()
             }
+        } catch (error) {
+            console.log('Error deleting house.', error)
         }
+    }
+
+    // const deleteExistingHouse = () => {
+    //     if (props.user.data) {
+    //         axios.delete(`/api/houses/${id}`)
+    //         .then(() => {props.getHouses()})
+    //         .then(() => {
+    //             props.setSelectedHouseRedux(props.houses.houses[0])
+    //         })
+    //         .then(() => {
+    //             setRedirect(true)
+    //             success.fire({title: `${props.houses.selectedHouse.address} has been deleted.`})
+    //         })
+    //         }  else {
+    //             pleaseSignIn.fire()
+    //         }
+    //     }
     
-    const updateExistingHouse = () => {
-        if (props.user.data) {
-                // const newAddress = address ? address : props.location.state.address
-                // const newCity = city ? city : props.location.state.city
-                // const newState = state ? state : props.location.state.state
-                // // const newStringZipcode = stringZipcode ? stringZipcode : props.location.state.zipcode
-                // const newZipcode = zipcode ? zipcode : props.location.state.zipcode
-                // const newRent = rent ? rent : props.location.state.rent
-                // const newStatus = status ? status : props.location.state.status
-                // const houseId = props.location.state.selectedHouse
-                // const newZipcode = parseInt(newStringZipcode, 10)
-                // const newRent = parseInt(newStringRent, 10)
-                axios.put('/api/houses', {id,address,city,state,zipcode,rent,status})
-                .then(() => {
-                    props.getHouses()
-                    setRedirect(true)
-                    success.fire({title: `${existingAddress} has been updated.`})
-                })
-               } else {
+    async function updateExistingHouse() {
+        try {
+            if (props.user.data) {
+                await axios.put('/api/houses', {id,address,city,state,zipcode,rent,status})
+                await props.getHouses()
+                setRedirect(true)
+                success.fire({title: `${existingAddress} has been updated.`})
+            } else {
                 pleaseSignIn.fire()
             }
+        } catch (error) {
+            console.log('Error updating house.', error)
         }
+    }
         
 
     return (

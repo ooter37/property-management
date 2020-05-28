@@ -5,7 +5,7 @@ import './react-datepicker.min.css'
 import {connect} from 'react-redux'
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 import {requestUserData} from './redux/reducers/user'
-import {getHouses} from './redux/reducers/houses'
+// import {getHouses} from './redux/reducers/houses'
 import useRedirect from './Components/Hooks/useRedirect'
 import Main from './Components/Main/Main'
 import Landing from './Components/Auth/Landing'
@@ -67,7 +67,7 @@ function App(props) {
   );
 }
 
-const mapDispatchToProps = {requestUserData, getHouses}
+const mapDispatchToProps = {requestUserData}
 
 const mapStateToProps = state => state
 

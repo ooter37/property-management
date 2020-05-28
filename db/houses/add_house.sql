@@ -4,3 +4,6 @@ INSERT INTO houses (address, city, state, zipcode, rent, status, image) VALUES (
 INSERT INTO linked (house_id, user_id, ownership)
 SELECT house_id, $8, $9
 FROM rows;
+
+-- SELECT * FROM houses
+-- WHERE user_id = $8

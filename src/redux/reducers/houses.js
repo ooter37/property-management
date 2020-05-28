@@ -4,10 +4,14 @@ const initialState = {
     loading: null,
     houses: [],
     selectedHouse: 0,
+    contractors: [],
+    selectedContractor: 0
 }
 
 const GET_HOUSES = 'GET_HOUSES'
 const SELECTED_HOUSE = 'SELECTED_HOUSE'
+const GET_CONTRACTORS = 'GET_CONTRACTORS'
+const SELECTED_CONTRACTOR = 'SELECTED_CONTRACTOR'
 
 export default function(state = initialState,action) {
     switch(action.type) {
@@ -17,9 +21,6 @@ export default function(state = initialState,action) {
                 loading: false
             }
         case GET_HOUSES + '_FULFILLED':
-            // console.log(action.payload)
-            // console.log('houses',state.houses)
-            // console.log('select',state.selectedHouse)
             return {
                 ...state,
                 houses: action.payload,
@@ -38,6 +39,31 @@ export default function(state = initialState,action) {
                 selectedHouse: action.payload,
                 loading: false
             }
+        case GET_CONTRACTORS + '_REJECTED':
+            return {
+                ...state,
+                loading: false
+            }
+        case GET_CONTRACTORS + '_FULFILLED':
+            return {
+                ...state,
+                contractors: action.payload,
+                loading: false,
+                selectedContractor: state.selectedContractor === 0 ? action.payload[0] : state.selectedContractor
+            }
+        case GET_CONTRACTORS + '_PENDING':
+            return {
+                ...state,
+                loading: true
+            }
+        case SELECTED_CONTRACTOR:
+            // console.log(action.payload)
+            return {
+                ...state,
+                selectedContractor: action.payload,
+                loading: false
+            }
+            
         default:
             return state
     }
@@ -51,6 +77,18 @@ export function getHouses() {
 export function setSelectedHouseRedux(selected) {
     return {
         type: SELECTED_HOUSE,
+        payload: selected
+    }
+}
+export function getContractors() {
+    return {
+        type: GET_CONTRACTORS,
+        payload: axios.get('/api/contractors').then(res => res.data)
+    }
+}
+export function setSelectedContractor(selected) {
+    return {
+        type: SELECTED_CONTRACTOR,
         payload: selected
     }
 }

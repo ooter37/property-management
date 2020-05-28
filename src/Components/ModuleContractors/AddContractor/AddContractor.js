@@ -80,7 +80,6 @@ function AddContractor(props) {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
-    // const [service, setService] = useState('')
     const [services, setServices] = useState('')
     const [value, setValue] = useState([])
     const classes = useStyles();
@@ -225,7 +224,7 @@ function AddContractor(props) {
                                     }}
                                     freeSolo
                                     renderInput={(params) => (
-                                    <TextField {...params} variant="standard" label="Services Provided" placeholder="Favorites"/>)}/>
+                                    <TextField {...params} variant="standard" label="Services Provided"/>)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
