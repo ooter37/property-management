@@ -44,9 +44,7 @@ return (
         
         {(() => {
         switch (displaying) {
-          case 'emailing':   return <Email setDisplaying={setDisplaying}
-            emailing={emailing} 
-            />;
+          case 'emailing':   return <Email setDisplaying={setDisplaying} emailing={emailing} />;
           case 'updating': return <UpdateRenter selectedRenterFull={selectedRenterFull} setDisplaying={setDisplaying}/>;
           default:      return <AddRenter />;
         }

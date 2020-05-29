@@ -227,9 +227,14 @@ function UpdateRenter(props) {
                                     </FormControl>
                                 </MuiThemeProvider>
                             </Grid>
-                            <Grid item>
-                                <Button onClick={() => handleClick()} type='submit' variant='contained' color="primary" className='add-renter-button'>Update</Button>
+                            <Grid item className='cancel-submit-container' >
+                                <Button onClick={()=> props.setDisplaying('default')} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>
+                                <Button onClick={() => handleClick()} type='submit' variant='contained' color="primary" className='submit-update-button'>Update</Button>
                             </Grid>
+                            {/* <Grid item>
+                                <Button onClick={() => handleClick()} type='submit' variant='contained' color="primary" className='add-renter-button'>Update</Button>
+                            </Grid> */}
+                            
                         </Grid>
                  
                     </Card>

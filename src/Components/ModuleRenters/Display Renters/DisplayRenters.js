@@ -42,7 +42,7 @@ function DisplayRenters(props) {
                 toggleEmail(renter.email)
               } else {pleaseSignIn.fire()}
             }}
-          startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>Renter</Button></TableCell>
+          startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>Email</Button></TableCell>
             <TableCell align='left'>{renter.name}</TableCell>
             <TableCell align="right">{renter.email}</TableCell>
             <TableCell align="right">{renter.phone}</TableCell>
@@ -67,10 +67,10 @@ function DisplayRenters(props) {
             <TableCell><Button 
             onClick={() => {
               if (props.user.data) {
-                toggleEmail(props.renters.map(elem => elem.email))
+                toggleEmail(props.renters && props.renters.map(elem => elem.email))
               } else {pleaseSignIn.fire()}
             }}
-             startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>All</Button></TableCell>
+             startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>Email All</Button></TableCell>
             <TableCell>Name</TableCell>
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">Phone</TableCell>

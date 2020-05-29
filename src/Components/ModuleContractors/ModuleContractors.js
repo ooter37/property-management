@@ -6,13 +6,15 @@ import {getContractors} from '../../redux/reducers/houses'
 import DisplayContractors from './DisplayContractors/DisplayContractors'
 import AddContractor from './AddContractor/AddContractor'
 import UpdateContractor from './Update Contractor/UpdateContractor'
+import Email from '../Email/Email'
 
 function ModuleContractors(props){
     // const [redirect,setRedirect] = useState(false)
     // const [contractors, setContractors] = useState('')
-    const [updating, setUpdating] = useState(false)
+    // const [updating, setUpdating] = useState(false)
     const [selectedContractorFull, setSelectedContractorFull] = useState('')
-
+    const [emailing, setEmailing] = useState('')
+    const [displaying, setDisplaying] = useState('default')
     const {data} = props.user
     const {getContractors} = props
     // useEffect(() => {
@@ -29,8 +31,8 @@ function ModuleContractors(props){
       },
       [getContractors, data])
 
-      function toggleUpdating(updating,contractorData) {
-        setUpdating(updating)
+      function toggleUpdating(displaying,contractorData) {
+        setDisplaying(displaying)
         setSelectedContractorFull(contractorData)
       }
       
@@ -45,20 +47,32 @@ return (
         } */}
         <DisplayContractors 
         toggleUpdating={toggleUpdating}
+        setDisplaying={setDisplaying}
         // updating={updating}
         // setUpdating={setUpdating}
+        setEmailing={setEmailing} 
         contractors={props.houses.contractors}
         // contractors={contractors}
         // setContractors={setContractors}
         />
+        {(() => {
+        switch (displaying) {
+          case 'emailing':   return <Email setDisplaying={setDisplaying} emailing={emailing} />;
+          case 'updating': return <UpdateContractor toggleUpdating={toggleUpdating} selectedContractorFull={selectedContractorFull} setDisplaying={setDisplaying}/>;
+          default:      return <AddContractor />;
+        }
+      })()}
+
+{/* 
+
         {
             (updating)
             ?
-            <UpdateContractor setUpdating={setUpdating} selectedContractorFull={selectedContractorFull} />
+            <UpdateContractor toggleUpdating={toggleUpdating} setUpdating={setUpdating} selectedContractorFull={selectedContractorFull} />
             :
             
         <AddContractor />
-        }
+        } */}
     </div>
 )
 }

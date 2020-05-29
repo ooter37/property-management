@@ -75,7 +75,7 @@ function Email(props) {
                                 />
                             </Grid>
                             <Grid item>
-                                <Button  onClick={() => props.setDisplaying('default')} variant='contained' color='secondary' className='cancel-email-button'>Cancel</Button>
+                                <Button  onClick={() => props.setDisplaying('default')} variant='outlined' color='secondary' className='cancel-email-button'>Cancel</Button>
                                 <Button type='submit' variant='contained' color="primary" className='send-email-button'>Send</Button>
                             </Grid>
                         </Grid>

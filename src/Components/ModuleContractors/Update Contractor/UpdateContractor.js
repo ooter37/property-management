@@ -191,7 +191,6 @@ function UpdateContractor(props) {
                                         if (newValue && newValue.inputValue) {
                                             return setValue(newValue.inputValue)
                                         } setValue(newValue)
-                                        console.log(value)
                                     }
                                     }
                                     filterOptions={(options, params) => {
@@ -348,7 +347,7 @@ function UpdateContractor(props) {
                             <Grid container className='status-rent-cancel-add-container'>
 
                             <Grid item className='delete-house-button'>
-                                <Button 
+                                {/* <Button 
                 //                 onClick={() => { 
                 // if (props.user.data) {
                 //         confirmDelete.fire({
@@ -356,19 +355,13 @@ function UpdateContractor(props) {
                 //             if (result.value) {deleteExistingHouse()}})
                 //         } else {pleaseSignIn.fire()}
                 //     }}  
-                    variant='contained' color="secondary" className='delete-house-button'>Delete Provider</Button>
+                    variant='contained' color="secondary" className='delete-house-button'>Delete Provider</Button> */}
                             </Grid>
                             <Grid item className='cancel-submit-container' >
-                                <Button onClick={()=> props.setUpdating(false)} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>
-                                <Button type='submit' variant='contained' color="primary" className='submit-update-button'>Submit</Button>
+                                <Button onClick={()=> props.setDisplaying('default')} variant='outlined' color="secondary" className='cancel-update-button'>Cancel</Button>
+                                <Button type='submit' variant='contained' color="primary" className='submit-update-button'>Update</Button>
                             </Grid>
-                            {/* <Grid 
-                            container
-                            direction="row"
-                            justify="flex-end"
-                            alignItems="flex-end">
-                                <Button type='submit' variant='contained' color="primary" className='add-contractor-button'>Add</Button>
-                            </Grid> */}
+
                         </Grid>
                         </Grid>
                     </Card>
