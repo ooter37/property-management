@@ -52,7 +52,8 @@ function ImageUpload(props) {
                 title: 'Uploaded Picture',
                 imageUrl: e.target.result,
                 imageAlt: 'The uploaded picture',
-                showCancelButton: true
+                showCancelButton: true,
+                confirmButtonColor: '#4caf50',
             }).then(res => {
                 if (res.value) {
                     sendFile(selectedFile)
@@ -123,6 +124,7 @@ function ImageUpload(props) {
                             Swal.mixin({
                                 confirmButtonText: 'Next &rarr;',
                                 showCancelButton: true,
+                                confirmButtonColor: '#4caf50',
                             }).queue([
                                 {title: 'Update House Picture',
                                 input: 'file',

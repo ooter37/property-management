@@ -45,11 +45,8 @@ function HouseCard(props) {
                         <Grid item style = {{ width: 800}}>
                             <Card className='selected-house-card' style = {{ height: 400}}>
                                 <CardContent className='selected-house-card-content'>
-                                    <div className='avatar-upload-container'>
-                                        {/* <Box border={2} borderRadius='50%'> */}
-    
+                                    <div className='avatar-upload-container'>    
                                         <Avatar  alt="House Image" src={house.image} className={classes.avatar} />
-                                        {/* </Box> */}
                                         <ImageUpload houses={props.houses.houses} selectedHouse={selectedHouse}/>
                                     </div>
                                     <div className='selected-house-card-body'>
@@ -111,7 +108,9 @@ function HouseCard(props) {
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">Add a New House</Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">You'll be able to manage repairs, track rent, and more. </Typography>
+                                        {/* <Button variant='contained' color='primary'>Add</Button> */}
                                     </CardContent>
+                                    
                             </Card>
                         </Grid>
                         <Grid item style = {{ width: 400}}>

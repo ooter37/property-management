@@ -27,7 +27,7 @@ const {setTasks, selectedHouse} = props
 
     const mappedTasks = props.tasks && props.tasks.map((task) => {
         return (
-          <TableRow key={`task-display-${task.task_id}`} className={`urgent-${task.urgent.toString()}`}>
+          <TableRow key={`task-display-${task.task_id}`} className={`urgent-${task.urgent}`}>
             <TableCell component="th" scope="row">{task.type}</TableCell>
             <TableCell align="right">{moment(task.date).format("MMMM Do YYYY")}</TableCell>
             <TableCell align="right">${task.price}</TableCell>

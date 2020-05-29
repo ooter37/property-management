@@ -20,7 +20,7 @@ const Logout = (props) => {
             &&
             <Redirect to='/' />
             }
-            <Button className='logout-button' onClick={() => logoutHandler()} color="inherit">Logout</Button>
+            <Button className='logout-button' onClick={() => logoutHandler()} variant='contained' color="primary">Logout</Button>
         </div>
     )
 }

@@ -16,8 +16,84 @@ import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
 import { primaryColor, grayColor, blackColor, hexToRgb } from "../../UI/material-dashboard-react";
 
+
+const greenTheme = createMuiTheme({
+  overrides: {
+    MuiPickersToolbar: {
+      toolbar: {
+        backgroundColor: '#4caf50',
+      },
+    },
+    flatButton: {
+      color: '#4caf50'
+    },
+    MuiPickersCalendarHeader: {
+      switchHeader: {
+        // backgroundColor: lightBlue.A200,
+        // color: "white",
+      },
+    },
+    MuiPickersDay: {
+      day: {
+        color: '#4caf50',
+      },
+      daySelected: {
+        '&:hover': {
+          backgroundColor: '#4caf50'
+        },
+        backgroundColor: '#4caf50',
+      },
+      dayDisabled: {
+        color: '#4caf50',
+      },
+      current: {
+        color: '#4caf50',
+      },
+    },
+    MuiPickersModal: {
+      dialogAction: {
+        color: '#4caf50',
+      },
+    },
+  },
+});
+
+
 const theme = createMuiTheme({
     overrides: {
+      // MuiPickersToolbar: {
+      //   toolbar: {
+      //     backgroundColor: '#4caf50',
+      //   },
+      // },
+      // MuiPickersCalendarHeader: {
+      //   switchHeader: {
+      //     // backgroundColor: lightBlue.A200,
+      //     // color: "white",
+      //   },
+      // },
+      // MuiPickersDay: {
+      //   day: {
+      //     color: '#4caf50',
+      //   },
+      //   daySelected: {
+      //     backgroundColor: '#4caf50',
+      //   },
+      //   dayDisabled: {
+      //     color: '#4caf50',
+      //   },
+      //   dayHover: {
+      //     color: '#4caf50',
+      //   },
+      //   current: {
+      //     color: '#4caf50',
+      //   },
+      // },
+      // MuiPickersModal: {
+      //   dialogAction: {
+      //     color: '#4caf50',
+      //   },
+      // },
       MuiInput: {
         underline: {
             "&:hover:not($disabled):before,&:before": {
@@ -116,40 +192,48 @@ const styles = {
   const useStyles = makeStyles(styles);
 
   const taskSelections = [
-    'Tree Trimming',
-    'Pool Repair',
-    'House Repair',
-    'Exterior Painting'
+    'Electrical',
+    'Home Repair',
+    'House Cleaning',
+    'Landscaping',
+    'Painting',
+    'Plumbing',
+    'Restoration',
+    'Pool Maintenance',
+    'Roofing',
+    'Tree Care',
 ];
 
 function AddTask(props) {
     const [type, setType] = useState('');
     const [date, setDate] = useState(new Date());
     const [price, setPrice] = useState(0)
-    const [checked, setChecked] = useState([])
+    const [checked, setChecked] = useState(false)
     const [note, setNote] = useState('')
     const [contact, setContact] = useState('')
     // const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
 
-    const checkHandler = value => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-    
-        if (currentIndex === -1) {
-          newChecked.push(value);
-        } else {
-          newChecked.splice(currentIndex, 1);
-        }
-        setChecked(newChecked);
-      };
+    // const checkHandler = value => {
+    //   const currentIndex = checked.indexOf(value);
+    //   const newChecked = [...checked];
+      
+    //   if (currentIndex === -1) {
+    //     newChecked.push(value);
+    //   } else {
+    //     newChecked.splice(currentIndex, 1);
+    //   }
+    //   setChecked(newChecked);
+    //   console.log('handler', checked)
+    //   };
 
     const submitNewTask = () => {
         if (props.user.data) {
+          // console.log('submit', checked)
             const userId = props.user.data.user_id
             const houseId = props.selectedHouse
-            const urgent = checked.length === 1 ? true : false
-            axios.post('/api/tasks', {userId, houseId, type, date, price, urgent, note, contact})
+            // const urgent = checked === 1 ? true : false
+            axios.post('/api/tasks', {userId, houseId, type, date, price, checked, note, contact})
             .then(() => {
                 axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
                     props.setTasks(res.data)
@@ -166,7 +250,7 @@ function AddTask(props) {
       setType('')
       setDate(new Date())
       setPrice(0)
-      setChecked([])
+      setChecked(false)
       setNote('')
       setContact('')
   }
@@ -228,7 +312,7 @@ function AddTask(props) {
                                                 </InputLabel>
                                                 <Checkbox
                                                 tabIndex={-1}
-                                                onClick={() => checkHandler(1)}
+                                                onClick={() => setChecked(!checked)}
                                                 checkedIcon={<Check className={classes.checkedIcon} />}
                                                 icon={<Check className={classes.uncheckedIcon} />}
                                                 classes={{
@@ -263,7 +347,11 @@ function AddTask(props) {
                                 >   
                                     <Grid item md={12}>
                                         <InputLabel classes={{root: classes.labelRoot}}>Date Due</InputLabel>
-                                        <MuiPickersUtilsProvider utils={DateFnsUtils}> <DatePicker value={date} onChange={setDate}/></MuiPickersUtilsProvider>
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils}> 
+                                        <MuiThemeProvider theme={greenTheme}>
+                                          <DatePicker value={date} onChange={setDate}/>
+                                          </MuiThemeProvider>
+                                        </MuiPickersUtilsProvider>
                                     </Grid>
                                     <Grid item  className={classes.grid} md={12}>
                                         <FormControl required className={classes.formControl} >

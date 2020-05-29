@@ -6,6 +6,7 @@ import { Button, CssBaseline, Paper, Box, Grid, Typography} from '@material-ui/c
 import { makeStyles } from '@material-ui/core/styles';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { login } from "../../redux/reducers/user";
+import { getHouses } from "../../redux/reducers/houses";
 import CustomInput from '../UI/CustomInput'
 
 const useStyles = makeStyles((theme) => ({
@@ -60,9 +61,11 @@ function Login(props) {
 //     setRedirect(!redirect)
 // }
 
-  const loginHandler = (e) => {
+  async function loginHandler(e) {
     e.preventDefault()
-    props.login({email,password})
+    await props.login({email,password})
+          props.getHouses()
+    
     // .then(() => {
     //     setEmail('')
     //     setPassword('')
@@ -155,6 +158,8 @@ function Login(props) {
   );
 }
 
+const mapDispatchToProps = {login, getHouses}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect(mapStateToProps, mapDispatchToProps )(Login);

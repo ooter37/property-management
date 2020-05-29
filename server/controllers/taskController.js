@@ -19,7 +19,8 @@ module.exports = {
             const db = req.app.get('db')
             if (req.session.user) {
                 // console.log(req.body)
-                const {userId, houseId,type,date,price,urgent,note,contact} = req.body
+                const {userId, houseId,type,date,price,note,contact} = req.body
+                const urgent = req.body.checked
                 const task = await db.tasks.add_task(userId,houseId,type,date,price,urgent,note,contact)
                 res.status(200).send(task)
             } else {

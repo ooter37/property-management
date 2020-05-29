@@ -18,6 +18,7 @@
     "@material-ui/lab": "^4.0.0-alpha.53",
     "@material-ui/pickers": "^3.2.10",
     "@sendgrid/mail": "^7.1.1",
+    "@sweetalert2/theme-material-ui": "^3.1.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -44,7 +45,7 @@
     "redux-promise-middleware": "^6.1.2",
     "riteway": "^6.1.2",
     "supertest": "^4.0.2",
-    "sweetalert2": "^9.10.13",
+    "sweetalert2": "^9.13.2",
     "sweetalert2-react-content": "^3.0.1",
     "tabler-react": "^1.30.1"
   },

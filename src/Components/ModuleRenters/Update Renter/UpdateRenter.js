@@ -119,7 +119,7 @@ function UpdateRenter(props) {
                 await axios.put('/api/renters', {id,houseId,name,email,phone})
                 props.getRenters()
                 resetForm()
-                success.fire({title: `${name} added as a new renter.`})
+                success.fire({title: `${name} updated.`})
             } else {
                 pleaseSignIn()
             }

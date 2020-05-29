@@ -1,5 +1,13 @@
 @import '../../App.scss';
 
+.logout-button {
+    color: white !important;
+    background-color: $theme-500 !important;
+}
+.header-logout-button {
+    color: white !important;
+    background-color: $theme-500 !important;
+}
 
 .auth-button {
     background-color: $theme-500 !important;

@@ -1,20 +1,5 @@
 @import '../../App.scss';
 
-// .scroller-display-container {
-//   // background-color: red;
-//   // width: 98%;
-// }
-// .selected-grid-item {
-//   width: 25%;
-//   padding-left: 10px;
-//   padding-top: 10px;
-//   box-sizing: border-box;
-// }
-// .scroller-grid-item {
-//   // background-color: orange;
-//   // width: 75%;
-// }
-
 .scroll-container {
   margin-top: 10px;
   // background-color: red;
@@ -22,6 +7,7 @@
 
 .modules-container {
   margin-top:10px;
+  max-width: 1500px;
 }
 
 // START SELECTED HOUSE CARD STYLING
@@ -70,19 +56,25 @@
       display: flex;
       justify-content: flex-end;
     }
+    .house-update-buttons {
+      background-color: $theme-500 !important;
+    }
 // END SELECTED HOUSE CARD STYLING
 
 
-// START CARD CSS
-// .update-house-card-header {
-//   display: flex;
-//   justify-content: space-between;
-//   width: 300px;
-//   margin-top: 45px;
-// }
-// END CARD CSS
 
-.house-update-buttons {
-  background-color: $theme-500 !important;
+
+.scroller-display-container {
+  // background-color: red;
+  // width: 98%;
 }
-
+.selected-grid-item {
+  width: 25%;
+  padding-left: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+.scroller-grid-item {
+  // background-color: orange;
+  // width: 75%;
+}

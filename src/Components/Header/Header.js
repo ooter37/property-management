@@ -76,7 +76,7 @@ function Header(props) {
             </IconButton>
           </Link>
           <div className='login-goback-container'>
-            <button onClick={() => console.log(props)}>PROP GETTER!!!</button>
+            {/* <button onClick={() => console.log(props)}>PROP GETTER!!!</button> */}
             <IconButton onClick={() => props.history.goBack()} edge="start"  color="inherit" aria-label="menu">
               <KeyboardBackspaceIcon  />
               <Typography variant='h6'>&nbsp; Previous Page</Typography>
@@ -87,7 +87,7 @@ function Header(props) {
               ?
               <Logout />
               :
-              <Button className='header-logout-button' onClick={() => toggleRedirect()} color="inherit">Login</Button>
+              <Button className='header-logout-button' onClick={() => toggleRedirect()} color="primary">Login</Button>
               }
             </div>
           </div>
