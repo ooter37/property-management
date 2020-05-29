@@ -12,7 +12,7 @@ const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, delet
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
 const { getContractorsByUser, addContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 const { getRentersByUser, addRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
-const { multiEmail } = require('./controllers/mailController')
+const { sendEmail } = require('./controllers/mailController')
 
 //TOP-LEVEL MIDDLEWARE
 const app=express()
@@ -72,7 +72,7 @@ app.put('/api/renters', updateRenter)
 
 //EMAIL ENDPOINTS
 // app.post('/email/single', singleEmail)
-app.post('/email/multi', multiEmail)
+app.post('/email/multi', sendEmail)
 
 
 // Configure aws with your accessKeyId and your secretAccessKey -- MIGHT NEED THIS WHEN ACCESS PRIVS ARE FIXED
