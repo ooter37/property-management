@@ -41,7 +41,7 @@ function HouseCard(props) {
                 <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
                 
                 <Grid>
-                    <Grid container spacing={2} justify="center">
+                    <Grid container spacing={2} justify="left">
                         <Grid item style = {{ width: 800}}>
                             <Card className='selected-house-card' style = {{ height: 400}}>
                                 <CardContent className='selected-house-card-content'>
@@ -107,7 +107,7 @@ function HouseCard(props) {
                                 </Link>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">Add a New House</Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">You'll be able to manage repairs, track rent, and more. </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">You'll be able to manage repairs, track renters, and more. </Typography>
                                         {/* <Button variant='contained' color='primary'>Add</Button> */}
                                     </CardContent>
                                     
@@ -141,7 +141,7 @@ function HouseCard(props) {
                                 </Link>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">Service Provider</Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">Service providers are the people who work on your properties. Contractors, landscapers, electricians, etc. </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">Service providers are the people who work on your properties, like contractors, landscapers, and electricians. </Typography>
                                     </CardContent>
                             </Card>
                         </Grid>
@@ -157,7 +157,23 @@ function HouseCard(props) {
                                 </Link>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">Renters</Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">View a list of all renters. Keep track of rent payments, send mass emails, and more... </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">View a list of all renters and send emails.  </Typography>
+                                    </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item style = {{ width: 400}}>
+                            <Card style = {{ height: 400}}>
+                                {/* <Link to={{pathname: '/renters'}}> */}
+                                    <CardActionArea>
+                                        <CardMedia
+                                        style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}
+                                        image= {require ("../../../media/rent.jpeg")}
+                                        title="Rent"/>
+                                    </CardActionArea>
+                                {/* </Link> */}
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="h2">Rent Tracking</Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">View a schedule of rent and track payment status. </Typography>
                                     </CardContent>
                             </Card>
                         </Grid>
@@ -169,7 +185,7 @@ function HouseCard(props) {
                                 title="New Features Coming"/>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">More Modules to Come</Typography>
-                                        <Typography variant="body2" color="textSecondary" component="p">Check back regularly to see new features, or add your e-mail address and we'll keep you up to date. </Typography>
+                                        <Typography variant="body2" color="textSecondary" component="p">Check back regularly to see new features. </Typography>
     
                                     </CardContent>
                             </Card>

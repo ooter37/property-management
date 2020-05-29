@@ -1,8 +1,13 @@
 .App {
   // height: 100vh;
-  max-width: 100vw;
+  max-width: 100vw !important;
   // background-color: red;
 }
+
+// .MuiGrid-spacing-xs-2 {
+//   width: 100% !important;
+// }
+
 // Variables
 $font-color: black;
 $background-color: #f5f7fb;
