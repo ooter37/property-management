@@ -4,7 +4,7 @@ import axios from 'axios'
 import {connect} from 'react-redux' 
 // import {Redirect} from 'react-router-dom'
 import {getContractors} from '../../../redux/reducers/houses'
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Chip, IconButton} from '@material-ui/core'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton} from '@material-ui/core'
 import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit';
@@ -45,7 +45,7 @@ function DisplayContractors(props) {
             <TableCell align="left">{contractor.address} <p/>{contractor.city} {contractor.state} {contractor.zipcode}</TableCell>
             <TableCell align="left">{mappedServices}</TableCell>
             <TableCell align="right"><IconButton onClick={() => props.toggleUpdating(true,contractor)} color='primary' className='edit-icon'><EditIcon /> </IconButton></TableCell>
-            <TableCell align="right"><IconButton onClick={() => { if (props.user.data) {
+            <TableCell align="left"><IconButton onClick={() => { if (props.user.data) {
               confirmDelete.fire({text: 'Are you sure you want to delete this contractor? This action is irreversible.'})
               .then((result) => {if (result.value) {deleteContractor(contractor.contractor_id)}})
                         } else {pleaseSignIn.fire()}}} color='secondary' > <DeleteIcon /></IconButton>

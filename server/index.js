@@ -11,8 +11,8 @@ const { login, register, logout, getUser, userData } = require('./controllers/au
 const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
 const { getContractorsByUser, addContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
-const { getRentersByUser, addNewRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
-const { singleEmail, multiEmail } = require('./controllers/mailController')
+const { getRentersByUser, addRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
+const { multiEmail } = require('./controllers/mailController')
 
 //TOP-LEVEL MIDDLEWARE
 const app=express()
@@ -66,7 +66,7 @@ app.put('/api/contractors', updateContractor)
 
 //RENTER ENDPOINTS
 app.get('/api/renters', getRentersByUser)
-app.post('/api/renters', addNewRenter)
+app.post('/api/renters', addRenter)
 app.delete('/api/renters/:id', deleteRenter)
 app.put('/api/renters', updateRenter)
 

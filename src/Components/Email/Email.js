@@ -1,4 +1,4 @@
-import './SingleEmail.scss'
+import './Email.scss'
 import React, {useState} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -33,16 +33,16 @@ const styles = {
   
   const useStyles = makeStyles(styles);
 
-function SingleEmail(props) {
+function Email(props) {
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
     const classes = useStyles();
 
-    function singleEmail() {
+    function sendEmail() {
         const to = props.emailing
         if (props.user.data)
         {    axios.post('/email/multi', {to,subject,message}).then(() => {
-            props.setEmailing(null)
+            props.setDisplaying('default')
             success.fire({title: `Email sent to ${joinedEmails}`})
             }).catch((err) => console.log('Error sending single email.', err))
         } else {pleaseSignIn.fire()}
@@ -51,7 +51,7 @@ function SingleEmail(props) {
     const joinedEmails = (typeof props.emailing ==! 'string') ? props.emailing.join(' // ') : props.emailing
 
     return (
-        <form onSubmit={singleEmail} >
+        <form onSubmit={sendEmail} >
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
@@ -75,7 +75,7 @@ function SingleEmail(props) {
                                 />
                             </Grid>
                             <Grid item>
-                                <Button  onClick={() => props.setEmailing(null)} variant='contained' color='secondary' className='cancel-email-button'>Cancel</Button>
+                                <Button  onClick={() => props.setDisplaying('default')} variant='contained' color='secondary' className='cancel-email-button'>Cancel</Button>
                                 <Button type='submit' variant='contained' color="primary" className='send-email-button'>Send</Button>
                             </Grid>
                         </Grid>
@@ -106,4 +106,4 @@ function SingleEmail(props) {
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(SingleEmail)
+export default connect(mapStateToProps, null)(Email)

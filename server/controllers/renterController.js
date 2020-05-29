@@ -13,13 +13,13 @@ module.exports = {
             res.status(500).send(error)
         }
     },
-    addNewRenter: async (req,res) => {
+    addRenter: async (req,res) => {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
                 const userId = req.session.user.user_id
                 const {houseId,name,email,phone} = req.body
-                const renter = await db.renters.add_new_renter(userId,houseId,name,email,phone)
+                const renter = await db.renters.add_renter(userId,houseId,name,email,phone)
                 res.status(200).send(renter)
             } else {
                 res.status(401).send('User not logged in.')
@@ -47,9 +47,8 @@ module.exports = {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
-                const {id} = req.params
-                const {houseId,name,email,phone,primary} = req.body
-                const renter = await db.renters.update_renter(id,houseId,name,email,phone,primary)
+                const {id,houseId,name,email,phone,primary} = req.body
+                const renter = await db.renters.update_renter(id,houseId,name,email,phone)
                 res.status(200).send(renter)
             } else {
                 res.status(401).send('User not logged in.')

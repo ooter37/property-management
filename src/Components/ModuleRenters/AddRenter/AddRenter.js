@@ -1,7 +1,8 @@
 import './AddRenter.scss'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {getRenters, getHouses} from '../../../redux/reducers/houses'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, MenuItem, FormControl, InputLabel, Select, FormHelperText, Button, Typography } from "@material-ui/core";
@@ -94,6 +95,15 @@ function AddRenter(props) {
     const [error, setError] = useState(false)
     const classes = useStyles();
 
+    const {data} = props.user
+    const {getHouses} = props
+
+    useEffect(() => {
+        if (data) {
+            getHouses()
+        }
+    },[data,getHouses])
+
     function handleClick() {
         setError(false)
         if (!houseId) {
@@ -101,18 +111,19 @@ function AddRenter(props) {
         }
     }
 
-    function submitNewRenter() {
-        if (props.user.data) { houseId &&
-            axios.post('/api/renters', {houseId,name,email,phone})
-            .then(() => {
+    async function submitNewRenter() {
+        try {
+            if (houseId)
+            if (props.user.data) {
+                await axios.post('/api/renters', {houseId,name,email,phone})
+                props.getRenters()
+                resetForm()
                 success.fire({title: `${name} added as a new renter.`})
-                axios.get('/api/renters').then(res => {
-                    props.setRenters(res.data)
-                    resetForm()
-            })
-            })
-        } else {
-            pleaseSignIn.fire()
+            } else {
+                pleaseSignIn()
+            }
+        } catch (error) {
+            console.log('Error adding renter.', error)
         }
     }
 
@@ -227,6 +238,8 @@ function AddRenter(props) {
     )
 }
 
+const mapDispatchToProps = {getRenters, getHouses}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(AddRenter)
+export default connect(mapStateToProps, mapDispatchToProps)(AddRenter)

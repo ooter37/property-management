@@ -5,13 +5,17 @@ const initialState = {
     houses: [],
     selectedHouse: 0,
     contractors: [],
-    selectedContractor: 0
+    selectedContractor: 0,
+    renters: [],
+    selectedRenter: 0,
 }
 
 const GET_HOUSES = 'GET_HOUSES'
 const SELECTED_HOUSE = 'SELECTED_HOUSE'
 const GET_CONTRACTORS = 'GET_CONTRACTORS'
 const SELECTED_CONTRACTOR = 'SELECTED_CONTRACTOR'
+const GET_RENTERS = 'GET_RENTERS'
+const SELECTED_RENTER = 'SELECTED_RENTER'
 
 export default function(state = initialState,action) {
     switch(action.type) {
@@ -63,7 +67,30 @@ export default function(state = initialState,action) {
                 selectedContractor: action.payload,
                 loading: false
             }
-            
+        case GET_RENTERS + '_REJECTED':
+            return {
+                ...state,
+                loading: false
+            }
+        case GET_RENTERS + '_FULFILLED':
+            return {
+                ...state,
+                renters: action.payload,
+                loading: false,
+                selectedRenter: state.selectedRenter === 0 ? action.payload[0] : state.selectedRenter
+            }
+        case GET_RENTERS + '_PENDING':
+            return {
+                ...state,
+                loading: true
+            }
+        case SELECTED_RENTER:
+            // console.log(action.payload)
+            return {
+                ...state,
+                selectedRenter: action.payload,
+                loading: false
+            }
         default:
             return state
     }
@@ -89,6 +116,18 @@ export function getContractors() {
 export function setSelectedContractor(selected) {
     return {
         type: SELECTED_CONTRACTOR,
+        payload: selected
+    }
+}
+export function getRenters() {
+    return {
+        type: GET_RENTERS,
+        payload: axios.get('/api/renters').then(res => res.data)
+    }
+}
+export function setSelectedRenter(selected) {
+    return {
+        type: SELECTED_RENTER,
         payload: selected
     }
 }

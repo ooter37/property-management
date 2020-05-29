@@ -136,7 +136,7 @@ function UpdateContractor(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedContractorFull.name ? `Updating ${props.selectedContractorFull.name}` : 'Something went wrong, please refresh the page.'}</Typography>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedContractorFull ? `Updating ${props.selectedContractorFull.name}` : 'Something went wrong, please refresh the page.'}</Typography>
                             {/* <p className={classes.cardCategoryWhite}>Edit the fields you'd like to update.</p> */}
                         </CardHeader>
                         <Grid container>

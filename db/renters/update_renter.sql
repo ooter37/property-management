@@ -10,5 +10,5 @@ SET email = $4 WHERE renter_id = $1;
 UPDATE renters
 SET phone = $5 WHERE renter_id = $1;
 
-UPDATE renters
-SET primary = $6 WHERE renter_id = $1;
+-- UPDATE renters
+-- SET primary = $6 WHERE renter_id = $1;

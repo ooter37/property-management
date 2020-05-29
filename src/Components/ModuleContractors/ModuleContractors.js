@@ -1,6 +1,6 @@
 import './ModuleContractors.scss'
 import React, {useState, useEffect} from 'react'
-import {Redirect} from 'react-router-dom'
+// import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux' 
 import {getContractors} from '../../redux/reducers/houses'
 import DisplayContractors from './DisplayContractors/DisplayContractors'
@@ -8,10 +8,10 @@ import AddContractor from './AddContractor/AddContractor'
 import UpdateContractor from './Update Contractor/UpdateContractor'
 
 function ModuleContractors(props){
-    const [redirect,setRedirect] = useState(false)
+    // const [redirect,setRedirect] = useState(false)
     // const [contractors, setContractors] = useState('')
     const [updating, setUpdating] = useState(false)
-    const [selectedContractorFull, setSelectedContractorFull] = useState(true)
+    const [selectedContractorFull, setSelectedContractorFull] = useState('')
 
     const {data} = props.user
     const {getContractors} = props
@@ -21,16 +21,17 @@ function ModuleContractors(props){
     //     })}, []
     //     )
     useEffect(() => {
-        if (!data) {setRedirect(true)}
-        else if (data) {
+        // if (!data) {setRedirect(true)}
+        // else 
+        if (data) {
           getContractors()
         }
       },
       [getContractors, data])
 
-      function toggleUpdating(updating,selected) {
+      function toggleUpdating(updating,contractorData) {
         setUpdating(updating)
-        setSelectedContractorFull(selected)
+        setSelectedContractorFull(contractorData)
       }
       
         
@@ -44,8 +45,8 @@ return (
         } */}
         <DisplayContractors 
         toggleUpdating={toggleUpdating}
-        updating={updating}
-        setUpdating={setUpdating}
+        // updating={updating}
+        // setUpdating={setUpdating}
         contractors={props.houses.contractors}
         // contractors={contractors}
         // setContractors={setContractors}
