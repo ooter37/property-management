@@ -87,7 +87,7 @@ function Header(props) {
               ?
               <Logout />
               :
-              <Button className='header-logout-button' onClick={() => toggleRedirect()} color="primary">Login</Button>
+              <Button className='logout-button' onClick={() => toggleRedirect()} variant='contained' color="primary">Login</Button>
               }
             </div>
           </div>
