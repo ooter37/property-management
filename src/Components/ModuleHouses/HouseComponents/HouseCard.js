@@ -41,7 +41,8 @@ function HouseCard(props) {
                 <div className='modules-container' key={`mappedHouses-${house.house_id}`}>
                 
                 <Grid>
-                    <Grid container spacing={2} justify="left">
+                    {/* <Grid container spacing={2} justify="left"> justify left gave invalid prop warning */} 
+                    <Grid container spacing={2}>
                         <Grid item style = {{ width: 800}}>
                             <Card className='selected-house-card' style = {{ height: 400}}>
                                 <CardContent className='selected-house-card-content'>

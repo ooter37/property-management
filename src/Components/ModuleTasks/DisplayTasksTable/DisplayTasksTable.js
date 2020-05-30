@@ -10,11 +10,6 @@ import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
 function DisplayTasksTable(props) {
 const {setTasks, selectedHouse} = props
 
-  useEffect(() => {
-    axios.get(`/api/tasks/${selectedHouse}`).then(res => {
-        setTasks(res.data)
-    })}, [selectedHouse, setTasks]
-)
     function deleteTask(id) {
       axios.delete(`/api/tasks/${id}`)
       .then(() => {success.fire({title: 'Task Deleted'})})

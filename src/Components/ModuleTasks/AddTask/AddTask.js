@@ -264,7 +264,7 @@ function AddTask(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-task-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedHouse ? 'Track tasks for this house.' : 'Something went wrong, please refresh the page.'}</Typography>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedHouse ? `Add a task for ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'}</Typography>
                             <Typography variant='subtitle2' >&nbsp; &nbsp; &nbsp; *Tasks marked urgent will be highlighted.</Typography>
                         </CardHeader>
                         <Grid 
