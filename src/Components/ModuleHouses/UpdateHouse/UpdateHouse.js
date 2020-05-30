@@ -144,7 +144,7 @@ function UpdateHouse(props) {
             if (props.user.data) {
               await axios.delete(`/api/houses/${id}`)
               await props.getHouses()
-              await props.setSelectedHouseRedux(props.houses.houses[0])
+            //   await props.setSelectedHouseRedux(props.houses.houses[0])
               setRedirect(true)
             } else {
                 pleaseSignIn.fire()
@@ -154,22 +154,6 @@ function UpdateHouse(props) {
         }
     }
 
-    // const deleteExistingHouse = () => {
-    //     if (props.user.data) {
-    //         axios.delete(`/api/houses/${id}`)
-    //         .then(() => {props.getHouses()})
-    //         .then(() => {
-    //             props.setSelectedHouseRedux(props.houses.houses[0])
-    //         })
-    //         .then(() => {
-    //             setRedirect(true)
-    //             success.fire({title: `${props.houses.selectedHouse.address} has been deleted.`})
-    //         })
-    //         }  else {
-    //             pleaseSignIn.fire()
-    //         }
-    //     }
-    
     async function updateExistingHouse() {
         try {
             if (props.user.data) {

@@ -55,12 +55,12 @@ function DisplayHouses (props) {
         if (!data.loading) {
             // console.log('selectedHouse',props.houses.selectedHouse)
             getHouses()
-            .then((res) => {
+            // .then((res) => {
                 // console.log('.selectedHouse',props.houses.selectedHouse)
-              res.value.length > 0 &&
-              setSelectedHouseRedux(res.value[0])
+            //   res.value.length > 0 &&
+            //   setSelectedHouseRedux(res.value[0])
             //   console.log(props.houses.selectedHouse)
-          })
+        //   })
         }
       },
       [getHouses, data])

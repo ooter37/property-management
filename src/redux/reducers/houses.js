@@ -37,7 +37,6 @@ export default function(state = initialState,action) {
                 loading: true
             }
         case SELECTED_HOUSE:
-            // console.log(action.payload)
             return {
                 ...state,
                 selectedHouse: action.payload,

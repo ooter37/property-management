@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux'
-import {getHouses, setSelectedHouseRedux} from '../../redux/reducers/houses'
+import {getHouses} from '../../redux/reducers/houses'
 import Button from '@material-ui/core/Button';
 import PhotoCamera from '@material-ui/icons/PhotoCamera'
 import Swal from 'sweetalert2'
@@ -147,7 +147,7 @@ function ImageUpload(props) {
     </div>)
 }
 
-const mapDispatchToProps = {getHouses,setSelectedHouseRedux}
+const mapDispatchToProps = {getHouses}
 
 const mapStateToProps = state => state
 

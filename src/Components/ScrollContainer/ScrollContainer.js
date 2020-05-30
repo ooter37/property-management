@@ -32,7 +32,8 @@ function ScrollContainer(props) {
     // const { name } = el;
   
     return (
-      <MenuItem onClick={() => props.setSelectedHouseRedux(house)}
+      <MenuItem 
+        onClick={() => props.setSelectedHouseRedux(house)}
         text={<HouseButton  selectedHouse={houses.selectedHouse} image={house.image} title={house.address}>{house.address}</HouseButton>}
         key={house.house_id}
       />

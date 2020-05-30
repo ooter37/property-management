@@ -9,9 +9,9 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import HomeIcon from '@material-ui/icons/Home';
 import Zoom from '@material-ui/core/Zoom';
-
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import Logout from '../Auth/Logout'
+import DisplaySelectedHouse from './DisplaySelectedHouse/DisplaySelectedHouse'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +75,7 @@ function Header(props) {
               <Typography variant='h4'>&nbsp; Prop Aid</Typography>
             </IconButton>
           </Link>
+          <DisplaySelectedHouse/>
           <div className='login-goback-container'>
             <button onClick={() => console.log(props)}>PROP GETTER!!!</button>
             <IconButton onClick={() => props.history.goBack()} edge="start"  color="inherit" aria-label="menu">

@@ -93,6 +93,7 @@ function AddRenter(props) {
     const [phone, setPhone] = useState('');
     const [houseId, setHouseId] = useState('')
     const [error, setError] = useState(false)
+    
     const classes = useStyles();
 
     const {data} = props.user

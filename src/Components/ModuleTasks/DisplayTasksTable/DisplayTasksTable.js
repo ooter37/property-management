@@ -1,5 +1,5 @@
 import './DisplayTasksTable.scss'
-import React, {useEffect} from 'react'
+import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux' 
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core'

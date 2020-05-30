@@ -1,0 +1,20 @@
+@import '../../../App.scss';
+
+.header-house-selector-container {
+    // display: flex !important;
+    // background-color: red;
+    // height: 50px;
+}
+
+.header-list {
+    // color: fuchsia;
+    // height: 50px;
+    // background-color: white;
+    // margin-top: 0px !important;
+}
+// .header-list-house-name {
+//     margin-left: 20px !important;
+// }
+.header-select-button {
+    background-color: $theme-500 !important;
+}

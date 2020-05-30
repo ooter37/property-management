@@ -118,7 +118,7 @@ function AddHouse(props) {
             if (props.user.data) { state &&
                 await axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
                 await props.getHouses()
-                await props.setSelectedHouseRedux(props.houses.houses[0])
+                // await props.setSelectedHouseRedux(props.houses.houses[0])
                 success.fire({title: `${address} has been added.`})
                 setRedirect(true)
             } else {
