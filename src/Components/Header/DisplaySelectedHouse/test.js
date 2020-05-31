@@ -1,37 +1,36 @@
 import './DisplaySelectedHouse.scss'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import { Typography, MenuItem, Menu, Button, List } from "@material-ui/core";
 
 function DisplaySelectedHouse(props){
-  const {selectedHouse} = props.houses
-  const {house_id} = props.houses.selectedHouse
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(115);
-    
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-      setSelectedIndex(house_id)
-    },[selectedHouse, house_id])
+    // },[])
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (houseId, index) => {
-    setSelectedIndex(houseId);
+  const handleMenuItemClick = (event, index) => {
+    setSelectedIndex(index);
     setAnchorEl(null);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+    
+    
+    // const classes = useStyles();
 
     return (
 
-        (props.houses.houses.find(e => e.house_id === selectedIndex))
+        (props.houses.houses[0])
         ?
         <div className='header-house-selector-container'>
            <List className='header-list' component="nav" aria-label="Selected House">
@@ -41,9 +40,11 @@ function DisplaySelectedHouse(props){
                 // button
                 aria-haspopup="true"
                 aria-controls="lock-menu"
-                // aria-label={<Typography variant='h5'>Currently Viewing</Typography>}
+                aria-label={<Typography variant='h5'>Currently Viewing</Typography>}
                 onClick={handleClickListItem}
-                >{selectedIndex && props.houses.houses.find(e => e.house_id === selectedIndex).address}
+                >{props.houses.houses[0] && props.houses.houses[selectedIndex].address}
+                    {/* <ListItemText primary={<Typography variant='h5'>Currently Viewing</Typography>} 
+                    secondary={<Typography variant='h5'>{props.houses.houses[0] && props.houses.houses[selectedIndex].address}</Typography>}/> */}
                 </Button>
             </List>
             <Menu
@@ -57,12 +58,10 @@ function DisplaySelectedHouse(props){
                 <MenuItem
                 key={house.house_id}
                 // disabled={index === 0}
-                // selected={index === selectedIndex}
+                selected={index === selectedIndex}
                 onClick={(event) => {
-                    handleMenuItemClick(house.house_id, index)
-                    // console.log(house.house_id)
-                    props.setSelectedHouseRedux(house)}}>
-                      {house.address}</MenuItem>))}
+                    handleMenuItemClick(event, index)
+                    props.setSelectedHouseRedux(house)}}>{house.address}</MenuItem>))}
             </Menu>              
         </div>
         :

@@ -144,7 +144,8 @@ function UpdateHouse(props) {
             if (props.user.data) {
               await axios.delete(`/api/houses/${id}`)
               await props.getHouses()
-            //   await props.setSelectedHouseRedux(props.houses.houses[0])
+              console.log(props.houses.houses)
+              await props.setSelectedHouseRedux(props.houses.houses[0])
               setRedirect(true)
             } else {
                 pleaseSignIn.fire()
