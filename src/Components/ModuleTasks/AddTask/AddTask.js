@@ -231,14 +231,14 @@ function AddTask(props) {
         if (props.user.data) {
           // console.log('submit', checked)
             const userId = props.user.data.user_id
-            const houseId = props.selectedHouse
+            const houseId = props.houses.selectedHouse.house_id
             // const urgent = checked === 1 ? true : false
             axios.post('/api/tasks', {userId, houseId, type, date, price, checked, note, contact})
             .then(() => {
-                axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
-                    props.setTasks(res.data)
-                    resetForm()
-                })
+                // axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
+                //     props.setTasks(res.data)
+                //   })
+                  resetForm()
                 success.fire({title: `${type} has been added.`})
             })
         } else {
@@ -264,7 +264,7 @@ function AddTask(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-task-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.selectedHouse ? `Add a task for ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'}</Typography>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.houses.selectedHouse ? `Add a task for ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'}</Typography>
                             <Typography variant='subtitle2' >&nbsp; &nbsp; &nbsp; *Tasks marked urgent will be highlighted.</Typography>
                         </CardHeader>
                         <Grid 

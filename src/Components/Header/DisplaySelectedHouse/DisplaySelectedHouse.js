@@ -2,25 +2,23 @@ import './DisplaySelectedHouse.scss'
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
-import { Typography, MenuItem, Menu, Button, List } from "@material-ui/core";
+import {  MenuItem, Menu, Button, List } from "@material-ui/core";
 
 function DisplaySelectedHouse(props){
   const {selectedHouse} = props.houses
   const {house_id} = props.houses.selectedHouse
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedIndex, setSelectedIndex] = useState(115);
-    
-
-    useEffect(() => {
-
-      setSelectedIndex(house_id)
-    },[selectedHouse, house_id])
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(115);
+  
+  useEffect(() => {
+    setSelectedIndex(house_id)
+  },[selectedHouse, house_id])
 
   const handleClickListItem = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuItemClick = (houseId, index) => {
+  const handleMenuItemClick = (houseId) => {
     setSelectedIndex(houseId);
     setAnchorEl(null);
   };

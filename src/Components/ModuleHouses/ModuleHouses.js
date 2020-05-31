@@ -2,8 +2,7 @@ import './ModuleHouses.scss'
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {getHouses, setSelectedHouseRedux} from '../../redux/reducers/houses'
-import {requestUserData} from '../../redux/reducers/user'
+import {getHouses, setSelectedHouseRedux, getTasks} from '../../redux/reducers/houses'
 import {Link} from 'react-router-dom'
 import {Card, CardActionArea, CardMedia, CardContent, Typography, Grid} from '@material-ui/core/';
 import ScrollContainer from '../ScrollContainer/ScrollContainer'
@@ -15,11 +14,14 @@ function DisplayHouses (props) {
     // const classes = useStyles();
     const data = props.user
     const {getHouses} = props
+    const {getTasks} = props
     const {selectedHouse} = props.houses
+    const houseId = props.houses.selectedHouse.house_id
 
     useEffect(() => {
         if (!data.loading) {
             // console.log('selectedHouse',props.houses.selectedHouse)
+            getTasks()
             getHouses()
         //     .then((res) => {
         //         // console.log('.selectedHouse',props.houses.selectedHouse)
@@ -29,13 +31,14 @@ function DisplayHouses (props) {
         //   })
         }
       },
-      [getHouses, data])
+      [getHouses, getTasks, data])
 
     
     useEffect(() => {
         selectedHouse &&
-        axios.get(`/api/tasks/${selectedHouse.house_id}`)
+        axios.get(`/api/tasks`)
         .then(res => {
+            // console.log(res)
             let pushTasks = []
             if (res.data[0])
             {res.data.forEach(task => {
@@ -47,7 +50,7 @@ function DisplayHouses (props) {
                 }
             })
         } setSelectedTasks(pushTasks)
-        })}, [selectedHouse]
+        })}, [selectedHouse, houseId]
     )
    
     return (
@@ -86,7 +89,7 @@ function DisplayHouses (props) {
     )
 }
 
-const mapDispatchToProps = {requestUserData, getHouses, setSelectedHouseRedux}
+const mapDispatchToProps = {getHouses, setSelectedHouseRedux, getTasks}
 
 const mapStateToProps = state => state
 

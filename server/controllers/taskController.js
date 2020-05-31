@@ -2,9 +2,8 @@ module.exports = {
     getTasksByHouse: async (req,res) => {
         try {
             const db = req.app.get('db')
-            // console.log(req.params.id)
             if (req.session.user) {
-                const tasks = await db.tasks.get_tasks_by_house(req.params.id)
+                const tasks = await db.tasks.get_tasks_by_user(req.session.user.user_id)
             res.status(200).send(tasks)
             } else {
                 res.status(401).send('User not logged in.')

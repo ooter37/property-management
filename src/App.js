@@ -56,7 +56,7 @@ function App(props) {
           <Route path='/main' component={Main}/>
           <Route path='/add_house' component={AddHouse}/>
           <Route path='/update_house' component={UpdateHouse}/>
-          <Route path='/task/:id' component={ModuleTasks} />
+          <Route path='/tasks' component={ModuleTasks} />
           <Route path='/contractors' component={ModuleContractors} />
           <Route path='/renters' component={ModuleRenters} />
           {/* <Route path='/email' component={singleEmail} /> */}

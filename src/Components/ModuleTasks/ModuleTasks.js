@@ -1,22 +1,20 @@
 import './ModuleTasks.scss'
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
 import {connect} from 'react-redux'
+import {getTasks} from '../../redux/reducers/houses'
 import {Redirect} from 'react-router-dom'
+
 
 // import DisplayTasks from './DisplayTasksTable/DisplayTasks'
 import AddTask from './AddTask/AddTask'
 import DisplayTasksTable from './DisplayTasksTable/DisplayTasksTable'
 
 function ModuleTasks(props) {
-    const [tasks, setTasks] = useState()
-    const selectedHouse = props.match.params.id
+    const {getTasks} = props
 
     useEffect(() => {
-        axios.get(`/api/tasks/${selectedHouse}`).then(res => {
-            setTasks(res.data)
-        })}, [selectedHouse, setTasks]
-    )
+        getTasks()
+    },[getTasks])
 
 
     return (
@@ -28,13 +26,15 @@ function ModuleTasks(props) {
                 <Redirect to='/' />
             }
             <div className='table'>
-                <DisplayTasksTable tasks={tasks} setTasks={setTasks} selectedHouse={props.match.params.id} />
+                <DisplayTasksTable  />
             </div>
-            <AddTask tasks={tasks} setTasks={setTasks} selectedHouse={props.match.params.id} />
+            <AddTask  />
         </div>
     )
 }
 
+const mapDispatchToProps = {getTasks}
+
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(ModuleTasks)
+export default connect(mapStateToProps, mapDispatchToProps)(ModuleTasks)

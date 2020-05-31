@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 function HouseCard(props) {
     const classes = useStyles();
     const {selectedHouse} = props.houses
-    const {selectedTasks} = props
  
     return (props.houses.houses.map((house) => {
 
@@ -67,7 +66,7 @@ function HouseCard(props) {
                                                             </TableRow>
                                                         </TableHead>
                                                         <TableBody>
-                                                            <TaskCard selectedTasks={selectedTasks} />
+                                                            <TaskCard />
                                                             {/* {mappedTasks} */}
                                                         </TableBody>
                                                     </Table>
@@ -116,7 +115,7 @@ function HouseCard(props) {
                         </Grid>
                         <Grid item style = {{ width: 400}}>
                             <Card style = {{ height: 400}}>
-                                <Link to={`task/${house.house_id}`}>
+                                <Link to={`/tasks`}>
                                     <CardActionArea>
                                         <CardMedia
                                         style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}

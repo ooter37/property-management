@@ -64,11 +64,11 @@ INSERT INTO contractors (user_id, name, email, address, city, state, zipcode, ph
 VALUES
 (0, 'Derek Lamarr', 'derekpropman@pineapplelighting.com', '123 Fake St.', 'Phoenix', 'AZ', 85020, 1234567890);
 
-CREATE TABLE contractor_notes (
-    contractor_note_id SERIAL PRIMARY KEY,
-    user_id  INT REFERENCES users(user_id),
-    contractor_id  INT REFERENCES contractor(contractor_id)
-);
+-- CREATE TABLE contractor_notes (
+--     contractor_note_id SERIAL PRIMARY KEY,
+--     user_id  INT REFERENCES users(user_id),
+--     contractor_id  INT REFERENCES contractor(contractor_id)
+-- );
 
 CREATE TABLE renters (
     renter_id SERIAL PRIMARY KEY,
@@ -86,9 +86,14 @@ VALUES
 (1,25,'Leo Lamarr','leo@derek.com',5551112233,true),
 (1,25,'Harriet Lamarr','harriet@derek.com',1234567890,false);
 
--- CREATE TABLE services (
---     service_id SERIAL PRIMARY KEY,
---     user_id  INT REFERENCES users(user_id),
---     contractor_id INT REFERENCES contractors(contractor_id),
---     service VARCHAR
--- );
+CREATE TABLE rent (
+    rent_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id),
+    house_id INT REFERENCES houses(house_id),
+    amount INT,
+    period VARCHAR,
+    due VARCHAR,
+    note TEXT,
+    paid BOOLEAN,
+    void BOOLEAN
+);

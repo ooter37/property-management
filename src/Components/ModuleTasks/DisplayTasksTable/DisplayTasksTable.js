@@ -20,7 +20,8 @@ const {setTasks, selectedHouse} = props
       }).catch((err) => console.log('Error deleting task.', err))
     }
 
-    const mappedTasks = props.tasks && props.tasks.map((task) => {
+    const mappedTasks = (props.houses.selectedHouse && props.houses.tasks) && props.houses.tasks.map((task) => {
+      if (task.house_id === props.houses.selectedHouse.house_id){
         return (
           <TableRow key={`task-display-${task.task_id}`} className={`urgent-${task.urgent}`}>
             <TableCell component="th" scope="row">{task.type}</TableCell>
@@ -35,7 +36,9 @@ const {setTasks, selectedHouse} = props
                         } else {pleaseSignIn.fire()}}} 
                         startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
         </TableRow>
-        )
+        )} else {
+          return null
+        }
     })
 
   return (

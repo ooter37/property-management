@@ -53,10 +53,10 @@ app.put('/api/houses', updateHouse)
 app.delete('/api/houses/:id', deleteHouse)
 
 //TASK ENDPOINTS
-app.get('/api/tasks/:id', getTasksByHouse)
+// app.get('/api/tasks/:id', getTasksByHouse)
+app.get('/api/tasks', getTasksByHouse)
 app.post('/api/tasks', addTask)
 app.delete('/api/tasks/:id', deleteTask)
-app.post('/sign_s3', uploadFile)
 
 //CONTRACTOR ENDPOINTS
 app.get('/api/contractors', getContractorsByUser)
@@ -70,9 +70,10 @@ app.post('/api/renters', addRenter)
 app.delete('/api/renters/:id', deleteRenter)
 app.put('/api/renters', updateRenter)
 
-//EMAIL ENDPOINTS
+//OTHER ENDPOINTS
 // app.post('/email/single', singleEmail)
 app.post('/email/multi', sendEmail)
+app.post('/sign_s3', uploadFile)
 
 
 // Configure aws with your accessKeyId and your secretAccessKey -- MIGHT NEED THIS WHEN ACCESS PRIVS ARE FIXED
