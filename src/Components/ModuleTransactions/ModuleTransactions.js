@@ -36,8 +36,8 @@ function ModuleTransactions(props) {
 
     return (
         <div className='transactions-container'>
-            <Grid container spacing={2}>
             <DisplayTransactions/>
+            <Grid container spacing={2}>
                 {mappedHousesTransactions}
             </Grid>
         </div>
