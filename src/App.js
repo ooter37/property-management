@@ -16,6 +16,7 @@ import Register from './Components/Auth/Register'
 import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
 import Header from './Components/Header/Header'
 import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
+import ModuleTransactions from './Components/ModuleTransactions/ModuleTransactions'
 
 function App(props) {
   // console.log(props.user)
@@ -59,6 +60,7 @@ function App(props) {
           <Route path='/tasks' component={ModuleTasks} />
           <Route path='/contractors' component={ModuleContractors} />
           <Route path='/renters' component={ModuleRenters} />
+          <Route path='/transactions' component={ModuleTransactions} />
           {/* <Route path='/email' component={singleEmail} /> */}
       </Switch>
       </div>

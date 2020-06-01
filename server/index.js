@@ -12,6 +12,7 @@ const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, delet
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
 const { getContractorsByUser, addContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 const { getRentersByUser, addRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
+const { getTransactionsByUser } = require('./controllers/transactionController')
 const { sendEmail } = require('./controllers/mailController')
 
 //TOP-LEVEL MIDDLEWARE
@@ -69,6 +70,9 @@ app.get('/api/renters', getRentersByUser)
 app.post('/api/renters', addRenter)
 app.delete('/api/renters/:id', deleteRenter)
 app.put('/api/renters', updateRenter)
+
+//TRANSACTION ENDPOINTS
+app.get('/api/transactions', getTransactionsByUser)
 
 //OTHER ENDPOINTS
 // app.post('/email/single', singleEmail)

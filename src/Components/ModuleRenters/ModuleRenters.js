@@ -15,18 +15,11 @@ function ModuleRenters(props){
     const {data} = props.user
     const {getRenters} = props
 
-    // useEffect(() => {
-    //     axios.get('/api/renters').then(res => {
-    //         setRenters(res.data)
-    //     })}, []
-    // )
     useEffect(() => {
-
         if (data) {
             getRenters()
         }
-      },
-      [getRenters, data])
+      },[getRenters, data])
 
       function toggleUpdating(displaying,renterData) {
         setDisplaying(displaying)

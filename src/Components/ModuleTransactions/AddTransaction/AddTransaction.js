@@ -1,16 +1,13 @@
-import './AddRenter.scss'
+import './AddTransaction.scss'
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
 import {connect} from 'react-redux'
-import {getRenters, getHouses} from '../../../redux/reducers/houses'
-import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, MenuItem, FormControl, InputLabel, Select, FormHelperText, Button, Typography } from "@material-ui/core";
-import CustomInput from "../../UI/CustomInput.js";
+import {  Grid, makeStyles, MenuItem, FormControl, InputLabel, Select, FormHelperText, Button, Typography } from "@material-ui/core";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import {primaryColor,dangerColor,successColor,grayColor,defaultFont} from "../../UI/material-dashboard-react";
+import CustomInput from "../../UI/CustomInput.js";
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import {primaryColor,dangerColor,successColor,grayColor,defaultFont} from "../UI/material-dashboard-react";
 
 const theme = createMuiTheme({
     overrides: {
@@ -84,122 +81,35 @@ const styles = {
       textDecoration: "none"
     }
   };
-  
   const useStyles = makeStyles(styles);
 
-function AddRenter(props) {
+function AddTransaction(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [houseId, setHouseId] = useState('')
     const [error, setError] = useState(false)
-    
-    const classes = useStyles();
 
-    const {data} = props.user
-    const {getHouses} = props
-
-    useEffect(() => {
-        if (data) {
-            getHouses()
-        }
-    },[data,getHouses])
-
-    function handleClick() {
-        setError(false)
-        if (!houseId) {
-            setError(true)
-        }
-    }
-
-    async function submitNewRenter() {
-        try {
-            if (houseId)
-            if (props.user.data) {
-                await axios.post('/api/renters', {houseId,name,email,phone})
-                props.getRenters()
-                resetForm()
-                success.fire({title: `${name} added as a new renter.`})
-            } else {
-                pleaseSignIn()
-            }
-        } catch (error) {
-            console.log('Error adding renter.', error)
-        }
-    }
-
-    function resetForm() {
-        setName('')
-        setEmail('')
-        setPhone('')
-        setHouseId('')
-    }
-    
     const mappedMenuItems = props.houses.houses && props.houses.houses.map((house) => {
         return (
         <MenuItem key={`mappedMenuItems${house.house_id}`} value={house.house_id}>{house.address}</MenuItem>
         )
     })
 
+    const classes = useStyles();
+
     return (
-        <form onSubmit={submitNewRenter}>
-            {/* <button onClick={()=> console.log(props)}>loglogg</button> */}
-            <Grid container>
+        <div>
+                <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-renter-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>View and manage renters</Typography>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>Transactions</Typography>
                             {/* <p className={classes.cardCategoryWhite}>Enter the renter's details.</p> */}
                         </CardHeader>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={5} className={classes.grid}>
-                                <CustomInput
-                                labelText="Name"
-                                id="name"
-                                formControlProps={{
-                                    required: true,
-                                    fullWidth: true
-                                }}
-                                inputProps={{
-                                    // required: true,
-                                    value: name,
-                                    onChange: (e) => setName(e.target.value)
-                                }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={3} className={classes.grid}>
-                                <CustomInput
-                                labelText="Phone Number"
-                                id="phone"
-                                formControlProps={{
-                                    required: true,
-                                    fullWidth: true
-                                }}
-                                inputProps={{
-                                    value: phone,
-                                    onChange: (e) => setPhone(e.target.value),
-                                }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={12} md={4} className={classes.grid}>
-                                <CustomInput
-                                labelText="Email"
-                                formControlProps={{
-                                    required: true,
-                                    fullWidth: true,
-                                }}
-                                inputProps={{
-                                    value: email,
-                                    onChange: (e) => setEmail(e.target.value),
-                                    type: 'email',
-                                    // required: 
-                                }}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container className='house-submit-container'>
-                            <Grid item xs={12} sm={12} md={6} className={classes.grid}>
-                                <MuiThemeProvider theme={theme}>
+                            <MuiThemeProvider theme={theme}>
                                     <FormControl
                                     className={classes.formControl}
                                     fullWidth
@@ -227,20 +137,31 @@ function AddRenter(props) {
                                     </FormControl>
                                 </MuiThemeProvider>
                             </Grid>
+                            <Grid item xs={12} sm={12} md={3} className={classes.grid}>
+                                
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={4} className={classes.grid}>
+                               
+                            </Grid>
+                        </Grid>
+                        <Grid container className='house-submit-container'>
+                            <Grid item xs={12} sm={12} md={6} className={classes.grid}>
+                               
+                            </Grid>
                             <Grid item>
-                                <Button onClick={() => handleClick()} type='submit' variant='contained' color="primary" className='add-renter-button'>Add</Button>
+                                {/* <Button onClick={() => handleClick()} type='submit' variant='contained' color="primary" className='add-renter-button'>Add</Button> */}
                             </Grid>
                         </Grid>
                  
                     </Card>
                 </Grid>
             </Grid>
-        </form>
+        </div>
     )
 }
 
-const mapDispatchToProps = {getRenters, getHouses}
+// const mapDispatchToProps = {requestUserData}
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddRenter)
+export default connect(mapStateToProps, null)(AddTransaction)

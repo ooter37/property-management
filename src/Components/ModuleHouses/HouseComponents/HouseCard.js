@@ -163,14 +163,14 @@ function HouseCard(props) {
                         </Grid>
                         <Grid item style = {{ width: 400}}>
                             <Card style = {{ height: 400}}>
-                                {/* <Link to={{pathname: '/renters'}}> */}
+                                <Link to={{pathname: '/transactions'}}>
                                     <CardActionArea>
                                         <CardMedia
                                         style = {{ height: 0, minWidth: 350, paddingTop: '70%'}}
                                         image= {require ("../../../media/rent.jpeg")}
                                         title="Rent"/>
                                     </CardActionArea>
-                                {/* </Link> */}
+                                </Link>
                                     <CardContent>
                                         <Typography gutterBottom variant="h5" component="h2">Rent Tracking</Typography>
                                         <Typography variant="body2" color="textSecondary" component="p">View a schedule of rent and track payment status. </Typography>

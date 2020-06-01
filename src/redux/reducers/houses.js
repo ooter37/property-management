@@ -8,7 +8,8 @@ const initialState = {
     selectedContractor: 0,
     renters: [],
     selectedRenter: 0,
-    tasks: []
+    tasks: [],
+    transactions: []
 }
 
 const GET_HOUSES = 'GET_HOUSES'
@@ -18,6 +19,7 @@ const SELECTED_CONTRACTOR = 'SELECTED_CONTRACTOR'
 const GET_RENTERS = 'GET_RENTERS'
 const SELECTED_RENTER = 'SELECTED_RENTER'
 const GET_TASKS = 'GET_TASKS'
+const GET_TRANSACTIONS = 'GET_TRANSACTIONS'
 
 export default function(state = initialState,action) {
     // console.log('switch', action)
@@ -110,6 +112,22 @@ export default function(state = initialState,action) {
                 ...state,
                 loading: true
             }
+        case GET_TRANSACTIONS + '_REJECTED':
+            return {
+                ...state,
+                loading: false
+            }
+        case GET_TRANSACTIONS + '_FULFILLED':
+            return {
+                ...state,
+                transactions: action.payload,
+                loading: false,
+            }
+        case GET_TRANSACTIONS + '_PENDING':
+            return {
+                ...state,
+                loading: true
+            }
         default:
             return state
     }
@@ -156,9 +174,9 @@ export function getTasks() {
         payload: axios.get('/api/tasks').then(res => res.data)
     }
 }
-// export function getTasks() {
-//     return {
-//         type: GET_TASKS,
-//         payload: axios.get('/api/houses').then(res => res.data)
-//     }
-// }
+export function getTransactions() {
+    return {
+        type: GET_TRANSACTIONS,
+        payload: axios.get('/api/transactions').then(res => res.data)
+    }
+}

@@ -18,6 +18,7 @@ VALUES
 
 CREATE TABLE houses (
     house_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id),
     address VARCHAR,
     city VARCHAR,
     state VARCHAR,
@@ -86,14 +87,31 @@ VALUES
 (1,25,'Leo Lamarr','leo@derek.com',5551112233,true),
 (1,25,'Harriet Lamarr','harriet@derek.com',1234567890,false);
 
-CREATE TABLE rent (
-    rent_id SERIAL PRIMARY KEY,
+-- CREATE TABLE rent (
+--     rent_id SERIAL PRIMARY KEY,
+--     user_id INT REFERENCES users(user_id),
+--     house_id INT REFERENCES houses(house_id),
+--     amount INT,
+--     period VARCHAR,
+--     due VARCHAR,
+--     note TEXT,
+--     paid BOOLEAN,
+--     void BOOLEAN
+-- );
+
+CREATE TABLE transactions (
+    transaction_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(user_id),
     house_id INT REFERENCES houses(house_id),
     amount INT,
-    period VARCHAR,
-    due VARCHAR,
+    date VARCHAR,
+    tag VARCHAR,
     note TEXT,
-    paid BOOLEAN,
     void BOOLEAN
 );
+INSERT INTO transactions (user_id, house_id, amount, date, tag)
+VALUES
+(1, 115, 2000, '2020-05-29T15:48:57.148Z', 'Monthly Rent'),
+(1, 137, 2000, '2020-05-25T15:48:57.148Z', 'Monthly Rent'),
+(1, 138, 2000, '2020-06-01T15:48:57.148Z', 'Monthly Rent'),
+(1, 114, 2000, '2020-05-30T15:48:57.148Z', 'Monthly Rent');
