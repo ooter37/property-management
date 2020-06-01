@@ -4,8 +4,8 @@ module.exports = {
             const db = req.app.get('db')
             if (req.session.user) {
                 const userId = req.session.user.user_id
-                const {houseId,amount,date,tag} = req.body
-                const transaction = await db.transactions.add_transaction(userId,houseId,amount,date,tag)
+                const {houseId,amount,date} = req.body
+                const transaction = await db.transactions.add_transaction(userId,houseId,amount,date)
                 res.status(200).send(transaction)
             } else {
                 res.status(401).send('User not logged in.')

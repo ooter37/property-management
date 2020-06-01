@@ -8,11 +8,11 @@ const cors = require('cors')
 //IMPORT 
 const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env
 const { login, register, logout, getUser, userData } = require('./controllers/authController')
-const { getHousesByLinked, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
+const { getHousesByUser, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
 const { getContractorsByUser, addContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 const { getRentersByUser, addRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
-const { getTransactionsByUser } = require('./controllers/transactionController')
+const { getTransactionsByUser, addTransaction } = require('./controllers/transactionController')
 const { sendEmail } = require('./controllers/mailController')
 
 //TOP-LEVEL MIDDLEWARE
@@ -47,7 +47,7 @@ app.get('/auth/current', getUser)
 app.get('/auth/user-data', userData)
 
 //HOUSE ENDPOINTS
-app.get('/api/houses', getHousesByLinked)
+app.get('/api/houses', getHousesByUser)
 app.post('/api/houses', addHouse)
 app.put('/api/houses/:id', updateImage )
 app.put('/api/houses', updateHouse)
@@ -73,6 +73,7 @@ app.put('/api/renters', updateRenter)
 
 //TRANSACTION ENDPOINTS
 app.get('/api/transactions', getTransactionsByUser)
+app.post('/api/transactions', addTransaction)
 
 //OTHER ENDPOINTS
 // app.post('/email/single', singleEmail)

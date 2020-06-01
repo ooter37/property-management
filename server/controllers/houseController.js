@@ -4,11 +4,23 @@ require('dotenv').config()
 const {S3_BUCKET} = process.env
 
 module.exports = {
-    getHousesByLinked: async (req,res) => {
+    // getHousesByLinked: async (req,res) => {
+    //     try {
+    //         const db = req.app.get('db')
+    //         if (req.session.user) {
+    //             const houses = await db.houses.get_houses_by_linked(req.session.user.user_id)
+    //             res.status(200).send(houses)
+    //         }
+    //     } catch (error) {
+    //         console.log('Error getting houses by link.', error)
+    //         res.status(500).send(error)
+    //     }
+    // },
+    getHousesByUser: async (req,res) => {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
-                const houses = await db.houses.get_houses_by_linked(req.session.user.user_id)
+                const houses = await db.houses.get_houses_by_user(req.session.user.user_id)
                 res.status(200).send(houses)
             }
         } catch (error) {
@@ -20,7 +32,7 @@ module.exports = {
         try {
             const db = req.app.get('db')
             if (req.session.user) {
-                const {address, city, state, zipcode, rent, status, ownership} = req.body
+                const {address, city, state, zipcode, rent, status} = req.body
                 const frontImage = req.body.image
                 const googleResult = await axios.get(`https://maps.googleapis.com/maps/api/streetview/metadata?location=${(`${address},+${city},+${state}`).replace(/\s/g,',+')}&key=${process.env.REACT_APP_GOOGLE}`)
                 let image
@@ -31,7 +43,7 @@ module.exports = {
                 } else {
                     image = '/no-image-available.png'
                 }
-                const house = await db.houses.add_house(address, city, state, zipcode, rent, status, image, req.session.user.user_id, ownership)
+                const house = await db.houses.add_house(req.session.user.user_id, address, city, state, zipcode, rent, status, image)
                 res.status(200).send(house)
             }
         } catch (error) {

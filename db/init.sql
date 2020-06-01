@@ -107,11 +107,26 @@ CREATE TABLE transactions (
     date VARCHAR,
     tag VARCHAR,
     note TEXT,
+    period VARCHAR,
     void BOOLEAN
 );
-INSERT INTO transactions (user_id, house_id, amount, date, tag)
+INSERT INTO transactions (user_id, house_id, amount, date, tag, period)
 VALUES
+(1, 115, 2000, '2020-04-29T15:48:57.148Z', 'Monthly Rent'),
+(1, 115, 2000, '2020-03-29T15:48:57.148Z', 'Monthly Rent'),
 (1, 115, 2000, '2020-05-29T15:48:57.148Z', 'Monthly Rent'),
 (1, 137, 2000, '2020-05-25T15:48:57.148Z', 'Monthly Rent'),
 (1, 138, 2000, '2020-06-01T15:48:57.148Z', 'Monthly Rent'),
 (1, 114, 2000, '2020-05-30T15:48:57.148Z', 'Monthly Rent');
+
+CREATE TABLE due (
+    due_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id),
+    house_id INT REFERENCES houses(house_id),
+    amount INT,
+    date VARCHAR,
+    tag VARCHAR,
+    note TEXT,
+    period VARCHAR,
+    void BOOLEAN
+);
