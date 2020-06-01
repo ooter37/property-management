@@ -17,6 +17,18 @@ import ModuleContractors from './Components/ModuleContractors/ModuleContractors'
 import Header from './Components/Header/Header'
 import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
 import ModuleTransactions from './Components/ModuleTransactions/ModuleTransactions'
+import { createMuiTheme,MuiThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+        // light: 
+        main: '#4caf50',
+        // dark:
+        contrastText: '#fff'
+    }
+  },
+});
 
 function App(props) {
   // console.log(props.user)
@@ -36,7 +48,7 @@ function App(props) {
 
 
   return (
-    // <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
     <div className="App">
       {
         redirect
@@ -65,7 +77,7 @@ function App(props) {
       </Switch>
       </div>
     </div>
-    // </MuiThemeProvider>
+    </MuiThemeProvider>
   );
 }
 

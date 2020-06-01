@@ -1,5 +1,5 @@
 import './ModuleTransactions.scss'
-import React, {useState, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import {connect} from 'react-redux' 
 import {getTransactions,getHouses} from '../../redux/reducers/houses'
 import { Grid } from '@material-ui/core'
@@ -27,18 +27,24 @@ function ModuleTransactions(props) {
         //       }
         //   })
           return (
-            <Grid key={`transactionHouseCard${house.house_id}`} item xs={12} sm={12} md={5}>
-            <TransactionHouseCard houseId={house.house_id} address={house.address} image={house.image} />
-        </Grid>
+            <Grid key={`transactionHouseCard${house.house_id}`} item xs={12} sm={12} md={6}>
+                <TransactionHouseCard houseId={house.house_id} address={house.address} image={house.image} />
+            </Grid>
           )
       })
       
 
     return (
         <div className='transactions-container'>
-            <DisplayTransactions/>
             <Grid container spacing={2}>
-                {mappedHousesTransactions}
+                <Grid style = {{ width: 420}} item xs={12} sm={4} md={4}>
+                <DisplayTransactions/>
+                </Grid>
+                <Grid item xs={12} sm={8} md={8}>
+                    <Grid container spacing={2}>
+                    {mappedHousesTransactions}
+                    </Grid>
+                </Grid>
             </Grid>
         </div>
 
