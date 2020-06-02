@@ -17,7 +17,8 @@ function TabPanel(props) {
       >
         {value === index && (
           <Box p={3}>
-            <Typography>{children}</Typography>
+            <div>{children}</div>
+            {/* <Typography>{children}</Typography> */}
           </Box>
         )}
       </div>
@@ -49,39 +50,13 @@ function TabPanel(props) {
 
 function DisplayTransactions(props) {
     const classes = useStyles();
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(3);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
       };
 
-
-    // const mappedHouses = (props.houses.houses.length && props.houses.transactions.length) ? props.houses.houses.map((house) => {
-    //     // const mappedTabs = props.houses.transactions.map((trans) => {
-
-    //     //     if (trans.house_id === house.house_id) 
-    //     // })
-    //     const mappedTransactions = props.houses.transactions.map((trans) => {
-    //         if (trans.house_id === house.house_id && trans.date === '2020-06-01T20:08:15.064Z') {
-    //             return (
-    //                 <TableRow key={`mappedTransactions${trans.transaction_id}`}>
-    //                     <TableCell>{trans.address}</TableCell>
-    //                     <TableCell>{trans.amount}</TableCell>
-    //                     <TableCell>{trans.date}</TableCell>
-    //                 </TableRow>
-
-    //             )
-    //         } else {
-    //             return null
-    //         }
-    //     })
-    //     return (
-    //         mappedTransactions
-    //     )
-    // }) : null
-
     const months = [...Array(5)].map((_, idx) => moment(moment().add(1,'months')).subtract(idx, 'month').format('MM'));
-    // const months = [...Array(5)].map((_, idx) => moment(moment().subtract(4, 'months')).add(idx, 'month').format('MM'))
     const tabMaker = months.reverse().map((month, index) => {
         // console.log(moment(month).format('MM'))
         // console.log(moment().month(month).format('MMM'))
@@ -97,7 +72,7 @@ function DisplayTransactions(props) {
                     return (
                         <TableRow key={`mappedTransactions${trans.transaction_id}`}>
                             <TableCell>{trans.address}</TableCell>
-                            <TableCell>{trans.amount}</TableCell>
+                            <TableCell>${trans.amount}</TableCell>
                             <TableCell>{moment(trans.date).format('MM/DD/YYYY')}</TableCell>
                         </TableRow>
                     )
@@ -130,7 +105,7 @@ function DisplayTransactions(props) {
        
        return (
         <div className={classes.root}>
-          {/* {console.log(years.reverse())} */}
+          {/* {console.log(parseInt(months[]))} */}
         <AppBar position="static" color="default">
           <Tabs
             value={value}

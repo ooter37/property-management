@@ -46,7 +46,6 @@ function TransactionHouseCard(props) {
   
     return (
         <div>
-            {console.log(props.rent, props.paid)}
             <Card className='transaction-card'>
                 <div className='avatar-address-container'>
                     <Avatar alt="House Image" src={props.image} className={classes.avatar} />
@@ -56,13 +55,13 @@ function TransactionHouseCard(props) {
                             (paid >= rent)
                             ?
                             
-                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<Typography className='paid' variant='h6'>PAID</Typography></Typography>
+                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='paid'>PAID</div></Typography>
                             :
                             (paid === 0)
                             ?
-                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<Typography className='address-title unpaid' variant='h6'>UNPAID</Typography></Typography>
+                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='address-title unpaid'>UNPAID</div></Typography>
                             :
-                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<Typography className='address-title partial' variant='h6'>PARTIAL</Typography></Typography>
+                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='address-title partial'>PARTIAL</div></Typography>
                         }
                         {/* <Typography className={`address-title ${props.paid > props.rent ? 'paid' : ''} ${props.paid < props.rent && props.paid > 0 ? 'partial' : ''} ${props.paid <= 0 ? 'unpaid' : ''}`} variant='h6'>payment status</Typography> */}
                     </div>
@@ -75,7 +74,7 @@ function TransactionHouseCard(props) {
                         <PriceInput
                         price={payment}
                         setPrice={setPayment}
-                        label='Payment Amount'/>
+                        label='Payment'/>
                     </FormControl>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <DatePicker

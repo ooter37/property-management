@@ -41,7 +41,6 @@ function ModuleTransactions(props) {
         <div className='transactions-container'>
             {/* {console.log(props.houses.transactions.length && props.houses.transactions[0].period)} */}
             {/* {console.log(moment(new Date()).format('MM YYYY'))} */}
-            {paidStatus(137)}
             <Grid container spacing={2}>
                 <Grid style = {{ width: 420}} item xs={12} sm={4} md={4}>
                 <DisplayTransactions/>
