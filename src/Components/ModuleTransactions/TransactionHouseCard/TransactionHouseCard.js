@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 function TransactionHouseCard(props) {
     const [date, setDate] = useState(new Date())
     const [payment, setPayment] = useState('')
+    const {paid,rent} = props
 
     const classes = useStyles();
 
@@ -42,15 +43,28 @@ function TransactionHouseCard(props) {
         }
     }
 
-
+  
     return (
         <div>
+            {console.log(props.rent, props.paid)}
             <Card className='transaction-card'>
                 <div className='avatar-address-container'>
                     <Avatar alt="House Image" src={props.image} className={classes.avatar} />
                     <div className='transaction-card-text-container'>
                         <Typography className='address-title' variant='h6'>{props.address}</Typography>
-                        <Typography className='address-title' variant='h6'>payment status</Typography>
+                        {
+                            (paid >= rent)
+                            ?
+                            
+                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<Typography className='paid' variant='h6'>PAID</Typography></Typography>
+                            :
+                            (paid === 0)
+                            ?
+                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<Typography className='address-title unpaid' variant='h6'>UNPAID</Typography></Typography>
+                            :
+                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<Typography className='address-title partial' variant='h6'>PARTIAL</Typography></Typography>
+                        }
+                        {/* <Typography className={`address-title ${props.paid > props.rent ? 'paid' : ''} ${props.paid < props.rent && props.paid > 0 ? 'partial' : ''} ${props.paid <= 0 ? 'unpaid' : ''}`} variant='h6'>payment status</Typography> */}
                     </div>
                 </div>
                 <form className='transaction-form' onSubmit={submitTransaction}>

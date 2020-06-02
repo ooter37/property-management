@@ -15,7 +15,8 @@
 }
 .address-title {
     // background-color: green;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     width: 100%;
 }
 .transaction-form {
@@ -39,5 +40,26 @@
     display: flex;
     // align-items: space-between;
     justify-content: space-between;
+}
 
+.paid {
+    border: 2px solid $theme-400;
+    color: $theme-400;
+    border-radius: 8%;
+    text-align: center;
+    width: 100px;
+}
+.unpaid {
+    border: 2px solid red;
+    color: red;
+    border-radius: 8%;
+    text-align: center;
+    width: 100px;
+}
+.partial {
+    border: 2px solid #fbc02d;
+    color: #fbc02d;
+    border-radius: 8%;
+    text-align: center;
+    width: 100px;
 }

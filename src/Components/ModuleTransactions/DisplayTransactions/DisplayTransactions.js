@@ -93,15 +93,6 @@ function DisplayTransactions(props) {
     const panelMaker = months.map((month, index) => {
         const mappedHouses = (props.houses.houses.length && props.houses.transactions.length) ? props.houses.houses.map((house) => {
             const mappedTransactions = props.houses.transactions.map((trans) => {
-                // console.log(month)
-                // console.log(moment().month(trans.date).format('MM'))
-                // console.log(moment(moment().month(trans.date).format('MM')).isSame(month, 'month'))
-                // console.log(trans.date)
-                // console.log(moment.format(trans.date, 'M'))
-                // console.log(moment(trans.date).format('MM'))
-                // console.log(month)
-                // console.log(moment().month(trans.date).format('MM'))
-                // if (trans.house_id === house.house_id && moment(moment().month(trans.date).format('MM')).isSame(month, 'month')) {
                 if (trans.house_id === house.house_id && month === moment(trans.date).format('MM')) {
                     return (
                         <TableRow key={`mappedTransactions${trans.transaction_id}`}>
