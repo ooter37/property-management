@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 function TransactionHouseCard(props) {
     const [date, setDate] = useState(new Date())
-    const [amount, setAmount] = useState()
+    const [amount, setAmount] = useState('')
 
     const classes = useStyles();
 
@@ -28,7 +28,7 @@ function TransactionHouseCard(props) {
             if (props.user.data) {
                 const {houseId} = props
                 await axios.post('/api/transactions', {houseId,amount,date})
-                setAmount()
+                setAmount('')
                 success.fire({title: `Transaction added.`})
                 // await props.getTransaction()
             } else {
@@ -42,29 +42,42 @@ function TransactionHouseCard(props) {
 
     return (
         <div>
-            <Card>
-                <Typography variant='h6'>{props.address}</Typography>
-                <Avatar alt="House Image" src={props.image} className={classes.avatar} />
-                <form onSubmit={submitTransaction}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <DatePicker
-                        variant="inline"
-                        openTo="year"
-                        views={["year", "month"]}
-                        label="Year and Month"
-                        helperText="Select the date and month to apply this payment."
-                        value={date}
-                        onChange={setDate}
-                        autoOk='true'
-                        />
-                    </MuiPickersUtilsProvider>
-                    <FormControl required className={classes.formControl} >
+            <Card className='transaction-card'>
+                <div className='avatar-address-container'>
+                    <Avatar alt="House Image" src={props.image} className={classes.avatar} />
+                    <div className='transaction-card-text-container'>
+                        <Typography className='address-title' variant='h6'>{props.address}</Typography>
+                        <Typography className='address-title' variant='h6'>payment status</Typography>
+                    </div>
+                </div>
+                <form className='transaction-form' onSubmit={submitTransaction}>
+                    {/* <div className='transaction-datepicker-container'> */}
+
+                    <div className='transaction-amount-and-button'>
+                    <FormControl required className='transaction-price-input' >
                         <PriceInput
                         price={amount}
                         setPrice={setAmount}
                         label='Payment Amount'/>
                     </FormControl>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <DatePicker
+                        className='transaction-datepicker'
+                        variant="inline"
+                        openTo="year"
+                        views={["year", "month"]}
+                        label="Month to Apply Payment"
+                        // helperText="Month to Apply Payment"
+                        value={date}
+                        onChange={setDate}
+                        autoOk='true'
+                        />
+                    </MuiPickersUtilsProvider>
+                    {/* </div> */}
+                    
+
                     <Button type='submit' variant='contained' color='primary'>Submit</Button>
+                        </div>
                 </form>
             </Card>
         </div>

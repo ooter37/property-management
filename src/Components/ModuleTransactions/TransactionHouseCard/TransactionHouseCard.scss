@@ -1,1 +1,43 @@
 @import '../../../App.scss';
+
+.transaction-card {
+    padding: 10px;
+}
+.avatar-address-container {
+    // background-color: red;
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    // margin-top: 10px;
+}
+.transaction-card-text-container{
+    width: 100%;
+}
+.address-title {
+    // background-color: green;
+    text-align: center;
+    width: 100%;
+}
+.transaction-form {
+    // background-color: lightblue;
+}
+// .transaction-datepicker {
+//     width: 100px;
+// }
+.transaction-datepicker-container{
+    // background-color: red;
+    width: 100%;
+    display: flex;
+    // justify-content: center;
+    justify-content: space-around;
+}
+.transaction-price-input {
+    width: 90px;
+}
+.transaction-amount-and-button {
+    // background-color: orange;
+    display: flex;
+    // align-items: space-between;
+    justify-content: space-between;
+
+}
