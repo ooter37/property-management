@@ -1,7 +1,7 @@
 import './DisplayTransactions.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import { TableRow, TableCell, TableContainer, TableHead, TableBody, Paper, Table, makeStyles, AppBar, Tabs, Tab, Typography, Box } from '@material-ui/core'
+import { TableRow, TableCell, TableContainer, TableHead, TableBody, Table, makeStyles, AppBar, Tabs, Tab, Typography, Box } from '@material-ui/core'
 import moment from "moment"
 import PropTypes from 'prop-types';
 
@@ -80,13 +80,13 @@ function DisplayTransactions(props) {
     //     )
     // }) : null
 
-    
-    const months = [...Array(5)].map((_, idx) => moment(moment().subtract(2, 'months')).add(idx, 'month').format('MM'))
-    const tabMaker = months.map((month, index) => {
-        // console.log(month)
+    const months = [...Array(5)].map((_, idx) => moment(moment().add(1,'months')).subtract(idx, 'month').format('MM'));
+    // const months = [...Array(5)].map((_, idx) => moment(moment().subtract(4, 'months')).add(idx, 'month').format('MM'))
+    const tabMaker = months.reverse().map((month, index) => {
+        // console.log(moment(month).format('MM'))
         // console.log(moment().month(month).format('MMM'))
         return (
-            <Tab key={`tabMaker${month}`} label={moment().month(month).format('MMM')} {...a11yProps(index)} />
+            <Tab key={`tabMaker${month}`} label={moment(month).format('MMM')} {...a11yProps(index)} />
         )
     })
 
@@ -139,6 +139,7 @@ function DisplayTransactions(props) {
        
        return (
         <div className={classes.root}>
+          {/* {console.log(years.reverse())} */}
         <AppBar position="static" color="default">
           <Tabs
             value={value}

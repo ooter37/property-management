@@ -8,6 +8,7 @@ import { Card, Avatar, makeStyles, Typography, Button, FormControl } from '@mate
 import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import PriceInput from '../../Functions/PriceInput'
+import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function TransactionHouseCard(props) {
     const [date, setDate] = useState(new Date())
-    const [amount, setAmount] = useState('')
+    const [payment, setPayment] = useState('')
 
     const classes = useStyles();
 
@@ -27,8 +28,10 @@ function TransactionHouseCard(props) {
         try {
             if (props.user.data) {
                 const {houseId} = props
-                await axios.post('/api/transactions', {houseId,amount,date})
-                setAmount('')
+                const amount = (payment) ? payment : 0
+                const period = moment(date).format('MM YYYY')
+                await axios.post('/api/transactions', {houseId,amount,date,period})
+                setPayment('')
                 success.fire({title: `Transaction added.`})
                 // await props.getTransaction()
             } else {
@@ -37,8 +40,8 @@ function TransactionHouseCard(props) {
         } catch (error) {
             
         }
-        
     }
+
 
     return (
         <div>
@@ -56,8 +59,8 @@ function TransactionHouseCard(props) {
                     <div className='transaction-amount-and-button'>
                     <FormControl required className='transaction-price-input' >
                         <PriceInput
-                        price={amount}
-                        setPrice={setAmount}
+                        price={payment}
+                        setPrice={setPayment}
                         label='Payment Amount'/>
                     </FormControl>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
