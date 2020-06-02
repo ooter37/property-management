@@ -39,7 +39,7 @@ function TransactionHouseCard(props) {
                 pleaseSignIn.fire()
             }
         } catch (error) {
-            
+            console.log('Error adding transaction.', error)
         }
     }
 

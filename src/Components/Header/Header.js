@@ -69,19 +69,28 @@ function Header(props) {
       }
       <AppBar className='header-appbar'>
         <Toolbar className='header-toolbar'>
+
           <Link to='/main'>
             <IconButton edge="start"  color="inherit" aria-label="menu">
               <HomeIcon />
               <Typography variant='h4'>&nbsp; Prop Aid</Typography>
             </IconButton>
           </Link>
-          <DisplaySelectedHouse/>
+          {
+            (props.location.pathname === '/tasks')
+            ?
+            <DisplaySelectedHouse/>
+            :
+            null
+          }
+
+
           <div className='login-goback-container'>
             <button onClick={() => console.log(props)}>PROP GETTER!!!</button>
-            <IconButton onClick={() => props.history.goBack()} edge="start"  color="inherit" aria-label="menu">
+            {/* <IconButton onClick={() => props.history.goBack()} edge="start"  color="inherit" aria-label="menu">
               <KeyboardBackspaceIcon  />
               <Typography variant='h6'>&nbsp; Previous Page</Typography>
-            </IconButton>
+            </IconButton> */}
             <div className='login-logout-container' >
               {
               (props.user.data) 
@@ -92,6 +101,7 @@ function Header(props) {
               }
             </div>
           </div>
+
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

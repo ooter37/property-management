@@ -1,9 +1,11 @@
 import './DisplayTransactions.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import { TableRow, TableCell, TableContainer, TableHead, TableBody, Table, makeStyles, AppBar, Tabs, Tab, Typography, Box } from '@material-ui/core'
+import { IconButton, TableRow, TableCell, TableContainer, TableHead, TableBody, Table, makeStyles, AppBar, Tabs, Tab, Box } from '@material-ui/core'
 import moment from "moment"
 import PropTypes from 'prop-types';
+import {confirmVoid, pleaseSignIn} from '../../Functions/Sweetalerts'
+import BlockIcon from '@material-ui/icons/Block';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,6 +73,12 @@ function DisplayTransactions(props) {
                 if (trans.house_id === house.house_id && month === moment(trans.date).format('MM')) {
                     return (
                         <TableRow key={`mappedTransactions${trans.transaction_id}`}>
+                          <TableCell>
+                          <IconButton onClick={() => { if (props.user.data) {
+              confirmVoid.fire({text: 'Are you sure you want to void this transaction?'})
+              .then((result) => {if (result.value) {props.voidTransaction(trans.transaction_id)}})
+                        } else {pleaseSignIn.fire()}}} color='secondary' > <BlockIcon /></IconButton>
+                          </TableCell>
                             <TableCell>{trans.address}</TableCell>
                             <TableCell>${trans.amount}</TableCell>
                             <TableCell>{moment(trans.date).format('MM/DD/YYYY')}</TableCell>
@@ -88,9 +96,10 @@ function DisplayTransactions(props) {
         return (
             <TabPanel key={`panelMaker${month}`} value={value} index={index}>
                 <TableContainer>
-                <Table>
+                <Table size='small'>
                     <TableHead>
                         <TableRow>
+                            <TableCell>Void</TableCell>
                             <TableCell>House</TableCell>
                             <TableCell>Paid</TableCell>
                             <TableCell>Date</TableCell>

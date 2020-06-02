@@ -1,11 +1,13 @@
 import './ModuleTransactions.scss'
 import React, { useEffect} from 'react'
 import {connect} from 'react-redux' 
+import axios from 'axios'
 import {getTransactions,getHouses} from '../../redux/reducers/houses'
 import { Grid } from '@material-ui/core'
 import TransactionHouseCard from './TransactionHouseCard/TransactionHouseCard'
 import DisplayTransactions from './DisplayTransactions/DisplayTransactions'
 import moment from 'moment'
+import {pleaseSignIn, success} from '../Functions/Sweetalerts'
 
 function ModuleTransactions(props) {
     const {data} = props.user
@@ -18,6 +20,20 @@ function ModuleTransactions(props) {
             getHouses()
         }
       },[getTransactions,getHouses,data])
+
+      async function voidTransaction(id) {
+          if (props.user.data) {
+              try {
+                  await axios.delete(`/api/transactions/${id}`)
+                  getTransactions()
+                  success.fire({title: 'Transaction Voided'})
+              } catch (error) {
+                  
+              }
+          } else {
+              pleaseSignIn.fire()
+          }
+      }
 
       function paidStatus(houseId) {
         let total = 0
@@ -42,10 +58,10 @@ function ModuleTransactions(props) {
             {/* {console.log(props.houses.transactions.length && props.houses.transactions[0].period)} */}
             {/* {console.log(moment(new Date()).format('MM YYYY'))} */}
             <Grid container spacing={2}>
-                <Grid style = {{ width: 420}} item xs={12} sm={4} md={4}>
-                <DisplayTransactions/>
+                <Grid style = {{ width: 450}} item xs={12} sm={5} md={5}>
+                <DisplayTransactions voidTransaction={voidTransaction}/>
                 </Grid>
-                <Grid item xs={12} sm={8} md={8}>
+                <Grid item xs={12} sm={7} md={7}>
                     <Grid container spacing={2}>
                     {mappedHousesTransactions}
                     </Grid>

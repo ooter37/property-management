@@ -63,6 +63,15 @@ const confirmDelete = Swal.mixin({
     cancelButtonColor: '#4caf50',
     confirmButtonText: 'DELETE',    
 })
+const confirmVoid = Swal.mixin({
+    title: 'Confirm Void',
+    text: "REPLACE ME",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#4caf50',
+    confirmButtonText: 'VOID',    
+})
 // END DELETE
 
 // START SUCCESS
@@ -108,6 +117,7 @@ const success = Swal.mixin({
 export  {
         // authSuccess,
         pleaseSignIn,
+        confirmVoid,
         // addedSuccess,
         // errorAdding,
         // confirmAdd,

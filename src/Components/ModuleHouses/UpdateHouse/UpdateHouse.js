@@ -89,7 +89,7 @@ function UpdateHouse(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [status, setStatus] = useState('')
-    const [rent, setRent] = useState()
+    const [amount, setAmount] = useState('')
     // rent initial state must be empty to prevent invalid data type submission
     const [redirect, setRedirect] = useState(false)
 
@@ -135,7 +135,7 @@ function UpdateHouse(props) {
 
     useEffect(() => {
         if (existingRent) {
-            setRent(existingRent)
+            setAmount(existingRent)
         }
     },[existingRent])
 
@@ -157,6 +157,7 @@ function UpdateHouse(props) {
 
     async function updateExistingHouse() {
         try {
+            const rent = (amount) ? amount : 0
             if (props.user.data) {
                 await axios.put('/api/houses', {id,address,city,state,zipcode,rent,status})
                 await props.getHouses()
@@ -239,8 +240,8 @@ function UpdateHouse(props) {
                             <Grid item xs={12} sm={12} md={3} className={classes.grid}>
                                 <FormControl required className={classes.formControl} >
                                     <PriceInput
-                                    price={rent}
-                                    setPrice={setRent}
+                                    price={amount}
+                                    setPrice={setAmount}
                                     label='Rent (monthly)'/>
                                 </FormControl>
                                 

@@ -30,6 +30,20 @@ module.exports = {
             res.status(500).send(error)
         }
     },
+    voidTransaction: async (req,res) => {
+        try {
+            const db = req.app.get('db')
+            if (req.session.user) {
+                const transaction = await db.transactions.void_transaction(req.params.id)
+                res.status(200).send(transaction)
+            } else {
+                res.status(401).send('User not logged in.')
+            }
+        } catch (error) {
+            console.log('Error voiding transaction.', error)
+            res.status(500).send(error)
+        }
+    }
     // getTransactionsByHouse: async (req,res) => {
     //     try {
     //         const db = req.app.get('db')

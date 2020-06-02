@@ -23,12 +23,18 @@ function DisplayContractors(props) {
   // },
   // [getContractors, data])
 
-  function deleteContractor(id) {
-    axios.delete(`/api/contractors/${id}`)
-    .then(() => {success.fire({title: 'Contractor Deleted'})})
-      .then (() => {
+  async function deleteContractor(id) {
+    if (props.user.data) {
+      try {
+        await axios.delete(`/api/contractors/${id}`)
+        success.fire({title: 'Contractor Deleted'})
         props.getContractors()
-    }).catch((err) => console.log('Error deleting contractor.', err))
+      } catch (error) {
+        console.log('Error deleting contractor.', error)
+      }
+    } else {
+      pleaseSignIn.fire()
+    }
   }
 
   function toggleEmail(email) {

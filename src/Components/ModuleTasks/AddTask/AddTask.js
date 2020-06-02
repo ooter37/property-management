@@ -207,27 +207,15 @@ const styles = {
 function AddTask(props) {
     const [type, setType] = useState('');
     const [date, setDate] = useState(new Date());
-    const [price, setPrice] = useState(0)
+    const [amount, setAmount] = useState('')
     const [checked, setChecked] = useState(false)
     const [note, setNote] = useState('')
     const [contact, setContact] = useState('')
-    // const [redirect, setRedirect] = useState(false)
     const classes = useStyles();
 
-    // const checkHandler = value => {
-    //   const currentIndex = checked.indexOf(value);
-    //   const newChecked = [...checked];
-      
-    //   if (currentIndex === -1) {
-    //     newChecked.push(value);
-    //   } else {
-    //     newChecked.splice(currentIndex, 1);
-    //   }
-    //   setChecked(newChecked);
-    //   console.log('handler', checked)
-    //   };
-
     const submitNewTask = () => {
+      try {
+        const price = (amount) ? amount : 0
         if (props.user.data) {
           // console.log('submit', checked)
             const userId = props.user.data.user_id
@@ -244,12 +232,15 @@ function AddTask(props) {
         } else {
           pleaseSignIn.fire()
         }
+      } catch (error) {
+        console.log('Error adding task.', error)
+      }
     }
 
     function resetForm() {
       setType('')
       setDate(new Date())
-      setPrice(0)
+      setAmount('')
       setChecked(false)
       setNote('')
       setContact('')
@@ -356,8 +347,8 @@ function AddTask(props) {
                                     <Grid item  className={classes.grid} md={12}>
                                         <FormControl required className={classes.formControl} >
                                             <PriceInput
-                                            price={price}
-                                            setPrice={setPrice}
+                                            price={amount}
+                                            setPrice={setAmount}
                                             label='Estimated Cost'/>
                                         </FormControl>
                                     </Grid>

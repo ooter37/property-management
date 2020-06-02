@@ -94,7 +94,7 @@ function AddHouse(props) {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [status, setStatus] = useState('')
-    const [rent, setRent] = useState()
+    const [amount, setAmount] = useState('')
     const [redirect, setRedirect] = useState(false)
     const [image, setImage] = useState('')
     const [error, setError] = useState(false)
@@ -115,6 +115,7 @@ function AddHouse(props) {
 
     async function submitNewHouse() {
         try {
+            const rent = (amount) ? amount : 0
             if (props.user.data) { state &&
                 await axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
                 await props.getHouses()
@@ -345,8 +346,8 @@ function AddHouse(props) {
                                     <Grid item  className={classes.grid} md={6}>
                                         <FormControl required className={classes.formControl} >
                                             <PriceInput
-                                            price={rent}
-                                            setPrice={setRent}
+                                            price={amount}
+                                            setPrice={setAmount}
                                             label='Rent (monthly)'/>
                                         </FormControl>
                                         {/* <CustomInput
