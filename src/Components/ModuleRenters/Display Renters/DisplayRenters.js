@@ -61,7 +61,7 @@ function DisplayRenters(props) {
   return (
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
       <div className='overflow-container'>
-      <Table className='display-tasks-table' aria-label="simple table">
+      <Table className='display-tasks-table' aria-label="simple table" size='small'>
         <TableHead>
           <TableRow>
             <TableCell><Button 

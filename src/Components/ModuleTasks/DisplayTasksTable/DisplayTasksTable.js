@@ -2,7 +2,7 @@ import './DisplayTasksTable.scss'
 import React from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux' 
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button} from '@material-ui/core'
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton} from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import moment from "moment"
 import {confirmDelete, pleaseSignIn, success} from '../../Functions/Sweetalerts'
@@ -29,12 +29,12 @@ const {setTasks, selectedHouse} = props
             <TableCell align="right">${task.price}</TableCell>
             <TableCell align="right">{task.contact}</TableCell>
             <TableCell align="right">{task.note}</TableCell>
-            <TableCell align="right"><Button onClick={() => { if (props.user.data) {
+            <TableCell align="right"><IconButton onClick={() => { if (props.user.data) {
                         confirmDelete.fire({
                             text: 'Are you sure you want to delete this task? This action is irreversible.'}).then((result) => {
                             if (result.value) {deleteTask(task.task_id)}})
                         } else {pleaseSignIn.fire()}}} 
-                        startIcon={<DeleteIcon />} size='small' color='secondary' variant='outlined'>Delete</Button></TableCell>
+                        size='small' color='secondary' variant='outlined'><DeleteIcon /></IconButton></TableCell>
         </TableRow>
         )} else {
           return null
@@ -44,7 +44,7 @@ const {setTasks, selectedHouse} = props
   return (
     <TableContainer className='table-container' style={{ width: '98%' }} component={Paper}>
         <div className='overflow-container'>
-      <Table className='display-tasks-table' aria-label="simple table">
+      <Table className='display-tasks-table' aria-label="simple table" size='small'>
         <TableHead>
           <TableRow>
             <TableCell>Task Type</TableCell>

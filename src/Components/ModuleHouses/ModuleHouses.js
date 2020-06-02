@@ -23,15 +23,8 @@ function DisplayHouses (props) {
             // console.log('selectedHouse',props.houses.selectedHouse)
             getTasks()
             getHouses()
-        //     .then((res) => {
-        //         // console.log('.selectedHouse',props.houses.selectedHouse)
-        //       res.value.length > 0 &&
-        //       setSelectedHouseRedux(res.value[0])
-        //     //   console.log(props.houses.selectedHouse)
-        //   })
         }
-      },
-      [getHouses, getTasks, data])
+    },[getHouses, getTasks, data])
 
     
     useEffect(() => {

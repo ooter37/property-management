@@ -1,12 +1,21 @@
 @import '../../../App.scss';
 
-.contractor-textfield {
-    margin-left: 10px;
-}
+// .contractor-textfield {
+//     margin-left: 10px;
+// }
 
 .add-contractor-button {
     margin-right: 10px !important;
     margin-bottom: 10px !important;
     background-color: $theme-500 !important;
 
+}
+
+.MuiFormLabel-root-386 {
+    color: #aaaaaa !important;
+    font-size: 14px !important;
+    font-weight: "400" !important;
+    line-height: "1.42857" !important;
+    letter-spacing: "unset" !important;
+    // background-color: yellow !important;
 }

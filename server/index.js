@@ -8,7 +8,7 @@ const cors = require('cors')
 //IMPORT 
 const { CONNECTION_STRING, SERVER_PORT, SESSION_SECRET } = process.env
 const { login, register, logout, getUser, userData } = require('./controllers/authController')
-const { getHousesByUser, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
+const { updateRent, getHousesByUser, addHouse, uploadFile, updateImage, updateHouse, deleteHouse } = require('./controllers/houseController')
 const { getTasksByHouse, addTask, deleteTask } = require('./controllers/taskController')
 const { getContractorsByUser, addContractor, deleteContractor, updateContractor } = require('./controllers/contractorController')
 const { getRentersByUser, addRenter, deleteRenter, updateRenter} = require('./controllers/renterController')
@@ -52,6 +52,7 @@ app.post('/api/houses', addHouse)
 app.put('/api/houses/:id', updateImage )
 app.put('/api/houses', updateHouse)
 app.delete('/api/houses/:id', deleteHouse)
+app.put('/api/rent', updateRent)
 
 //TASK ENDPOINTS
 // app.get('/api/tasks/:id', getTasksByHouse)

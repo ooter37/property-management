@@ -17,83 +17,50 @@ import CardHeader from "../../UI/CardHeader.js";
 import { primaryColor, grayColor, blackColor, hexToRgb } from "../../UI/material-dashboard-react";
 
 
-const greenTheme = createMuiTheme({
-  overrides: {
-    MuiPickersToolbar: {
-      toolbar: {
-        backgroundColor: '#4caf50',
-      },
-    },
-    flatButton: {
-      color: '#4caf50'
-    },
-    MuiPickersCalendarHeader: {
-      switchHeader: {
-        // backgroundColor: lightBlue.A200,
-        // color: "white",
-      },
-    },
-    MuiPickersDay: {
-      day: {
-        color: '#4caf50',
-      },
-      daySelected: {
-        '&:hover': {
-          backgroundColor: '#4caf50'
-        },
-        backgroundColor: '#4caf50',
-      },
-      dayDisabled: {
-        color: '#4caf50',
-      },
-      current: {
-        color: '#4caf50',
-      },
-    },
-    MuiPickersModal: {
-      dialogAction: {
-        color: '#4caf50',
-      },
-    },
-  },
-});
+// const greenTheme = createMuiTheme({
+//   overrides: {
+//     MuiPickersToolbar: {
+//       toolbar: {
+//         backgroundColor: '#4caf50',
+//       },
+//     },
+//     flatButton: {
+//       color: '#4caf50'
+//     },
+//     MuiPickersCalendarHeader: {
+//       switchHeader: {
+//         // backgroundColor: lightBlue.A200,
+//         // color: "white",
+//       },
+//     },
+//     MuiPickersDay: {
+//       day: {
+//         color: '#4caf50',
+//       },
+//       daySelected: {
+//         '&:hover': {
+//           backgroundColor: '#4caf50'
+//         },
+//         backgroundColor: '#4caf50',
+//       },
+//       dayDisabled: {
+//         color: '#4caf50',
+//       },
+//       current: {
+//         color: '#4caf50',
+//       },
+//     },
+//     MuiPickersModal: {
+//       dialogAction: {
+//         color: '#4caf50',
+//       },
+//     },
+//   },
+// });
 
 
 const theme = createMuiTheme({
     overrides: {
-      // MuiPickersToolbar: {
-      //   toolbar: {
-      //     backgroundColor: '#4caf50',
-      //   },
-      // },
-      // MuiPickersCalendarHeader: {
-      //   switchHeader: {
-      //     // backgroundColor: lightBlue.A200,
-      //     // color: "white",
-      //   },
-      // },
-      // MuiPickersDay: {
-      //   day: {
-      //     color: '#4caf50',
-      //   },
-      //   daySelected: {
-      //     backgroundColor: '#4caf50',
-      //   },
-      //   dayDisabled: {
-      //     color: '#4caf50',
-      //   },
-      //   dayHover: {
-      //     color: '#4caf50',
-      //   },
-      //   current: {
-      //     color: '#4caf50',
-      //   },
-      // },
-      // MuiPickersModal: {
-      //   dialogAction: {
-      //     color: '#4caf50',
-      //   },
-      // },
       MuiInput: {
         underline: {
             "&:hover:not($disabled):before,&:before": {
@@ -281,7 +248,7 @@ function AddTask(props) {
                                                     required>
                                                         <SelectInput
                                                         // required
-                                                        label='Task Name (start typing to add your own)'
+                                                        label='Name (start typing to add new)'
                                                         selections={taskSelections}
                                                         value={type}
                                                         setValue={setType}
@@ -339,9 +306,9 @@ function AddTask(props) {
                                     <Grid item md={12}>
                                         <InputLabel classes={{root: classes.labelRoot}}>Date Due</InputLabel>
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}> 
-                                        <MuiThemeProvider theme={greenTheme}>
-                                          <DatePicker value={date} onChange={setDate}/>
-                                          </MuiThemeProvider>
+                                        {/* <MuiThemeProvider theme={greenTheme}> */}
+                                          <DatePicker autoOk='true' value={date} onChange={setDate}/>
+                                          {/* </MuiThemeProvider> */}
                                         </MuiPickersUtilsProvider>
                                     </Grid>
                                     <Grid item  className={classes.grid} md={12}>

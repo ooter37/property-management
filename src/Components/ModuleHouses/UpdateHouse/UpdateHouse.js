@@ -84,60 +84,60 @@ const styles = {
   const useStyles = makeStyles(styles);
 
 function UpdateHouse(props) {
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [zipcode, setZipcode] = useState('')
-    const [status, setStatus] = useState('')
-    const [amount, setAmount] = useState('')
+    const [address, setAddress] = useState(props.houses.selectedHouse.address)
+    const [city, setCity] = useState(props.houses.selectedHouse.city)
+    const [state, setState] = useState(props.houses.selectedHouse.state)
+    const [zipcode, setZipcode] = useState(props.houses.selectedHouse.zipcode)
+    const [status, setStatus] = useState(props.houses.selectedHouse.status)
+    const [amount, setAmount] = useState(props.houses.selectedHouse.rent)
     // rent initial state must be empty to prevent invalid data type submission
     const [redirect, setRedirect] = useState(false)
 
     const classes = useStyles();
 
-    const existingAddress = props.houses.selectedHouse.address
-    const existingCity = props.houses.selectedHouse.city
-    const existingState = props.houses.selectedHouse.state
-    const existingZipcode = props.houses.selectedHouse.zipcode
-    const existingStatus = props.houses.selectedHouse.status
-    const existingRent = props.houses.selectedHouse.rent
+    // const existingAddress = props.houses.selectedHouse.address
+    // const existingCity = props.houses.selectedHouse.city
+    // const existingState = props.houses.selectedHouse.state
+    // const existingZipcode = props.houses.selectedHouse.zipcode
+    // const existingStatus = props.houses.selectedHouse.status
+    // const existingRent = props.houses.selectedHouse.rent
     const id = props.houses.selectedHouse.house_id
 
-    useEffect(() => {
-        if (existingAddress) {
-            setAddress(existingAddress)
-        }
-    },[existingAddress])
+    // useEffect(() => {
+    //     if (existingAddress) {
+    //         setAddress(existingAddress)
+    //     }
+    // },[existingAddress])
 
-    useEffect(() => {
-        if (existingCity) {
-            setCity(existingCity)
-        }
-    },[existingCity])
+    // useEffect(() => {
+    //     if (existingCity) {
+    //         setCity(existingCity)
+    //     }
+    // },[existingCity])
 
-    useEffect(() => {
-        if (existingState) {
-            setState(existingState)
-        }
-    },[existingState])
+    // useEffect(() => {
+    //     if (existingState) {
+    //         setState(existingState)
+    //     }
+    // },[existingState])
 
-    useEffect(() => {
-        if (existingZipcode) {
-            setZipcode(existingZipcode)
-        }
-    },[existingZipcode])
+    // useEffect(() => {
+    //     if (existingZipcode) {
+    //         setZipcode(existingZipcode)
+    //     }
+    // },[existingZipcode])
 
-    useEffect(() => {
-        if (existingStatus) {
-            setStatus(existingStatus)
-        }
-    },[existingStatus])
+    // useEffect(() => {
+    //     if (existingStatus) {
+    //         setStatus(existingStatus)
+    //     }
+    // },[existingStatus])
 
-    useEffect(() => {
-        if (existingRent) {
-            setAmount(existingRent)
-        }
-    },[existingRent])
+    // useEffect(() => {
+    //     if (existingRent) {
+    //         setAmount(existingRent)
+    //     }
+    // },[existingRent])
 
     async function deleteExistingHouse() {
         try {
@@ -160,9 +160,9 @@ function UpdateHouse(props) {
             const rent = (amount) ? amount : 0
             if (props.user.data) {
                 await axios.put('/api/houses', {id,address,city,state,zipcode,rent,status})
+                success.fire({title: `${props.houses.selectedHouse.address} has been updated.`})
                 await props.getHouses()
                 setRedirect(true)
-                success.fire({title: `${existingAddress} has been updated.`})
             } else {
                 pleaseSignIn.fire()
             }
@@ -179,7 +179,7 @@ function UpdateHouse(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>{existingAddress ? `Updating ${existingAddress}` : 'Something went wrong, please refresh the page.'} </Typography>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.houses.selectedHouse ? `Updating ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'} </Typography>
                             {/* <p className={classes.cardCategoryWhite}>Enter the fields you would like to update.</p> */}
                         </CardHeader>
                         <Grid container className='address-cancel-container'>

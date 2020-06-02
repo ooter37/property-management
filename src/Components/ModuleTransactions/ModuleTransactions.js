@@ -47,7 +47,7 @@ function ModuleTransactions(props) {
 
       const mappedHousesTransactions = props.houses.houses.map((house) => {
           return (
-            <Grid key={`transactionHouseCard${house.house_id}`} item xs={12} sm={12} md={6}>
+            <Grid key={`transactionHouseCard${house.house_id}`} item xs={12} md={12} lg={6}>
                 <TransactionHouseCard rent={house.rent} paid={paidStatus(house.house_id)} houseId={house.house_id} address={house.address} image={house.image} />
             </Grid>
           )
@@ -58,10 +58,10 @@ function ModuleTransactions(props) {
             {/* {console.log(props.houses.transactions.length && props.houses.transactions[0].period)} */}
             {/* {console.log(moment(new Date()).format('MM YYYY'))} */}
             <Grid container spacing={2}>
-                <Grid style = {{ width: 450}} item xs={12} sm={5} md={5}>
+                <Grid style = {{ width: 450}} item xs={12} md={5} lg={5}>
                 <DisplayTransactions voidTransaction={voidTransaction}/>
                 </Grid>
-                <Grid item xs={12} sm={7} md={7}>
+                <Grid item xs={12} md={7} lg={7}>
                     <Grid container spacing={2}>
                     {mappedHousesTransactions}
                     </Grid>

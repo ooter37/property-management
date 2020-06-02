@@ -2,13 +2,15 @@ import './TransactionHouseCard.scss'
 import React, {useState} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {getTransactions} from '../../../redux/reducers/houses'
+import {getTransactions, getHouses} from '../../../redux/reducers/houses'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import { Card, Avatar, makeStyles, Typography, Button, FormControl } from '@material-ui/core'
 import {DatePicker,MuiPickersUtilsProvider,} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import PriceInput from '../../Functions/PriceInput'
 import moment from 'moment'
+import Swal from 'sweetalert2'
+
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 function TransactionHouseCard(props) {
     const [date, setDate] = useState(new Date())
     const [payment, setPayment] = useState('')
+    const [amount, setAmount] = useState('')
     const {paid,rent} = props
 
     const classes = useStyles();
@@ -32,9 +35,10 @@ function TransactionHouseCard(props) {
                 const amount = (payment) ? payment : 0
                 const period = moment(date).format('MM YYYY')
                 await axios.post('/api/transactions', {houseId,amount,date,period})
+                await props.getTransactions()
+                await props.getHouses()
                 setPayment('')
-                success.fire({title: `Transaction added.`})
-                // await props.getTransaction()
+                success.fire({title: `Transaction added`})
             } else {
                 pleaseSignIn.fire()
             }
@@ -43,6 +47,40 @@ function TransactionHouseCard(props) {
         }
     }
 
+    async function editHouseRent(rent) {
+        try {
+            if (props.user.data) {
+                const {houseId} = props
+                await axios.put('/api/rent', {houseId,rent})
+                await props.getHouses()
+                success.fire({title: `Rent updated`})
+            } else {
+                pleaseSignIn.fire()
+            }
+        } catch (error) {
+            console.log('Error editing rent.', error)
+        }
+    }
+
+    function editRent() {
+        Swal.fire({
+            title: 'Enter Monthly Rent',
+            input: 'text',
+            inputValue: amount,
+            showCancelButton: true,
+            confirmButtonColor: '#4caf50',
+            reverseButtons: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Please enter an amount or click cancel to go back.'
+                }
+            }
+        }).then((result) => {
+            if (result.value) {
+                editHouseRent(result.value)
+            }
+        })
+    }
   
     return (
         <div>
@@ -52,6 +90,13 @@ function TransactionHouseCard(props) {
                     <div className='transaction-card-text-container'>
                         <Typography className='address-title' variant='h6'>{props.address}</Typography>
                         {
+                            (rent === 0) 
+                            ?
+                            <div className='transaction-add-rent-container'><Button 
+                            onClick={() => editRent()}
+                            size='small' variant='contained' color='primary'  >Add Rent</Button></div>
+                            // <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='paid'>SET RENT</div></Typography>
+                            :
                             (paid >= rent)
                             ?
                             
@@ -100,7 +145,7 @@ function TransactionHouseCard(props) {
     )
 }
 
-const mapDispatchToProps = {getTransactions}
+const mapDispatchToProps = {getTransactions, getHouses}
 
 const mapStateToProps = state => state
 

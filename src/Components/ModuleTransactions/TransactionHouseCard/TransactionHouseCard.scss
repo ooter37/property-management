@@ -22,9 +22,9 @@
 .transaction-form {
     // background-color: lightblue;
 }
-// .transaction-datepicker {
-//     width: 100px;
-// }
+.transaction-datepicker {
+    width: 100px;
+}
 .transaction-datepicker-container{
     // background-color: red;
     width: 100%;
@@ -41,7 +41,11 @@
     // align-items: space-between;
     justify-content: space-between;
 }
-
+.transaction-add-rent-container {
+    display: flex;
+    justify-content: center;
+    width: 100%
+}
 .paid {
     border: 2px solid $theme-400;
     color: $theme-400;

@@ -1,32 +1,16 @@
 import './AddContractor.scss'
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {getContractors} from '../../../redux/reducers/houses'
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
-import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import { Grid, Button, FormControl, Select, InputLabel, MenuItem, TextField, Typography } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Button, Typography } from "@material-ui/core";
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import {primaryColor,grayColor} from "../../UI/material-dashboard-react";
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
-
-const theme = createMuiTheme({
-    overrides: {
-      MuiInput: {
-        underline: {
-            "&:hover:not($disabled):before,&:before": {
-              borderColor: grayColor[4] + " !important",
-              borderWidth: "1px !important"
-            },
-            "&:after": {
-              borderColor: primaryColor[0] + '!important'
-            }
-          },
-      }
-    }
-})
+import StateInput from '../../Functions/StateInput'
+import SelectMulti from '../../Functions/SelectMulti'
 
 const styles = {
     formControl: {
@@ -86,7 +70,6 @@ function AddContractor(props) {
     const [value, setValue] = useState([])
     const classes = useStyles();
 
-    const filter = createFilterOptions();
 
     async function submitNewContractor() {
         try {
@@ -102,32 +85,6 @@ function AddContractor(props) {
             console.log('Error adding contractor.', error)
         }
     }
-    // function submitNewContractor() {
-    //     if (props.user.data) {
-    //         axios.post('/api/contractors', {name,email,phone,address,city,state,zipcode,services})
-    //         .then(() => {
-    //             success.fire({title: `${name} added as a new contractor.`})
-    //             axios.get('/api/contractors').then(res => {
-    //                 props.setContractors(res.data)
-    //                 resetForm()
-    //         })
-    //         })
-    //     } else {
-    //         pleaseSignIn.fire()
-    //     }
-    // }
-
-    useEffect(() => {
-        let filteredServices = []
-        value.forEach((elem) => {
-            if (typeof elem === 'string') {
-                filteredServices.push(elem)
-            } else {
-                filteredServices.push(elem.inputValue)
-            }
-        })
-        setServices(filteredServices)
-    },[value])
 
     function resetForm() {
         setName('')
@@ -148,7 +105,7 @@ function AddContractor(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>Manage service providers</Typography>
+                            <Typography variant='h5' className={classes.cardTitleWhite}>Add a service provider</Typography>
                             {/* <p className={classes.cardCategoryWhite}>Enter the provider's details.</p> */}
                         </CardHeader>
                         <Grid container>
@@ -195,42 +152,7 @@ function AddContractor(props) {
                         </Grid>
                         <Grid container>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
-                                <FormControl fullWidth className={classes.formControl}>
-                                    <Autocomplete
-                                    id='service'
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        if (newValue && newValue.inputValue) {
-                                            return setValue(newValue.inputValue)
-                                        } setValue(newValue)}}
-                                    filterOptions={(options, params) => {
-                                        const filtered = filter(options, params);
-                                        if (params.inputValue !== '') {
-                                            filtered.push({
-                                            inputValue: params.inputValue,
-                                            title: `Add "${params.inputValue}"`,
-                                        });}
-                                        return filtered;}}
-                                    multiple
-                                    options={taskSelections}
-                                    getOptionLabel={(option) => {
-                                        if (typeof option === 'string') {
-                                            return option
-                                        }
-                                        if (option.inputValue) {
-                                            return option.inputValue
-                                        }
-                                        return option
-                                    }}
-                                    renderOption={(option) => {
-                                        if (!option.title) {
-                                        return option
-                                        } else {return option.title}
-                                    }}
-                                    freeSolo
-                                    renderInput={(params) => (
-                                    <TextField {...params} variant="standard" label="Services Provided"/>)}/>
-                                </FormControl>
+                                <SelectMulti value={value} setValue={setValue} setServices={setServices} selections={taskSelections} />
                             </Grid>
                             <Grid item xs={12} sm={12} md={6} className={classes.grid}>
                                 <CustomInput
@@ -261,7 +183,8 @@ function AddContractor(props) {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={4} className={classes.grid}>
-                            <MuiThemeProvider theme={theme}>
+                                <StateInput state={state} setState={setState} />
+                            {/* <MuiThemeProvider theme={theme}>
                                     <FormControl
                                     className={classes.formControl}
                                     fullWidth
@@ -339,7 +262,7 @@ function AddContractor(props) {
                                             <MenuItem value="VI">Virgin Islands</MenuItem>
                                         </Select>
                                     </FormControl>
-                                </MuiThemeProvider>
+                                </MuiThemeProvider> */}
                             </Grid>
                             <Grid item xs={12} sm={12} md={4} className={classes.grid}>
                                 <CustomInput
