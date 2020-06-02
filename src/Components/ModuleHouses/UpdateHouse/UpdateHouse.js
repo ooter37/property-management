@@ -1,5 +1,5 @@
 import './UpdateHouse.scss'
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {getHouses} from '../../../redux/reducers/houses'
 import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
@@ -11,7 +11,6 @@ import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
 import { makeStyles } from '@material-ui/core/styles';
-import {grayColor} from "../../UI/material-dashboard-react";
 import PriceInput from '../../Functions/PriceInput'
 
 // const theme = createMuiTheme({
@@ -140,7 +139,6 @@ function UpdateHouse(props) {
             if (props.user.data) {
               await axios.delete(`/api/houses/${id}`)
               await props.getHouses()
-              console.log(props.houses.houses)
               await props.setSelectedHouseRedux(props.houses.houses[0])
               setRedirect(true)
             } else {

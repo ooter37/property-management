@@ -57,17 +57,19 @@ function DisplayTransactions(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
       };
-
+      // const months = ['03','04','05','06','07']
     const months = [...Array(5)].map((_, idx) => moment(moment().add(1,'months')).subtract(idx, 'month').format('MM'));
     const tabMaker = months.reverse().map((month, index) => {
+      // console.log(month)
         // console.log(moment(month).format('MM'))
         // console.log(moment().month(month).format('MMM'))
         return (
-            <Tab key={`tabMaker${month}`} label={moment(month).format('MMM')} {...a11yProps(index)} />
+            <Tab key={`tabMaker${month}`} label={moment(month, 'MM').format('MMM')} {...a11yProps(index)} />
         )
     })
 
     const panelMaker = months.map((month, index) => {
+      // console.log(months)
         const mappedHouses = (props.houses.houses.length && props.houses.transactions.length) ? props.houses.houses.map((house) => {
             const mappedTransactions = props.houses.transactions.map((trans) => {
                 if (trans.house_id === house.house_id && month === moment(trans.date).format('MM')) {

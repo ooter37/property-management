@@ -18,7 +18,7 @@ import Header from './Components/Header/Header'
 import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
 import ModuleTransactions from './Components/ModuleTransactions/ModuleTransactions'
 import { createMuiTheme,MuiThemeProvider } from '@material-ui/core/styles';
-import {primaryColor,grayColor,defaultFont} from "./Components/UI/material-dashboard-react";
+import {primaryColor,grayColor} from "./Components/UI/material-dashboard-react";
 
 const theme = createMuiTheme({
   overrides: {

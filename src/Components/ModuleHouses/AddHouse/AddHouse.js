@@ -5,13 +5,13 @@ import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import {getHouses, setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography, FormHelperText, Box } from "@material-ui/core";
-import { MuiThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import PriceInput from '../../Functions/PriceInput'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import {dangerColor,successColor,grayColor} from "../../UI/material-dashboard-react";
+import {dangerColor,successColor} from "../../UI/material-dashboard-react";
 
 const styles = {
     // labelRoot: {

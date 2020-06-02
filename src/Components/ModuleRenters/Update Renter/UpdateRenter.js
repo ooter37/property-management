@@ -91,7 +91,8 @@ function UpdateRenter(props) {
     const [name, setName] = useState(props.selectedRenterFull.name);
     const [email, setEmail] = useState(props.selectedRenterFull.email);
     const [phone, setPhone] = useState(props.selectedRenterFull.phone);
-    const [houseId, setHouseId] = useState(props.selectedRenterFull.houseId)
+    const [houseId, setHouseId] = useState(props.selectedRenterFull.house_id)
+    // const [houseId, setHouseId] = useState()
     const [error, setError] = useState(false)
     const classes = useStyles();
 
@@ -143,7 +144,7 @@ function UpdateRenter(props) {
 
     return (
         <form onSubmit={UpdateRenter}>
-            {/* <button onClick={()=> console.log(props)}>loglogg</button> */}
+        {/* <button onClick={()=> console.log(houseId)}>loglogg</button> */}
             <Grid container>
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>

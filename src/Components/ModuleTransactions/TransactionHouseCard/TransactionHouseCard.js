@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 function TransactionHouseCard(props) {
     const [date, setDate] = useState(new Date())
     const [payment, setPayment] = useState('')
-    const [amount, setAmount] = useState('')
+    const [amount] = useState('')
     const {paid,rent} = props
 
     const classes = useStyles();
@@ -100,13 +100,13 @@ function TransactionHouseCard(props) {
                             (paid >= rent)
                             ?
                             
-                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='paid'>PAID</div></Typography>
+                            <Typography className='address-title' variant='h6'>{moment().format('MMMM')}:&nbsp;&nbsp;<div className='paid'>PAID</div></Typography>
                             :
                             (paid === 0)
                             ?
-                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='address-title unpaid'>UNPAID</div></Typography>
+                            <Typography className='address-title' variant='h6'>{moment().format('MMMM')}:&nbsp;&nbsp;<div className='address-title unpaid'>UNPAID</div></Typography>
                             :
-                            <Typography className='address-title' variant='h6'>{moment(new Date()).format('MMMM')}:&nbsp;&nbsp;<div className='address-title partial'>PARTIAL</div></Typography>
+                            <Typography className='address-title' variant='h6'>{moment().format('MMMM')}:&nbsp;&nbsp;<div className='address-title partial'>PARTIAL</div></Typography>
                         }
                         {/* <Typography className={`address-title ${props.paid > props.rent ? 'paid' : ''} ${props.paid < props.rent && props.paid > 0 ? 'partial' : ''} ${props.paid <= 0 ? 'unpaid' : ''}`} variant='h6'>payment status</Typography> */}
                     </div>

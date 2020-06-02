@@ -86,11 +86,11 @@ function Header(props) {
 
 
           <div className='login-goback-container'>
-            <button onClick={() => console.log(props)}>PROP GETTER!!!</button>
-            {/* <IconButton onClick={() => props.history.goBack()} edge="start"  color="inherit" aria-label="menu">
+            {/* <button onClick={() => console.log(props)}>PROP GETTER!!!</button> */}
+            <IconButton onClick={() => props.history.goBack()} edge="start"  color="inherit" aria-label="menu">
               <KeyboardBackspaceIcon  />
               <Typography variant='h6'>&nbsp; Previous Page</Typography>
-            </IconButton> */}
+            </IconButton>
             <div className='login-logout-container' >
               {
               (props.user.data) 

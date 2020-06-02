@@ -38,7 +38,7 @@ function ModuleTransactions(props) {
       function paidStatus(houseId) {
         let total = 0
         props.houses.transactions.length && props.houses.transactions.forEach((trans) => {
-            if (trans.house_id === houseId && trans.period === moment(new Date()).format('MM YYYY')) {
+            if (trans.house_id === houseId && trans.period === moment().format('MM YYYY')) {
                 total += trans.amount
             }
         })
