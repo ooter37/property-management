@@ -10,50 +10,46 @@ import {pleaseSignIn, success, confirmDelete} from '../../Functions/Sweetalerts'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
-import {primaryColor,grayColor} from "../../UI/material-dashboard-react";
+import { makeStyles } from '@material-ui/core/styles';
+import {grayColor} from "../../UI/material-dashboard-react";
 import PriceInput from '../../Functions/PriceInput'
 
-const theme = createMuiTheme({
-    overrides: {
-      MuiInput: {
-        underline: {
-            "&:hover:not($disabled):before,&:before": {
-              borderColor: grayColor[4] + " !important",
-              borderWidth: "1px !important"
-            },
-            "&:after": {
-              borderColor: primaryColor[0] + '!important'
-            }
-          },
-      }
-    }
-})
+// const theme = createMuiTheme({
+//     overrides: {
+//       MuiInput: {
+//         underline: {
+//             "&:hover:not($disabled):before,&:before": {
+//               borderColor: grayColor[4] + " !important",
+//               borderWidth: "1px !important"
+//             },
+//             "&:after": {
+//               borderColor: primaryColor[0] + '!important'
+//             }
+//           },
+//       }
+//     }
+// })
 
 const styles = {
-
-    labelRoot: {
-    //   ...defaultFont,
-      color: grayColor[3] + " !important",
-      fontWeight: "400",
-      fontSize: "14px",
-      lineHeight: "1.42857",
-      letterSpacing: "unset"
-    },
-    feedback: {
-      position: "absolute",
-      top: "18px",
-      right: "0",
-      zIndex: "2",
-      display: "block",
-      width: "24px",
-      height: "24px",
-      textAlign: "center",
-      pointerEvents: "none"
-    },
-    marginTop: {
-      // marginTop: "16px"
-    },
+    // labelRoot: {
+    // //   ...defaultFont,
+    //   color: grayColor[3] + " !important",
+    //   fontWeight: "400",
+    //   fontSize: "14px",
+    //   lineHeight: "1.42857",
+    //   letterSpacing: "unset"
+    // },
+    // feedback: {
+    //   position: "absolute",
+    //   top: "18px",
+    //   right: "0",
+    //   zIndex: "2",
+    //   display: "block",
+    //   width: "24px",
+    //   height: "24px",
+    //   textAlign: "center",
+    //   pointerEvents: "none"
+    // },
     formControl: {
       paddingBottom: "10px",
       margin: "27px 0 0 0",
@@ -63,22 +59,22 @@ const styles = {
   grid: {
       padding: "0 15px !important"
     },
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-  //   fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
+//   cardCategoryWhite: {
+//     color: "rgba(255,255,255,.62)",
+//     margin: "0",
+//     fontSize: "14px",
+//     marginTop: "0",
+//     marginBottom: "0"
+//   },
+//   cardTitleWhite: {
+//     color: "#FFFFFF",
+//     marginTop: "0px",
+//     minHeight: "auto",
+//     fontWeight: "300",
+//   //   fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+//     marginBottom: "3px",
+//     textDecoration: "none"
+//   }
 };
   
   const useStyles = makeStyles(styles);
@@ -158,7 +154,7 @@ function UpdateHouse(props) {
     async function updateExistingHouse() {
         try {
             const rent = (amount) ? amount : 0
-            if (props.user.data) {
+            if (props.user.data) {state &&
                 await axios.put('/api/houses', {id,address,city,state,zipcode,rent,status})
                 success.fire({title: `${props.houses.selectedHouse.address} has been updated.`})
                 await props.getHouses()
@@ -209,7 +205,7 @@ function UpdateHouse(props) {
                                     onChange: (e) => setStatus(e.target.value)
                                 }}
                                 /> */}
-                                <MuiThemeProvider theme={theme}>
+                                {/* <MuiThemeProvider theme={theme}> */}
                                     <FormControl
                                     className={classes.formControl}
                                     fullWidth
@@ -235,7 +231,7 @@ function UpdateHouse(props) {
                                             <MenuItem value='Other'>Other</MenuItem>
                                         </Select>
                                     </FormControl>
-                                </MuiThemeProvider>
+                                {/* </MuiThemeProvider> */}
                             </Grid>
                             <Grid item xs={12} sm={12} md={3} className={classes.grid}>
                                 <FormControl required className={classes.formControl} >
@@ -274,7 +270,7 @@ function UpdateHouse(props) {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={12} md={4} className={classes.grid}>
-                                <MuiThemeProvider theme={theme}>
+                                {/* <MuiThemeProvider theme={theme}> */}
                                     <FormControl
                                     className={classes.formControl}
                                     fullWidth
@@ -352,7 +348,7 @@ function UpdateHouse(props) {
                                             <MenuItem value="VI">Virgin Islands</MenuItem>
                                         </Select>
                                     </FormControl>
-                                </MuiThemeProvider>
+                                {/* </MuiThemeProvider> */}
                             </Grid>
                             <Grid item xs={12} sm={12} md={4} className={classes.grid}>
                                 <CustomInput

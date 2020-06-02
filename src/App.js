@@ -18,8 +18,40 @@ import Header from './Components/Header/Header'
 import ModuleRenters from './Components/ModuleRenters/ModuleRenters'
 import ModuleTransactions from './Components/ModuleTransactions/ModuleTransactions'
 import { createMuiTheme,MuiThemeProvider } from '@material-ui/core/styles';
+import {primaryColor,grayColor,defaultFont} from "./Components/UI/material-dashboard-react";
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        //   ...defaultFont,
+          color: grayColor[3] + " !important",
+          fontWeight: "400",
+          fontSize: "14px",
+          lineHeight: "1.42857",
+          letterSpacing: "unset"
+        },
+    },
+    MuiInput: {
+      underline: {
+          "&:hover:not($disabled):before,&:before": {
+            borderColor: grayColor[4] + " !important",
+            borderWidth: "1px !important"
+          },
+          "&:after": {
+            borderColor: primaryColor[0] + '!important'
+          }
+        },
+        // label: {
+        //   // ...defaultFont,
+        //   color: grayColor[3] + " !important",
+        //   fontWeight: "400",
+        //   fontSize: "14px",
+        //   lineHeight: "1.42857",
+        //   letterSpacing: "unset"
+        // },
+    }
+  },
   palette: {
     primary: {
         // light: 

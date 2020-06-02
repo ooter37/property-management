@@ -5,57 +5,40 @@ import axios from 'axios'
 import {Redirect} from 'react-router-dom'
 import {getHouses, setSelectedHouseRedux} from '../../../redux/reducers/houses'
 import { Grid, Button, FormControl, InputLabel, Select, MenuItem, CardMedia, Typography, FormHelperText, Box } from "@material-ui/core";
-import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, makeStyles } from '@material-ui/core/styles';
 import {pleaseSignIn, success} from '../../Functions/Sweetalerts'
 import PriceInput from '../../Functions/PriceInput'
 import CustomInput from "../../UI/CustomInput.js";
 import Card from "../../UI/Card";
 import CardHeader from "../../UI/CardHeader.js";
-import {primaryColor,dangerColor,successColor,grayColor} from "../../UI/material-dashboard-react";
-
-const theme = createMuiTheme({
-    overrides: {
-      MuiInput: {
-        underline: {
-            "&:hover:not($disabled):before,&:before": {
-              borderColor: grayColor[4] + " !important",
-              borderWidth: "1px !important"
-            },
-            "&:after": {
-              borderColor: primaryColor[0] + '!important'
-            }
-          },
-      }
-    }
-})
+import {dangerColor,successColor,grayColor} from "../../UI/material-dashboard-react";
 
 const styles = {
-
-    labelRoot: {
-    //   ...defaultFont,
-      color: grayColor[3] + " !important",
-      fontWeight: "400",
-      fontSize: "14px",
-      lineHeight: "1.42857",
-      letterSpacing: "unset"
-    },
+    // labelRoot: {
+    // //   ...defaultFont,
+    //   color: grayColor[3] + " !important",
+    //   fontWeight: "400",
+    //   fontSize: "14px",
+    //   lineHeight: "1.42857",
+    //   letterSpacing: "unset"
+    // },
     labelRootError: {
         color: dangerColor[0]
     },
     labelRootSuccess: {
         color: successColor[0]
     },
-    feedback: {
-      position: "absolute",
-      top: "18px",
-      right: "0",
-      zIndex: "2",
-      display: "block",
-      width: "24px",
-      height: "24px",
-      textAlign: "center",
-      pointerEvents: "none"
-    },
+    // feedback: {
+    //   position: "absolute",
+    //   top: "18px",
+    //   right: "0",
+    //   zIndex: "2",
+    //   display: "block",
+    //   width: "24px",
+    //   height: "24px",
+    //   textAlign: "center",
+    //   pointerEvents: "none"
+    // },
     marginTop: {
       // marginTop: "16px"
     },
@@ -68,22 +51,22 @@ const styles = {
   grid: {
       padding: "0 15px !important"
     },
-  cardCategoryWhite: {
-    color: "rgba(255,255,255,.62)",
-    margin: "0",
-    fontSize: "14px",
-    marginTop: "0",
-    marginBottom: "0"
-  },
-  cardTitleWhite: {
-    color: "#FFFFFF",
-    marginTop: "0px",
-    minHeight: "auto",
-    fontWeight: "300",
-  //   fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: "3px",
-    textDecoration: "none"
-  }
+//   cardCategoryWhite: {
+//     color: "rgba(255,255,255,.62)",
+//     margin: "0",
+//     fontSize: "14px",
+//     marginTop: "0",
+//     marginBottom: "0"
+//   },
+//   cardTitleWhite: {
+//     color: "#FFFFFF",
+//     marginTop: "0px",
+//     minHeight: "auto",
+//     fontWeight: "300",
+//   //   fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+//     marginBottom: "3px",
+//     textDecoration: "none"
+//   }
 };
   
   const useStyles = makeStyles(styles);
@@ -116,12 +99,17 @@ function AddHouse(props) {
     async function submitNewHouse() {
         try {
             const rent = (amount) ? amount : 0
-            if (props.user.data) { state &&
-                await axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
-                await props.getHouses()
-                // await props.setSelectedHouseRedux(props.houses.houses[0])
-                success.fire({title: `${address} has been added.`})
-                setRedirect(true)
+            console.log(state)
+            if (props.user.data) {
+                if (state) {
+                    await axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
+                    await props.getHouses()
+                    // await props.setSelectedHouseRedux(props.houses.houses[0])
+                    success.fire({title: `${address} has been added.`})
+                    setRedirect(true)
+                } else {
+                    console.log('State field is required.')
+                }
             } else {
                 pleaseSignIn.fire()
             }
@@ -216,7 +204,6 @@ function AddHouse(props) {
                                         />
                                     </Grid>
                                     <Grid item  className={classes.grid} md={4}>
-                                        <MuiThemeProvider theme={theme}>
                                             <FormControl
                                             className={classes.formControl}
                                             fullWidth
@@ -298,7 +285,6 @@ function AddHouse(props) {
                                                 </Select>
                                                 {error && <FormHelperText>This is required!</FormHelperText>}
                                             </FormControl>
-                                        </MuiThemeProvider>
                                     </Grid>
                                     <Grid item className={classes.grid} md={4}>
                                         <CustomInput
@@ -315,7 +301,6 @@ function AddHouse(props) {
                                         />
                                     </Grid>
                                     <Grid item className={classes.grid} md={6}>
-                                        <MuiThemeProvider theme={theme}>
                                             <FormControl
                                             className={classes.formControl}
                                             fullWidth
@@ -341,7 +326,6 @@ function AddHouse(props) {
                                                     <MenuItem value='Other'>Other</MenuItem>
                                                 </Select>
                                             </FormControl>
-                                        </MuiThemeProvider>
                                     </Grid>
                                     <Grid item  className={classes.grid} md={6}>
                                         <FormControl required className={classes.formControl} >

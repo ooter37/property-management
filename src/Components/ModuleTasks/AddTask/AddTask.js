@@ -306,9 +306,7 @@ function AddTask(props) {
                                     <Grid item md={12}>
                                         <InputLabel classes={{root: classes.labelRoot}}>Date Due</InputLabel>
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}> 
-                                        {/* <MuiThemeProvider theme={greenTheme}> */}
                                           <DatePicker autoOk='true' value={date} onChange={setDate}/>
-                                          {/* </MuiThemeProvider> */}
                                         </MuiPickersUtilsProvider>
                                     </Grid>
                                     <Grid item  className={classes.grid} md={12}>
