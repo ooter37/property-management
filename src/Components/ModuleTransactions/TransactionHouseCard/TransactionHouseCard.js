@@ -127,7 +127,7 @@ function TransactionHouseCard(props) {
                         variant="inline"
                         openTo="year"
                         views={["year", "month"]}
-                        label="Month to Apply Payment"
+                        label="Month to Apply"
                         // helperText="Month to Apply Payment"
                         value={date}
                         onChange={setDate}

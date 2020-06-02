@@ -99,7 +99,6 @@ function AddHouse(props) {
     async function submitNewHouse() {
         try {
             const rent = (amount) ? amount : 0
-            console.log(state)
             if (props.user.data) {
                 if (state) {
                     await axios.post('/api/houses', {address,city,state,zipcode,rent,status,image})
