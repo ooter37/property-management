@@ -14,3 +14,23 @@
     color: $theme-500 !important;
     // width: 10px !important;
 }
+.table-typography-name {
+    max-width: 200px;
+}
+.table-typography-email {
+    max-width: 300px;
+}
+.table-typography-phone {
+    max-width: 150px;
+}
+.table-email-container {
+    display: flex;
+}
+.header-email-container {
+    display: flex;
+    // background-color: red;
+}
+.action-button {
+    background-color: red;
+    width: 10px;
+}
