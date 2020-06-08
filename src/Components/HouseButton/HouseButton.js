@@ -72,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     imageTitle: {
         position: 'relative',
         padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
+        maxWidth: 250,
     },
     imageMarked: {
         height: 3,
@@ -102,6 +103,7 @@ export default function HouseButton(props) {
             <span className={classes.imageBackdrop} />
             <span className={classes.imageButton}>
                 <Typography
+                noWrap={true}
                 component="span"
                 variant="subtitle1"
                 color="inherit"

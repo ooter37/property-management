@@ -51,7 +51,6 @@ function DisplayHouses (props) {
             {/* <button onClick={() => console.log()}>console log</button> */}
             <div className='scroll-container'>
                 <ScrollContainer />
-
            </div>
             {
                 // (!props.houses.houses.loading && !props.houses.selectedHouse.loading)

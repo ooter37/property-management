@@ -48,7 +48,7 @@ function Email(props) {
         } else {pleaseSignIn.fire()}
     }
         
-    const joinedEmails = (typeof props.emailing ==! 'string') ? props.emailing.join(' // ') : props.emailing
+    const joinedEmails = (Array.isArray(props.emailing)) ? props.emailing.join(' // ') : props.emailing
 
     return (
         <form onSubmit={sendEmail} >

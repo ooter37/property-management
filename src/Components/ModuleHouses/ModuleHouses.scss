@@ -36,8 +36,12 @@
     justify-content: space-between;
   }
     .avatar-title-container {
+      max-width: 500px;
       // background-color: orange;
       text-align: center;
+    }
+    .house-card-display-address {
+      max-width: 200px;
     }
     .status-address-container {
       // background-color: pink;

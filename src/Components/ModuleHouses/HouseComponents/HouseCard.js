@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Card, CardActionArea, CardMedia, CardContent, Typography, Grid, Avatar, makeStyles} from '@material-ui/core/';
+import {Tooltip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Card, CardActionArea, CardMedia, CardContent, Typography, Grid, Avatar, makeStyles} from '@material-ui/core/';
 import ImageUpload from '../../Functions/ImageUpload'
 import DisplayAddress from './DisplayAddress'
 import HouseStatus from './HouseStatus'
@@ -50,7 +50,7 @@ function HouseCard(props) {
                                         <ImageUpload houses={props.houses.houses} selectedHouse={selectedHouse}/>
                                     </div>
                                     <div className='selected-house-card-body'>
-                                        <Typography className='avatar-title-container' variant="h4" component="h2">{house.address}</Typography>
+                                    <Tooltip title={house.address}><Typography noWrap={true} className='avatar-title-container' variant="h4" component="h2">{house.address}</Typography></Tooltip>
                                         <div className='status-address-container'>
                                             <DisplayAddress house={house}/>
                                             <HouseStatus house={house}/>

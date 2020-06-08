@@ -36,23 +36,18 @@ function DisplayRenters(props) {
     const mappedRenters = props.renters ? props.renters.map((renter) => {
         return (
           <TableRow key={`renter-display-${renter.renter_id}`} className={`global-${renter.user_id.toString()}`}>
-            {/* <TableCell align='left'><Button 
-            onClick={() => {
-              if (props.user.data) {
-                toggleEmail(renter.email)
-              } else {pleaseSignIn.fire()}
-            }}
-          startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>Email</Button></TableCell> */}
-            <TableCell align='left'><Tooltip title={renter.name}><Typography className='table-typography-name' noWrap={true}>{renter.name}</Typography></Tooltip></TableCell>
+            <TableCell component="th" scope="row" align='left'><Tooltip title={renter.name}><Typography className='table-typography-name' noWrap={true}>{renter.name}</Typography></Tooltip></TableCell>
             <TableCell align='center'>
               <div className='table-email-container'>
+                <Tooltip title={`Email ${renter.name}`}>
               <Button 
               onClick={() => {
                 if (props.user.data) {
                   toggleEmail(renter.email)
                 } else {pleaseSignIn.fire()}
               }}
-              startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'></Button>
+              startIcon={<MailIcon />} size='small' color='primary'></Button>
+              </Tooltip>
               <Tooltip title={renter.email}><Typography className='table-typography-email' noWrap={true}>{renter.email}</Typography></Tooltip>
               </div>
             </TableCell>
@@ -75,13 +70,6 @@ function DisplayRenters(props) {
       <Table className='display-tasks-table' aria-label="simple table" size='small'>
         <TableHead>
           <TableRow>
-            {/* <TableCell><Button 
-            onClick={() => {
-              if (props.user.data) {
-                toggleEmail(props.renters && props.renters.map(elem => elem.email))
-              } else {pleaseSignIn.fire()}
-            }}
-             startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>Email All</Button></TableCell> */}
             <TableCell>Name</TableCell>
             <TableCell align="left">
             <div className='header-email-container'>
