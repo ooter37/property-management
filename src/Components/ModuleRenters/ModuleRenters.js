@@ -27,7 +27,7 @@ function ModuleRenters(props){
       }
 
 return (
-    <div className='renter-table-wrapper'>
+    <div>
         <DisplayRenters 
         setDisplaying={setDisplaying}
         toggleUpdating={toggleUpdating}

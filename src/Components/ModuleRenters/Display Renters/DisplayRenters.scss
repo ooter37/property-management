@@ -3,53 +3,14 @@
 .table-container {
     margin: 0 auto;
     margin-top: 20px;
-    max-width: 1000px !important;
-
 }
 
 .display-tasks-table {
     min-width: 650px;
     // from default
-    // max-width: 1000px !important;
 }
-.table-head {
-    max-width: 90% !important;
 
-}
-.renter-row {
-    max-width: 90% !important;
-}
 .renter-email-button {
     color: $theme-500 !important;
     // width: 10px !important;
-}
-.renter-table-send-email {
-    background-color: pink;
-    max-width: 50px !important;
-}
-.renter-table-name {
-    background-color: orange;
-    max-width: 20%;
-}
-.renter-table-email {
-    background-color: grey;
-    max-width: 200px;
-}
-.renter-table-phone {
-    background-color: green;
-    max-width: 130px;
-}
-.renter-table-address {
-    background-color: red;
-    max-width: 200px;
-}
-.renter-table-action {
-    background-color: yellow;
-    max-width: 200px;
-}
-tbody {
-    max-width: 90% !important;
-}
-table {
-    max-width: 90% !important;
 }
