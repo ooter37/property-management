@@ -1,6 +1,7 @@
 import './AddTask.scss'
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
+import {getTasks} from '../../../redux/reducers/houses'
 import axios from 'axios'
 // import {Redirect} from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
@@ -190,9 +191,7 @@ function AddTask(props) {
             // const urgent = checked === 1 ? true : false
             axios.post('/api/tasks', {userId, houseId, type, date, price, checked, note, contact})
             .then(() => {
-                // axios.get(`/api/tasks/${props.selectedHouse}`).then(res => {
-                //     props.setTasks(res.data)
-                //   })
+                props.getTasks()
                   resetForm()
                 success.fire({title: `${type} has been added.`})
             })
@@ -222,7 +221,7 @@ function AddTask(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-task-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.houses.selectedHouse ? `Add a task for ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'}</Typography>
+                            <Typography noWrap={true} variant='h5' className={classes.cardTitleWhite}>{props.houses.selectedHouse ? `Add a task for ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'}</Typography>
                             <Typography variant='subtitle2' >&nbsp; &nbsp; &nbsp; *Tasks marked urgent will be highlighted.</Typography>
                         </CardHeader>
                         <Grid 
@@ -347,8 +346,8 @@ function AddTask(props) {
     )
 }
 
-// const mapDispatchToProps = {getHouses}
+const mapDispatchToProps = {getTasks}
 
 const mapStateToProps = state => state
 
-export default connect(mapStateToProps, null)(AddTask)
+export default connect(mapStateToProps, mapDispatchToProps)(AddTask)

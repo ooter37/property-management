@@ -119,6 +119,7 @@ function UpdateRenter(props) {
                 const id = props.selectedRenterFull.renter_id
                 await axios.put('/api/renters', {id,houseId,name,email,phone})
                 props.getRenters()
+                props.setDisplaying('default')
                 resetForm()
                 success.fire({title: `${name} updated.`})
             } else {

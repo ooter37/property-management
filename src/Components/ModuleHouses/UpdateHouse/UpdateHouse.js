@@ -173,7 +173,7 @@ function UpdateHouse(props) {
                 <Grid item xs={12} sm={12} md={8} className={classes.grid}>
                     <Card>
                         <CardHeader color="primary" className='add-contractor-header'>
-                            <Typography variant='h5' className={classes.cardTitleWhite}>{props.houses.selectedHouse ? `Updating ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'} </Typography>
+                            <Typography noWrap={true} variant='h5' className={classes.cardTitleWhite}>{props.houses.selectedHouse ? `Updating ${props.houses.selectedHouse.address}` : 'Something went wrong, please refresh the page.'} </Typography>
                             {/* <p className={classes.cardCategoryWhite}>Enter the fields you would like to update.</p> */}
                         </CardHeader>
                         <Grid container className='address-cancel-container'>

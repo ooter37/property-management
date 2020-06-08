@@ -2,7 +2,7 @@ import './DisplaySelectedHouse.scss'
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {setSelectedHouseRedux} from '../../../redux/reducers/houses'
-import {  MenuItem, Menu, Button, List } from "@material-ui/core";
+import {  MenuItem, Menu, Button, List, Typography } from "@material-ui/core";
 
 function DisplaySelectedHouse(props){
   const {selectedHouse} = props.houses
@@ -41,7 +41,8 @@ function DisplaySelectedHouse(props){
                 aria-controls="lock-menu"
                 // aria-label={<Typography variant='h5'>Currently Viewing</Typography>}
                 onClick={handleClickListItem}
-                >{selectedIndex && props.houses.houses.find(e => e.house_id === selectedIndex).address}
+                >
+                  <Typography noWrap={true}>{selectedIndex && props.houses.houses.find(e => e.house_id === selectedIndex).address}</Typography>
                 </Button>
             </List>
             <Menu
@@ -60,7 +61,8 @@ function DisplaySelectedHouse(props){
                     handleMenuItemClick(house.house_id, index)
                     // console.log(house.house_id)
                     props.setSelectedHouseRedux(house)}}>
-                      {house.address}</MenuItem>))}
+                      <Typography className='header-menu-item' noWrap={true}>{house.address}</Typography>
+                      </MenuItem>))}
             </Menu>              
         </div>
         :

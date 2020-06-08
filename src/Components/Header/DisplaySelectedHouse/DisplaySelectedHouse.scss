@@ -16,5 +16,10 @@
 //     margin-left: 20px !important;
 // }
 .header-select-button {
-    background-color: $theme-500 !important;
+    max-width: 300px;
+    // background-color: $theme-500 !important;
+}
+.header-menu-item {
+    max-width: 400px;
+    
 }
