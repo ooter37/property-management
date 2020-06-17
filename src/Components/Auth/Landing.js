@@ -65,12 +65,6 @@ function Login(props) {
     e.preventDefault()
     await props.login({email,password})
           props.getHouses()
-    
-    // .then(() => {
-    //     setEmail('')
-    //     setPassword('')
-    //     toggleRedirect()
-    // })
     .catch((err) => {
         console.log("Error with login.", err)
     })
@@ -87,9 +81,6 @@ function Login(props) {
       </Grid>
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          {/* <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar> */}
           <Typography component="h1" variant="h5">Welcome to Prop Aid!</Typography>
           <Typography component="h1" variant="body1">This website was created to help you manage properties. You can track houses, contractors, renters, tasks, and more.</Typography>
           <form className={classes.form} onSubmit={loginHandler}>
@@ -117,11 +108,6 @@ function Login(props) {
                 onChange: (e) => setPassword(e.target.value)
             }}
             />
-
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <Button
               type="submit"
               fullWidth
@@ -133,11 +119,6 @@ function Login(props) {
               Sign In
             </Button>
             <Grid container>
-              {/* <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid> */}
               <Grid item>
                 <Link to='/register' variant="body2">
                   {"Don't have an account? Sign Up"}

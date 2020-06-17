@@ -42,14 +42,6 @@ return (
           default:      return <AddRenter />;
         }
       })()}
-
-        {/* {
-            (emailing)
-            ?
-        <SingleEmail setEmailing={setEmailing} emailing={emailing} />
-        :
-        <AddRenter setRenters={setRenters} />
-        } */}
     </div>
 )
 }

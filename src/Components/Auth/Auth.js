@@ -5,8 +5,6 @@ import Register from './Register'
 import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {login} from '../../redux/reducers/user'
-// import useRedirect from '../Hooks/useRedirect'
-
 
 const Auth = () => {
     // const {redirect, toggleRedirect} = useRedirect(false)
@@ -27,7 +25,6 @@ const Auth = () => {
             <Redirect to='/main' />
             }
             <div>
-                <h1>auth component</h1>
                 {
                     display
                     ?

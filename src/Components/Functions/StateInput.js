@@ -2,31 +2,7 @@ import './Functions.scss'
 import React from 'react'
 import {  makeStyles } from '@material-ui/core/styles';
 import { FormControl, Select, InputLabel, MenuItem } from "@material-ui/core";
-// import {primaryColor,grayColor,defaultFont} from "../UI/material-dashboard-react";
 
-// const theme = createMuiTheme({
-//     overrides: {
-//       MuiInput: {
-//         underline: {
-//             "&:hover:not($disabled):before,&:before": {
-//               borderColor: grayColor[4] + " !important",
-//               borderWidth: "1px !important"
-//             },
-//             "&:after": {
-//               borderColor: primaryColor[0] + '!important'
-//             }
-//           },
-//           labelRoot: {
-//             ...defaultFont,
-//             color: grayColor[3] + " !important",
-//             fontWeight: "400",
-//             fontSize: "14px",
-//             lineHeight: "1.42857",
-//             letterSpacing: "unset"
-//           },
-//       }
-//     }
-// })
 const styles = {
     formControl: {
         paddingBottom: "10px",
@@ -61,7 +37,6 @@ export default function StateInput(props) {
     const classes = useStyles();
 
     return (
-        // <MuiThemeProvider theme={theme}>
         <FormControl
         className={classes.formControl}
         fullWidth
@@ -139,6 +114,5 @@ export default function StateInput(props) {
                 <MenuItem value="VI">Virgin Islands</MenuItem>
             </Select>
         </FormControl>
-    // </MuiThemeProvider>
     )
 } 

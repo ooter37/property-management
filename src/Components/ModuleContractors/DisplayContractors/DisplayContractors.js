@@ -11,18 +11,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import MailIcon from '@material-ui/icons/Mail';
 
 function DisplayContractors(props) {
-  // const [redirect,setRedirect] = useState(false)
-  // const {data} = props.user
-  // const {getContractors} = props
-
-  // useEffect(() => {
-  //   if (!data) {setRedirect(true)}
-  //   else if (!data.loading) {
-  //     getContractors()
-  //   }
-  // },
-  // [getContractors, data])
-
   async function deleteContractor(id) {
     if (props.user.data) {
       try {
@@ -103,13 +91,6 @@ function DisplayContractors(props) {
       <Table className='display-tasks-table' aria-label="simple table">
         <TableHead>
           <TableRow>
-          {/* <TableCell><Button 
-            onClick={() => {
-              if (props.user.data) {
-                toggleEmail(props.contractors && props.contractors.map(elem => elem.email))
-              } else {pleaseSignIn.fire()}
-            }}
-             startIcon={<MailIcon />} size='small' color='primary' className='renter-email-button'>Email All</Button></TableCell> */}
             <TableCell align="left">Name</TableCell>
             <TableCell align="left">
               <div className='header-email-container'>
