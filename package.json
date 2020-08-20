@@ -25,7 +25,7 @@
     "@unicef/material-ui-currency-textfield": "^0.8.6",
     "aws-sdk": "^2.681.0",
     "axios": "^0.19.2",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
